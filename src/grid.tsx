@@ -22,12 +22,6 @@ enum Direction{
 let currentHeadDir = Direction.Down; 
 let currentTailDir = Direction.Down; 
 
-// for (let i = 0; i<gridSize; i++)
-//     for(let j = 0; j<gridSize; j++)
-//         grid[i][j] = 'b';
-
-
- 
 export const Grid: React.FunctionComponent = () => {
     const [snakeEnds, setSnakeEnds] = useState(snakeEndsInit);
     const [playing, setPlaying] = useState(false);
