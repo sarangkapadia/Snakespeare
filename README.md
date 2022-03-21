@@ -1,5 +1,6 @@
-# Getting Started with Create React App
+# S-N-A-K-E
 
+A fun twist on the classic snake game.
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
