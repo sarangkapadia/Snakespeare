@@ -1,0 +1,26 @@
+:root {
+  --gridSize: 15;
+  --boxBackgroundColor: rgb(53, 53, 53);
+  --appBackgroundColor: lightpink;
+  --snakeColor: white;
+  --foodColor: lightgreen;
+  --boxSize: 50px;
+}
+
+@media screen and (max-width: 450px) {
+  :root {
+    --boxSize: 25px;
+  }
+}
+
+@media screen and (min-width: 450px) and (max-width: 770px) {
+  :root {
+    --boxSize: 30px;
+  }
+}
+
+/* @media screen and (min-width: 1400px) {
+  :root {
+    --gridSize: 20;
+  }
+} */

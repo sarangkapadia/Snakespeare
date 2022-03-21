@@ -1,0 +1,4 @@
+.newGame {
+  background-color: var(--boxBackgroundColor);
+  color: var(--appBackgroundColor);
+}

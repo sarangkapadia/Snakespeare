@@ -1,0 +1,13 @@
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(var(--gridSize), var(--boxSize));
+  /* gap: 1px; */
+}
+
+.appUtils {
+  display: flex;
+  width: calc(var(--gridSize) * var(--boxSize));
+  height: auto;
+  justify-content: space-evenly;
+  align-items: center;
+}

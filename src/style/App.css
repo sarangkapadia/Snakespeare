@@ -1,0 +1,10 @@
+@import "media.css";
+
+.appContainer {
+  display: flex;
+  background-color: var(--appBackgroundColor);
+  width: auto;
+  height: auto;
+  align-items: center;
+  flex-flow: column nowrap;
+}
