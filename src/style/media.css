@@ -1,7 +1,7 @@
 :root {
   --gridSize: 15;
   --boxBackgroundColor: rgb(53, 53, 53);
-  --appBackgroundColor: lightpink;
+  --appBackgroundColor: pink;
   --snakeColor: white;
   --foodColor: lightgreen;
   --boxSize: 50px;
