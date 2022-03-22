@@ -10,8 +10,11 @@ const rootStyle = getComputedStyle(root);
 let gridSize = parseInt(rootStyle.getPropertyValue('--gridSize'));
 const snakeEndsInit = {tail:{row:5, col:5}, head:{row:8, col:5}};
 
+// init the grid
 let grid:string[][] = Array.from(Array(gridSize), () => new Array(gridSize).fill('b'));
 grid[5][5] = grid[6][5] = grid[7][5] = grid[8][5] = 's';
+
+// decare the directions
 enum Direction{
     Up = 1,
     Down,
@@ -93,7 +96,7 @@ export const Grid: React.FunctionComponent = () => {
     useInterval(
         onTick,
         // Delay in milliseconds or null to stop it
-        playing ? 100 : null
+        playing ? 2000 : null
       );
 
     const handleOnNewGame = useCallback(() => {
