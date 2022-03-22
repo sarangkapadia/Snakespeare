@@ -1,16 +1,14 @@
-import React from 'react';
-import './style/App.css';
+import React from "react";
+import "./style/App.css";
 
-import { Title } from './title';
-import { Grid } from './grid';
+import { Title } from "./title";
+import { GridContainer } from "./gridContainer";
 
 export const App: React.FunctionComponent = () => {
-  console.log("App rendering");
-  
   return (
-    <div className={'appContainer'} >
+    <div className={"appContainer"}>
       <Title />
-      <Grid />
+      <GridContainer />
     </div>
   );
-}
+};

@@ -1,4 +1,4 @@
-.gridContainer {
+.grid {
   display: grid;
   grid-template-columns: repeat(var(--gridSize), var(--boxSize));
   /* gap: 1px; */
