@@ -1,3 +1,40 @@
+/* The animation code */
+@keyframes box2snake {
+  from {
+    background-color: var(--boxBackgroundColor);
+  }
+  to {
+    background-color: var(--snakeColor);
+  }
+}
+
+@keyframes snake2box {
+  from {
+    background-color: var(--snakeColor);
+  }
+  to {
+    background-color: var(--boxBackgroundColor);
+  }
+}
+
+.tail {
+  width: var(--boxSize);
+  height: var(--boxSize);
+  background-color: var(--boxBackgroundColor);
+  animation-name: snake2box;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.head {
+  width: var(--boxSize);
+  height: var(--boxSize);
+  background-color: var(--boxBackgroundColor);
+  animation-name: box2snake;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
 .box {
   width: var(--boxSize);
   height: var(--boxSize);

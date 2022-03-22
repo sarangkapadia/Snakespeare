@@ -13,7 +13,9 @@ const snakeEndsInit = { tail: { row: 5, col: 5 }, head: { row: 8, col: 5 } };
 let grid: string[][] = Array.from(Array(gridSize), () =>
   new Array(gridSize).fill("b")
 );
-grid[5][5] = grid[6][5] = grid[7][5] = grid[8][5] = "s";
+grid[5][5] = "t";
+grid[6][5] = grid[7][5] = "s";
+grid[8][5] = "h";
 
 // decare the directions
 enum Direction {
@@ -35,6 +37,7 @@ export const GridContainer: React.FunctionComponent = () => {
   const getNewEnds = (ends: typeof snakeEnds) => {
     let newCol = snakeEnds.head.col;
     let newRow = snakeEnds.head.row;
+    grid[newRow][newCol] = "s"; // make current head -> snake
 
     switch (currentHeadDir) {
       case Direction.Up: {
@@ -63,8 +66,8 @@ export const GridContainer: React.FunctionComponent = () => {
     ends.head.row = newRow;
     ends.head.col = newCol;
 
-    grid[newRow][newCol] = "s"; // assign new head
-    grid[snakeEnds.tail.row][snakeEnds.tail.col] = "b"; //clear current tail
+    grid[newRow][newCol] = "h"; // b -> h
+    grid[snakeEnds.tail.row][snakeEnds.tail.col] = "b"; // t -> b
 
     newCol = snakeEnds.tail.col;
     newRow = snakeEnds.tail.row;
@@ -96,6 +99,7 @@ export const GridContainer: React.FunctionComponent = () => {
 
     ends.tail.row = newRow;
     ends.tail.col = newCol;
+    grid[newRow][newCol] = "t"; // s -> t
 
     return ends;
   };
@@ -109,7 +113,7 @@ export const GridContainer: React.FunctionComponent = () => {
   useInterval(
     onTick,
     // Delay in milliseconds or null to stop it
-    playing ? 2000 : null
+    playing ? 600 : null
   );
 
   const handleOnNewGame = useCallback(() => {
