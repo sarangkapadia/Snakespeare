@@ -1,38 +1,44 @@
-/* The animation code */
-@keyframes box2snake {
-  from {
-    background-color: var(--boxBackgroundColor);
-  }
-  to {
-    background-color: var(--snakeColor);
-  }
+:root {
+  --animprops: 0.6s linear forwards;
 }
 
-@keyframes snake2box {
-  from {
-    background-color: var(--snakeColor);
+@keyframes t2b {
+  0% {
+    background-position: bottom;
   }
-  to {
-    background-color: var(--boxBackgroundColor);
+  100% {
+    background-position: top;
   }
 }
 
 .tail {
   width: var(--boxSize);
   height: var(--boxSize);
-  background-color: var(--boxBackgroundColor);
-  animation-name: snake2box;
-  animation-duration: 0.5s;
-  animation-fill-mode: forwards;
+
+  background-image: linear-gradient(
+    to bottom,
+    var(--boxBackgroundColor) 50%,
+    var(--snakeColor) 50%
+  );
+  background-position: top;
+  background-size: 100% 200%;
+
+  animation: t2b var(--animprops);
 }
 
 .head {
   width: var(--boxSize);
   height: var(--boxSize);
-  background-color: var(--boxBackgroundColor);
-  animation-name: box2snake;
-  animation-duration: 0.5s;
-  animation-fill-mode: forwards;
+
+  background-image: linear-gradient(
+    to bottom,
+    var(--snakeColor) 50%,
+    var(--boxBackgroundColor) 50%
+  );
+  background-position: top;
+  background-size: 100% 200%;
+
+  animation: t2b var(--animprops);
 }
 
 .box {

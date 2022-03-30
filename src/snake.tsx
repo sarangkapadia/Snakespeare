@@ -7,7 +7,6 @@ interface ISnakeProps{
 }
 
 export const Snake:React.FunctionComponent<ISnakeProps> = (props) => {
-    console.log("Snake rendering");
     return <div className={props.className} >{props.id}</div>;
 };
 
