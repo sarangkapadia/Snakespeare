@@ -3,6 +3,7 @@ import { Score } from "./score";
 import { Button } from "./button";
 import { useInterval } from "./useInterval";
 import { GridRenderer } from "./gridRenderer";
+import { useSwipeable } from "react-swipeable";
 
 const root = document.querySelector(":root")!;
 const rootStyle = getComputedStyle(root);
@@ -18,7 +19,7 @@ grid[6][5] = grid[7][5] = "s";
 grid[8][5] = "h";
 
 // decare the directions
-enum Direction {
+export enum Direction {
   Up = 1,
   Down,
   Right,
@@ -28,9 +29,26 @@ enum Direction {
 let currentHeadDir = Direction.Down;
 let currentTailDir = Direction.Down;
 
+const logSwipe = () => {
+  console.log("swipe detected");
+};
+
 export const GridContainer: React.FunctionComponent = () => {
   const [snakeEnds, setSnakeEnds] = useState(snakeEndsInit);
   const [playing, setPlaying] = useState(false);
+
+  const handlers = useSwipeable({
+    onSwipedLeft: () => {
+      console.log("swipe left");
+    },
+    onSwipedRight: logSwipe,
+    onSwipedDown: logSwipe,
+    onSwipedUp: logSwipe,
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true,
+  });
+
+  console.log(handlers);
   //   const [currentHeadDir, setCurrentHeadDir] = useState(Direction.Down);
   //   const [currentTailDir, setCurrentTailDir] = useState(Direction.Down);
 
@@ -121,14 +139,21 @@ export const GridContainer: React.FunctionComponent = () => {
   }, []);
 
   return (
-    <div>
-      <GridRenderer grid={grid} />
+    <div {...handlers}>
+      <GridRenderer
+        grid={grid}
+        currentDirection={{ head: currentHeadDir, tail: currentTailDir }}
+      />
       <div className={"appUtils"}>
         <Score currentScore={0}></Score>
         <Button
           onClick={handleOnNewGame}
           label={playing ? "Stop Game" : "New Game"}
         />
+        {/* <div {...handlers}>
+          <Score currentScore={10}></Score>
+          {"This is the swipe Area"}
+        </div> */}
       </div>
     </div>
   );

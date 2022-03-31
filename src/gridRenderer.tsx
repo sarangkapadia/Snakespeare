@@ -1,15 +1,17 @@
 import React from "react";
 import { Box } from "./box";
+import { Direction } from "./gridContainer";
 import "./style/grid.css";
 
-interface IGripRendererProps {
+interface IGridRendererProps {
   grid: string[][];
+  currentDirection: { head: Direction; tail: Direction };
 }
 
-export const GridRenderer: React.FunctionComponent<IGripRendererProps> = (
+export const GridRenderer: React.FunctionComponent<IGridRendererProps> = (
   props
 ) => {
-  const { grid } = props;
+  const { grid, currentDirection } = props;
 
   const getClassName = (box: string): string => {
     switch (box) {
@@ -30,7 +32,12 @@ export const GridRenderer: React.FunctionComponent<IGripRendererProps> = (
   return (
     <div className={"grid"}>
       {grid.flat().map((box, index) => (
-        <Box className={getClassName(box)} id={index} key={index} />
+        <Box
+          className={getClassName(box)}
+          id={index}
+          key={index}
+          currentDirection={currentDirection}
+        />
       ))}
     </div>
   );
