@@ -5,38 +5,22 @@ import "./style/grid.css";
 
 interface IGridRendererProps {
   grid: string[][];
-  currentDirection: { head: Direction; tail: Direction };
+  currentHeadDirection: Direction;
 }
 
 export const GridRenderer: React.FunctionComponent<IGridRendererProps> = (
   props
 ) => {
-  const { grid, currentDirection } = props;
-
-  const getClassName = (box: string): string => {
-    switch (box) {
-      case "b":
-        return "box";
-      case "h":
-        return "head";
-      case "s":
-        return "snake";
-      case "t":
-        return "tail";
-      case "f":
-        return "food";
-    }
-    return "invalid";
-  };
+  const { grid, currentHeadDirection } = props;
 
   return (
     <div className={"grid"}>
-      {grid.flat().map((box, index) => (
+      {grid.flat().map((role, index) => (
         <Box
-          className={getClassName(box)}
+          role={role}
           id={index}
           key={index}
-          currentDirection={currentDirection}
+          currentHeadDirection={currentHeadDirection}
         />
       ))}
     </div>

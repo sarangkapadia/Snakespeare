@@ -29,8 +29,18 @@ export enum Direction {
 let currentHeadDir = Direction.Down;
 let currentTailDir = Direction.Down;
 
-const logSwipe = () => {
-  console.log("swipe detected");
+// add logic in these to detect game end
+const onSwipedLeft = () => {
+  currentHeadDir = Direction.Left;
+};
+const onSwipedRight = () => {
+  currentHeadDir = Direction.Right;
+};
+const onSwipedUp = () => {
+  currentHeadDir = Direction.Up;
+};
+const onSwipedDown = () => {
+  currentHeadDir = Direction.Down;
 };
 
 export const GridContainer: React.FunctionComponent = () => {
@@ -38,19 +48,13 @@ export const GridContainer: React.FunctionComponent = () => {
   const [playing, setPlaying] = useState(false);
 
   const handlers = useSwipeable({
-    onSwipedLeft: () => {
-      console.log("swipe left");
-    },
-    onSwipedRight: logSwipe,
-    onSwipedDown: logSwipe,
-    onSwipedUp: logSwipe,
+    onSwipedLeft: onSwipedLeft,
+    onSwipedRight: onSwipedRight,
+    onSwipedDown: onSwipedDown,
+    onSwipedUp: onSwipedUp,
     preventDefaultTouchmoveEvent: true,
     trackMouse: true,
   });
-
-  console.log(handlers);
-  //   const [currentHeadDir, setCurrentHeadDir] = useState(Direction.Down);
-  //   const [currentTailDir, setCurrentTailDir] = useState(Direction.Down);
 
   const getNewEnds = (ends: typeof snakeEnds) => {
     let newCol = snakeEnds.head.col;
@@ -124,7 +128,6 @@ export const GridContainer: React.FunctionComponent = () => {
 
   const onTick = () => {
     let ends = { ...snakeEnds };
-    // console.log("head = ", ends.head, "tail = ", ends.tail);
     setSnakeEnds(getNewEnds(ends));
   };
 
@@ -140,20 +143,13 @@ export const GridContainer: React.FunctionComponent = () => {
 
   return (
     <div {...handlers}>
-      <GridRenderer
-        grid={grid}
-        currentDirection={{ head: currentHeadDir, tail: currentTailDir }}
-      />
+      <GridRenderer grid={grid} currentHeadDirection={currentHeadDir} />
       <div className={"appUtils"}>
         <Score currentScore={0}></Score>
         <Button
           onClick={handleOnNewGame}
           label={playing ? "Stop Game" : "New Game"}
         />
-        {/* <div {...handlers}>
-          <Score currentScore={10}></Score>
-          {"This is the swipe Area"}
-        </div> */}
       </div>
     </div>
   );

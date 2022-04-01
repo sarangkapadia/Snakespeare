@@ -11,7 +11,34 @@
   }
 }
 
-.tail {
+@keyframes b2t {
+  0% {
+    background-position: top;
+  }
+  100% {
+    background-position: bottom;
+  }
+}
+
+@keyframes l2r {
+  0% {
+    background-position: right;
+  }
+  100% {
+    background-position: left;
+  }
+}
+
+@keyframes r2l {
+  0% {
+    background-position: left;
+  }
+  100% {
+    background-position: right;
+  }
+}
+/* -------------------------- */
+.tail_t2b {
   width: var(--boxSize);
   height: var(--boxSize);
 
@@ -20,13 +47,13 @@
     var(--boxBackgroundColor) 50%,
     var(--snakeColor) 50%
   );
-  background-position: top;
+
   background-size: 100% 200%;
 
   animation: t2b var(--animprops);
 }
 
-.head {
+.head_t2b {
   width: var(--boxSize);
   height: var(--boxSize);
 
@@ -35,10 +62,106 @@
     var(--snakeColor) 50%,
     var(--boxBackgroundColor) 50%
   );
-  background-position: top;
+
   background-size: 100% 200%;
 
   animation: t2b var(--animprops);
+}
+
+/* -------------------------- */
+
+.tail_b2t {
+  width: var(--boxSize);
+  height: var(--boxSize);
+
+  background-image: linear-gradient(
+    to top,
+    var(--boxBackgroundColor) 50%,
+    var(--snakeColor) 50%
+  );
+
+  background-size: 100% 200%;
+
+  animation: b2t var(--animprops);
+}
+
+.head_b2t {
+  width: var(--boxSize);
+  height: var(--boxSize);
+
+  background-image: linear-gradient(
+    to top,
+    var(--snakeColor) 50%,
+    var(--boxBackgroundColor) 50%
+  );
+
+  background-size: 100% 200%;
+
+  animation: b2t var(--animprops);
+}
+
+/* -------------------------- */
+
+.tail_l2r {
+  width: var(--boxSize);
+  height: var(--boxSize);
+
+  background-image: linear-gradient(
+    to right,
+    var(--boxBackgroundColor) 50%,
+    var(--snakeColor) 50%
+  );
+
+  background-size: 200%;
+
+  animation: l2r var(--animprops);
+}
+
+.head_l2r {
+  width: var(--boxSize);
+  height: var(--boxSize);
+
+  background-image: linear-gradient(
+    to right,
+    var(--snakeColor) 50%,
+    var(--boxBackgroundColor) 50%
+  );
+
+  background-size: 200%;
+
+  animation: l2r var(--animprops);
+}
+
+/* -------------------------- */
+
+.tail_r2l {
+  width: var(--boxSize);
+  height: var(--boxSize);
+
+  background-image: linear-gradient(
+    to left,
+    var(--boxBackgroundColor) 50%,
+    var(--snakeColor) 50%
+  );
+
+  background-size: 200%;
+
+  animation: r2l var(--animprops);
+}
+
+.head_r2l {
+  width: var(--boxSize);
+  height: var(--boxSize);
+
+  background-image: linear-gradient(
+    to left,
+    var(--snakeColor) 50%,
+    var(--boxBackgroundColor) 50%
+  );
+
+  background-size: 200%;
+
+  animation: r2l var(--animprops);
 }
 
 .box {

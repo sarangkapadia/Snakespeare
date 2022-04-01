@@ -8,7 +8,6 @@ interface IButtonProps {
 
 export const Button: React.FunctionComponent<IButtonProps> = React.memo(
   (props) => {
-    console.log("Button rendering");
     return (
       <button className={"newGame"} onClick={props.onClick}>
         {props.label}
