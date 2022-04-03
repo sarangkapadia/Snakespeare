@@ -1,6 +1,6 @@
 import React from "react";
 import { Box } from "./box";
-import { Direction } from "./gridContainer";
+import { Direction } from "./grid";
 import "./style/grid.css";
 
 interface IGridRendererProps {

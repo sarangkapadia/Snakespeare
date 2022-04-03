@@ -4,11 +4,11 @@ import { Button } from "./button";
 import { useInterval } from "./useInterval";
 import { GridRenderer } from "./gridRenderer";
 import { useSwipeable } from "react-swipeable";
+import { Grid, Direction } from "./grid";
 
-const root = document.querySelector(":root")!;
-const rootStyle = getComputedStyle(root);
-let gridSize = parseInt(rootStyle.getPropertyValue("--gridSize"));
-const snakeEndsInit = { tail: { row: 5, col: 5 }, head: { row: 8, col: 5 } };
+const gridObj = new Grid();
+gridObj.initGridData();
+let gridSize = gridObj.getGridSize();
 
 // init the grid
 let grid: string[][] = Array.from(Array(gridSize), () =>
@@ -18,16 +18,8 @@ grid[5][5] = "t";
 grid[6][5] = grid[7][5] = "s";
 grid[8][5] = "h";
 
-// decare the directions
-export enum Direction {
-  Up = 1,
-  Down,
-  Right,
-  Left,
-}
-
-let currentHeadDir = Direction.Down;
-let currentTailDir = Direction.Down;
+let currentHeadDir = gridObj.getCurrentHeadDirection();
+let currentTailDir = gridObj.getCurrentTailDirection();
 
 // add logic in these to detect game end
 const onSwipedLeft = () => {
@@ -44,7 +36,7 @@ const onSwipedDown = () => {
 };
 
 export const GridContainer: React.FunctionComponent = () => {
-  const [snakeEnds, setSnakeEnds] = useState(snakeEndsInit);
+  const [snakeEnds, setSnakeEnds] = useState(gridObj.getSnake().getSnakeEnds());
   const [playing, setPlaying] = useState(false);
 
   const handlers = useSwipeable({

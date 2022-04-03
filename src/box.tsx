@@ -1,5 +1,5 @@
 import React from "react";
-import { Direction } from "./gridContainer";
+import { Direction } from "./grid";
 import "./style/box.css";
 
 interface IBoxProps {
