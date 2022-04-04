@@ -7,6 +7,13 @@ import { useSwipeable } from "react-swipeable";
 import { Grid, Direction, Role } from "./grid";
 import { DebugGrid } from "./debug/debugGrid";
 
+const root = document.querySelector(":root")!;
+const rootStyle = getComputedStyle(root);
+
+const tickCount = rootStyle.getPropertyValue("--tick");
+const tickCountMs =
+  parseFloat(tickCount.substr(0, tickCount.length - 1)) * 1000;
+
 const url: URL = new URL(window.location.href);
 const urlSearchParams = new URLSearchParams(url.search);
 
@@ -143,7 +150,7 @@ export const GridContainer: React.FunctionComponent = () => {
   useInterval(
     onTick,
     // Delay in milliseconds or null to stop it
-    playing ? 600 : null
+    playing ? tickCountMs : null
   );
 
   const handleOnPlayPauseGame = useCallback(() => {

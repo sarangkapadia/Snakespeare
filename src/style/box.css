@@ -1,7 +1,3 @@
-:root {
-  --animprops: 0.6s linear forwards;
-}
-
 @keyframes t2b {
   0% {
     background-position: bottom;
@@ -50,7 +46,7 @@
 
   background-size: 100% 200%;
 
-  animation: t2b var(--animprops);
+  animation: t2b var(--tick) var(--animprops);
 }
 
 .head_t2b {
@@ -65,7 +61,7 @@
 
   background-size: 100% 200%;
 
-  animation: t2b var(--animprops);
+  animation: t2b var(--tick) var(--animprops);
 }
 
 /* -------------------------- */
@@ -82,7 +78,7 @@
 
   background-size: 100% 200%;
 
-  animation: b2t var(--animprops);
+  animation: b2t var(--tick) var(--animprops);
 }
 
 .head_b2t {
@@ -97,7 +93,7 @@
 
   background-size: 100% 200%;
 
-  animation: b2t var(--animprops);
+  animation: b2t var(--tick) var(--animprops);
 }
 
 /* -------------------------- */
@@ -114,7 +110,7 @@
 
   background-size: 200%;
 
-  animation: l2r var(--animprops);
+  animation: l2r var(--tick) var(--animprops);
 }
 
 .head_l2r {
@@ -129,7 +125,7 @@
 
   background-size: 200%;
 
-  animation: l2r var(--animprops);
+  animation: l2r var(--tick) var(--animprops);
 }
 
 /* -------------------------- */
@@ -146,7 +142,7 @@
 
   background-size: 200%;
 
-  animation: r2l var(--animprops);
+  animation: r2l var(--tick) var(--animprops);
 }
 
 .head_r2l {
@@ -161,7 +157,7 @@
 
   background-size: 200%;
 
-  animation: r2l var(--animprops);
+  animation: r2l var(--tick) var(--animprops);
 }
 
 .box {
