@@ -72,6 +72,16 @@ export class Grid {
     return this.grid[tail.row][tail.col].direction;
   }
 
+  public setCurrentHeadDirection(direction: Direction) {
+    const { head } = this.snake.getSnakeEnds();
+    this.grid[head.row][head.col].direction = direction;
+  }
+
+  public setCurrentTailDirection(direction: Direction) {
+    const { tail } = this.snake.getSnakeEnds();
+    this.grid[tail.row][tail.col].direction = direction;
+  }
+
   public initGridData() {
     const { tail, head } = this.snake.getSnakeEnds();
 

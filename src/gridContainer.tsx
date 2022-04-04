@@ -16,9 +16,6 @@ gridObj.initGridData();
 const gridSize = gridObj.getGridSize();
 const grid = gridObj.getGrid();
 
-let currentHeadDir = gridObj.getCurrentHeadDirection();
-let currentTailDir = gridObj.getCurrentTailDirection();
-
 export const GridContainer: React.FunctionComponent = () => {
   const [snakeEnds, setSnakeEnds] = useState(gridObj.getSnake().getSnakeEnds());
   const [playing, setPlaying] = useState(false);
@@ -27,19 +24,19 @@ export const GridContainer: React.FunctionComponent = () => {
   // add logic in these to detect game end
   const onSwipedLeft = () => {
     if (!playing) return;
-    currentHeadDir = Direction.Left;
+    gridObj.setCurrentHeadDirection(Direction.Left);
   };
   const onSwipedRight = () => {
     if (!playing) return;
-    currentHeadDir = Direction.Right;
+    gridObj.setCurrentHeadDirection(Direction.Right);
   };
   const onSwipedUp = () => {
     if (!playing) return;
-    currentHeadDir = Direction.Up;
+    gridObj.setCurrentHeadDirection(Direction.Up);
   };
   const onSwipedDown = () => {
     if (!playing) return;
-    currentHeadDir = Direction.Down;
+    gridObj.setCurrentHeadDirection(Direction.Down);
   };
 
   const handlers = useSwipeable({
@@ -51,10 +48,14 @@ export const GridContainer: React.FunctionComponent = () => {
     trackMouse: true,
   });
 
+  // calcualte the new snake ends, and assign new roles as necessary
   const getNewEnds = (ends: typeof snakeEnds) => {
     let newCol = snakeEnds.head.col;
     let newRow = snakeEnds.head.row;
-    grid[newRow][newCol].role = Role.Body; // make current head -> snake
+    const currentHeadDir = gridObj.getCurrentHeadDirection();
+
+    grid[newRow][newCol].role = Role.Body; // make current head -> snake body
+    grid[newRow][newCol].direction = Direction.None; // make current head's dir none
 
     switch (currentHeadDir) {
       case Direction.Up: {
@@ -77,14 +78,20 @@ export const GridContainer: React.FunctionComponent = () => {
           snakeEnds.head.col - 1 < 0 ? gridSize - 1 : snakeEnds.head.col - 1;
         break;
       }
-      default:
+      default: {
+        setPlaying(false);
         throw new Error("Invalid head direction!");
+      }
     }
     ends.head.row = newRow;
     ends.head.col = newCol;
 
-    grid[newRow][newCol].role = Role.Head; // b -> h
-    grid[snakeEnds.tail.row][snakeEnds.tail.col].role = Role.Canvas; // t -> b
+    grid[newRow][newCol].role = Role.Head; // canvas -> head
+    grid[newRow][newCol].direction = currentHeadDir; // retain previous head's dir in the new head
+
+    const currentTailDir = gridObj.getCurrentTailDirection();
+    grid[snakeEnds.tail.row][snakeEnds.tail.col].role = Role.Canvas; // tail -> canvas
+    grid[snakeEnds.tail.row][snakeEnds.tail.col].direction = Direction.None; // tail -> canvas dir
 
     newCol = snakeEnds.tail.col;
     newRow = snakeEnds.tail.row;
@@ -110,20 +117,27 @@ export const GridContainer: React.FunctionComponent = () => {
           snakeEnds.tail.col - 1 < 0 ? gridSize - 1 : snakeEnds.tail.col - 1;
         break;
       }
-      default:
+      default: {
+        setPlaying(false);
         throw new Error("Invalid tail direction!");
+      }
     }
 
     ends.tail.row = newRow;
     ends.tail.col = newCol;
-    grid[newRow][newCol].role = Role.Tail; // s -> t
+    grid[newRow][newCol].role = Role.Tail; // body -> tail
+    grid[newRow][newCol].direction = currentTailDir;
 
     return ends;
   };
 
   const onTick = () => {
     let ends = { ...snakeEnds };
-    setSnakeEnds(getNewEnds(ends));
+    // set new roles on the new ends
+    const newEnds = getNewEnds(ends);
+    setSnakeEnds(newEnds);
+    // set new ends
+    gridObj.getSnake().setSnakeEnds(newEnds);
   };
 
   useInterval(
@@ -134,13 +148,15 @@ export const GridContainer: React.FunctionComponent = () => {
 
   const handleOnPlayPauseGame = useCallback(() => {
     if (!playing) {
+      const currentTailDir = gridObj.getCurrentTailDirection();
+      const currentHeadDir = gridObj.getCurrentHeadDirection();
       // on hitting play
       if (
         currentHeadDir === Direction.None &&
         currentTailDir === Direction.None
       ) {
-        currentTailDir = Direction.Down;
-        currentHeadDir = Direction.Down;
+        gridObj.setCurrentTailDirection(Direction.Down);
+        gridObj.setCurrentHeadDirection(Direction.Down);
       }
     }
 
@@ -160,7 +176,10 @@ export const GridContainer: React.FunctionComponent = () => {
       {debug ? (
         <DebugGrid grid={grid} />
       ) : (
-        <GridRenderer grid={grid} currentHeadDirection={currentHeadDir} />
+        <GridRenderer
+          grid={grid}
+          currentHeadDirection={gridObj.getCurrentHeadDirection()}
+        />
       )}
       <div className={"appUtils"}>
         <Score currentScore={0}></Score>
