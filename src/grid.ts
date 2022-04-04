@@ -75,8 +75,8 @@ export class Grid {
   public initGridData() {
     const { tail, head } = this.snake.getSnakeEnds();
 
-    this.grid[tail.row][tail.col].direction = Direction.Down;
-    this.grid[head.row][head.col].direction = Direction.Down;
+    this.grid[tail.row][tail.col].direction = Direction.None;
+    this.grid[head.row][head.col].direction = Direction.None;
 
     this.grid[tail.row][tail.col].role = Role.Tail;
     this.grid[head.row][head.col].role = Role.Head;

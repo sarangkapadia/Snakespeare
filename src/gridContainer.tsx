@@ -19,24 +19,28 @@ const grid = gridObj.getGrid();
 let currentHeadDir = gridObj.getCurrentHeadDirection();
 let currentTailDir = gridObj.getCurrentTailDirection();
 
-// add logic in these to detect game end
-const onSwipedLeft = () => {
-  currentHeadDir = Direction.Left;
-};
-const onSwipedRight = () => {
-  currentHeadDir = Direction.Right;
-};
-const onSwipedUp = () => {
-  currentHeadDir = Direction.Up;
-};
-const onSwipedDown = () => {
-  currentHeadDir = Direction.Down;
-};
-
 export const GridContainer: React.FunctionComponent = () => {
   const [snakeEnds, setSnakeEnds] = useState(gridObj.getSnake().getSnakeEnds());
   const [playing, setPlaying] = useState(false);
   const [debug, setDebug] = useState(false);
+
+  // add logic in these to detect game end
+  const onSwipedLeft = () => {
+    if (!playing) return;
+    currentHeadDir = Direction.Left;
+  };
+  const onSwipedRight = () => {
+    if (!playing) return;
+    currentHeadDir = Direction.Right;
+  };
+  const onSwipedUp = () => {
+    if (!playing) return;
+    currentHeadDir = Direction.Up;
+  };
+  const onSwipedDown = () => {
+    if (!playing) return;
+    currentHeadDir = Direction.Down;
+  };
 
   const handlers = useSwipeable({
     onSwipedLeft: onSwipedLeft,
@@ -128,9 +132,20 @@ export const GridContainer: React.FunctionComponent = () => {
     playing ? 600 : null
   );
 
-  const handleOnNewGame = useCallback(() => {
+  const handleOnPlayPauseGame = useCallback(() => {
+    if (!playing) {
+      // on hitting play
+      if (
+        currentHeadDir === Direction.None &&
+        currentTailDir === Direction.None
+      ) {
+        currentTailDir = Direction.Down;
+        currentHeadDir = Direction.Down;
+      }
+    }
+
     setPlaying((playing) => !playing);
-  }, []);
+  }, [playing]);
 
   const handleOnDebug = useCallback(() => {
     setDebug((debug) => !debug);
@@ -150,8 +165,8 @@ export const GridContainer: React.FunctionComponent = () => {
       <div className={"appUtils"}>
         <Score currentScore={0}></Score>
         <Button
-          onClick={handleOnNewGame}
-          label={playing ? "Stop Game" : "New Game"}
+          onClick={handleOnPlayPauseGame}
+          label={playing ? "Pause" : "Play"}
         />
         {isDebugMode() ? (
           <Button

@@ -170,7 +170,9 @@
   background-color: var(--boxBackgroundColor);
 }
 
-.snake {
+.snake,
+.head_none,
+.tail_none {
   width: var(--boxSize);
   height: var(--boxSize);
   background-color: var(--snakeColor);

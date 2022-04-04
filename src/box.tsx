@@ -21,6 +21,8 @@ export const Box: React.FunctionComponent<IBoxProps> = React.memo((props) => {
         return "r2l";
       case Direction.Right:
         return "l2r";
+      case Direction.None:
+        return "none";
       default:
         throw new Error("invalid dir");
     }
