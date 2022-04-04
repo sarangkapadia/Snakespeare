@@ -4,19 +4,17 @@ import { Button } from "./button";
 import { useInterval } from "./useInterval";
 import { GridRenderer } from "./gridRenderer";
 import { useSwipeable } from "react-swipeable";
-import { Grid, Direction } from "./grid";
+import { Grid, Direction, Role } from "./grid";
+import { DebugGrid } from "./debug/debugGrid";
+
+const url: URL = new URL(window.location.href);
+const urlSearchParams = new URLSearchParams(url.search);
 
 const gridObj = new Grid();
 gridObj.initGridData();
-let gridSize = gridObj.getGridSize();
 
-// init the grid
-let grid: string[][] = Array.from(Array(gridSize), () =>
-  new Array(gridSize).fill("b")
-);
-grid[5][5] = "t";
-grid[6][5] = grid[7][5] = "s";
-grid[8][5] = "h";
+const gridSize = gridObj.getGridSize();
+const grid = gridObj.getGrid();
 
 let currentHeadDir = gridObj.getCurrentHeadDirection();
 let currentTailDir = gridObj.getCurrentTailDirection();
@@ -38,6 +36,7 @@ const onSwipedDown = () => {
 export const GridContainer: React.FunctionComponent = () => {
   const [snakeEnds, setSnakeEnds] = useState(gridObj.getSnake().getSnakeEnds());
   const [playing, setPlaying] = useState(false);
+  const [debug, setDebug] = useState(false);
 
   const handlers = useSwipeable({
     onSwipedLeft: onSwipedLeft,
@@ -51,7 +50,7 @@ export const GridContainer: React.FunctionComponent = () => {
   const getNewEnds = (ends: typeof snakeEnds) => {
     let newCol = snakeEnds.head.col;
     let newRow = snakeEnds.head.row;
-    grid[newRow][newCol] = "s"; // make current head -> snake
+    grid[newRow][newCol].role = Role.Body; // make current head -> snake
 
     switch (currentHeadDir) {
       case Direction.Up: {
@@ -80,8 +79,8 @@ export const GridContainer: React.FunctionComponent = () => {
     ends.head.row = newRow;
     ends.head.col = newCol;
 
-    grid[newRow][newCol] = "h"; // b -> h
-    grid[snakeEnds.tail.row][snakeEnds.tail.col] = "b"; // t -> b
+    grid[newRow][newCol].role = Role.Head; // b -> h
+    grid[snakeEnds.tail.row][snakeEnds.tail.col].role = Role.Canvas; // t -> b
 
     newCol = snakeEnds.tail.col;
     newRow = snakeEnds.tail.row;
@@ -113,7 +112,7 @@ export const GridContainer: React.FunctionComponent = () => {
 
     ends.tail.row = newRow;
     ends.tail.col = newCol;
-    grid[newRow][newCol] = "t"; // s -> t
+    grid[newRow][newCol].role = Role.Tail; // s -> t
 
     return ends;
   };
@@ -133,15 +132,33 @@ export const GridContainer: React.FunctionComponent = () => {
     setPlaying((playing) => !playing);
   }, []);
 
+  const handleOnDebug = useCallback(() => {
+    setDebug((debug) => !debug);
+  }, []);
+
+  const isDebugMode = () => {
+    return urlSearchParams.get("debug") === "true";
+  };
+
   return (
     <div {...handlers}>
-      <GridRenderer grid={grid} currentHeadDirection={currentHeadDir} />
+      {debug ? (
+        <DebugGrid grid={grid} />
+      ) : (
+        <GridRenderer grid={grid} currentHeadDirection={currentHeadDir} />
+      )}
       <div className={"appUtils"}>
         <Score currentScore={0}></Score>
         <Button
           onClick={handleOnNewGame}
           label={playing ? "Stop Game" : "New Game"}
         />
+        {isDebugMode() ? (
+          <Button
+            onClick={handleOnDebug}
+            label={debug ? "Debug Off" : "Debug On"}
+          />
+        ) : null}
       </div>
     </div>
   );

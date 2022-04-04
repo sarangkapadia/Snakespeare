@@ -1,10 +1,10 @@
 import React from "react";
-import { Direction } from "./grid";
+import { Direction, Role } from "./grid";
 import "./style/box.css";
 
 interface IBoxProps {
   id: number;
-  role: string;
+  role: Role;
   currentHeadDirection: Direction;
 }
 
@@ -28,15 +28,15 @@ export const Box: React.FunctionComponent<IBoxProps> = React.memo((props) => {
 
   const getClassName = (): string => {
     switch (role) {
-      case "b":
+      case Role.Canvas:
         return "box";
-      case "h":
+      case Role.Head:
         return `head_${getClassNameFromDirection(currentHeadDirection)}`;
-      case "s":
+      case Role.Body:
         return "snake";
-      case "t":
+      case Role.Tail:
         return `tail_${getClassNameFromDirection(currentHeadDirection)}`; // fix this to tail
-      case "f":
+      case Role.Byte:
         return "food";
       default:
         throw new Error("invalid role");

@@ -16,7 +16,12 @@ export enum Role {
   Byte,
 }
 
-class GridItem {
+export interface IGridItem {
+  role: Role;
+  direction: Direction;
+}
+
+class GridItem implements IGridItem {
   role = Role.Canvas;
   direction = Direction.None;
 }
@@ -85,8 +90,8 @@ export class Grid {
     } else if (tail.col === head.col) {
       // vertical snake
       for (let i = tail.row + 1; i < head.row; i++) {
-        this.grid[tail.row][i].role = Role.Body;
-        this.grid[head.row][i].role = Role.Body;
+        this.grid[i][tail.col].role = Role.Body;
+        this.grid[i][tail.col].role = Role.Body;
       }
     } else {
       throw new Error("Snake init invalid");

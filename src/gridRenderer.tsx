@@ -1,10 +1,10 @@
 import React from "react";
 import { Box } from "./box";
-import { Direction } from "./grid";
+import { Direction, IGridItem } from "./grid";
 import "./style/grid.css";
 
 interface IGridRendererProps {
-  grid: string[][];
+  grid: IGridItem[][];
   currentHeadDirection: Direction;
 }
 
@@ -15,9 +15,9 @@ export const GridRenderer: React.FunctionComponent<IGridRendererProps> = (
 
   return (
     <div className={"grid"}>
-      {grid.flat().map((role, index) => (
+      {grid.flat().map((item, index) => (
         <Box
-          role={role}
+          role={item.role}
           id={index}
           key={index}
           currentHeadDirection={currentHeadDirection}

@@ -5,6 +5,8 @@
   --snakeColor: white;
   --foodColor: lightgreen;
   --boxSize: 50px;
+  --debugBoxSize: 100px;
+  --debugBoxBackgroundColor: lightgrey;
 }
 
 @media screen and (max-width: 450px) {
