@@ -31,18 +31,31 @@ export const GridContainer: React.FunctionComponent = () => {
   // add logic in these to detect game end
   const onSwipedLeft = () => {
     if (!playing) return;
+
+    const currentHeadDir = gridObj.getCurrentHeadDirection();
+    if (currentHeadDir === Direction.Left || currentHeadDir === Direction.Right)
+      return;
     gridObj.setCurrentHeadDirection(Direction.Left);
   };
   const onSwipedRight = () => {
     if (!playing) return;
+    const currentHeadDir = gridObj.getCurrentHeadDirection();
+    if (currentHeadDir === Direction.Left || currentHeadDir === Direction.Right)
+      return;
     gridObj.setCurrentHeadDirection(Direction.Right);
   };
   const onSwipedUp = () => {
     if (!playing) return;
+    const currentHeadDir = gridObj.getCurrentHeadDirection();
+    if (currentHeadDir === Direction.Down || currentHeadDir === Direction.Up)
+      return;
     gridObj.setCurrentHeadDirection(Direction.Up);
   };
   const onSwipedDown = () => {
     if (!playing) return;
+    const currentHeadDir = gridObj.getCurrentHeadDirection();
+    if (currentHeadDir === Direction.Down || currentHeadDir === Direction.Up)
+      return;
     gridObj.setCurrentHeadDirection(Direction.Down);
   };
 
