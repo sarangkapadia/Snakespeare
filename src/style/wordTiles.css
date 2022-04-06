@@ -1,0 +1,7 @@
+.wordTilesContainer {
+  display: flex;
+  flex-flow: row nowrap;
+  height: 100px;
+  margin: 5px;
+  background: coral;
+}

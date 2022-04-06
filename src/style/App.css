@@ -1,10 +1,18 @@
 @import "media.css";
 
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
 .appContainer {
   display: flex;
   background-color: var(--appBackgroundColor);
-  width: auto;
-  height: auto;
+  width: 100%;
+  height: 100%;
   align-items: center;
   flex-flow: column nowrap;
+  margin: 0px auto;
 }

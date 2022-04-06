@@ -1,11 +1,12 @@
 import React, { useCallback, useState } from "react";
-import { Score } from "./score";
 import { Button } from "./button";
 import { useInterval } from "./useInterval";
 import { GridRenderer } from "./gridRenderer";
 import { useSwipeable } from "react-swipeable";
 import { Grid, Direction, Role } from "./grid";
 import { DebugGrid } from "./debug/debugGrid";
+import "./style/gridContainer.css";
+import { WordTiles } from "./wordtiles";
 
 const root = document.querySelector(":root")!;
 const rootStyle = getComputedStyle(root);
@@ -33,10 +34,12 @@ export const GridContainer: React.FunctionComponent = () => {
     if (!playing) return;
 
     const currentHeadDir = gridObj.getCurrentHeadDirection();
+    console.log(currentHeadDir);
     if (currentHeadDir === Direction.Left || currentHeadDir === Direction.Right)
       return;
     gridObj.setCurrentHeadDirection(Direction.Left);
   };
+
   const onSwipedRight = () => {
     if (!playing) return;
     const currentHeadDir = gridObj.getCurrentHeadDirection();
@@ -44,6 +47,7 @@ export const GridContainer: React.FunctionComponent = () => {
       return;
     gridObj.setCurrentHeadDirection(Direction.Right);
   };
+
   const onSwipedUp = () => {
     if (!playing) return;
     const currentHeadDir = gridObj.getCurrentHeadDirection();
@@ -51,6 +55,7 @@ export const GridContainer: React.FunctionComponent = () => {
       return;
     gridObj.setCurrentHeadDirection(Direction.Up);
   };
+
   const onSwipedDown = () => {
     if (!playing) return;
     const currentHeadDir = gridObj.getCurrentHeadDirection();
@@ -192,7 +197,7 @@ export const GridContainer: React.FunctionComponent = () => {
   };
 
   return (
-    <div {...handlers}>
+    <div {...handlers} className={"gridContainer"}>
       {debug ? (
         <DebugGrid grid={grid} />
       ) : (
@@ -202,7 +207,7 @@ export const GridContainer: React.FunctionComponent = () => {
         />
       )}
       <div className={"appUtils"}>
-        <Score currentScore={0}></Score>
+        {/* <Score currentScore={0}></Score> */}
         <Button
           onClick={handleOnPlayPauseGame}
           label={playing ? "Pause" : "Play"}
@@ -214,6 +219,7 @@ export const GridContainer: React.FunctionComponent = () => {
           />
         ) : null}
       </div>
+      <WordTiles />
     </div>
   );
 };

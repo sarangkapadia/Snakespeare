@@ -1,0 +1,18 @@
+.header {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+  height: var(--header-height);
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid;
+}
+
+.menuleft,
+.menuright {
+  display: flex;
+  flex-flow: row nowrap;
+
+  justify-content: space-evenly;
+  margin: 5px;
+}
