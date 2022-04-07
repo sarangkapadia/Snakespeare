@@ -1,0 +1,6 @@
+.title {
+  color: var(--fontColor);
+  font-family: "Roboto Slab", serif;
+  font-weight: bold;
+  font-size: 30px;
+}

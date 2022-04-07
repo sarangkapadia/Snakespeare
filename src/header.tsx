@@ -10,15 +10,15 @@ export const Header: React.FunctionComponent = () => {
           {"About"}
         </button>
         <button className="Instructions" style={{ margin: "2px" }}>
-          {"How To Play"}
+          {"How"}
         </button>
       </div>
       <Title />
       <div className={"menuright"}>
-        <button className="Settings" style={{ margin: "2px" }}>
+        <button className="Sett" style={{ margin: "2px" }}>
           {"Settings"}
         </button>
-        <button className="Stats" style={{ margin: "2px" }}>
+        <button className="Stat" style={{ margin: "2px" }}>
           {"Stats"}
         </button>
       </div>

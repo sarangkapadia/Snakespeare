@@ -1,8 +1,8 @@
 :root {
   --gridSize: 15;
-  --boxBackgroundColor: rgb(53, 53, 53);
-  --appBackgroundColor: lightpink;
-  --snakeColor: white;
+  --boxBackgroundColor: white;
+  --appBackgroundColor: black;
+  --snakeColor: black;
   --foodColor: lightgreen;
   --boxSize: 50px;
   --debugBoxSize: 100px;
@@ -10,6 +10,7 @@
   --tick: 0.6s;
   --animprops: linear forwards;
   --header-height: 50px;
+  --fontColor: white;
 }
 
 @media screen and (max-width: 450px) {

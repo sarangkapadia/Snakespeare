@@ -1,5 +1,6 @@
 import React from "react";
+import "./style/title.css";
 
 export const Title: React.FunctionComponent = () => {
-  return <h2>Snake Bytes</h2>;
+  return <div className="title">Snake Bytes</div>;
 };

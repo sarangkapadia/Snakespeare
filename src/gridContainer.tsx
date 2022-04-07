@@ -64,15 +64,6 @@ export const GridContainer: React.FunctionComponent = () => {
     gridObj.setCurrentHeadDirection(Direction.Down);
   };
 
-  const handlers = useSwipeable({
-    onSwipedLeft: onSwipedLeft,
-    onSwipedRight: onSwipedRight,
-    onSwipedDown: onSwipedDown,
-    onSwipedUp: onSwipedUp,
-    preventDefaultTouchmoveEvent: true,
-    trackMouse: true,
-  });
-
   // calcualte the new snake ends, and assign new roles as necessary
   const getNewEnds = (ends: typeof snakeEnds) => {
     let newCol = snakeEnds.head.col;
@@ -196,29 +187,40 @@ export const GridContainer: React.FunctionComponent = () => {
     return urlSearchParams.get("debug") === "true";
   };
 
+  const handlers = useSwipeable({
+    onSwipedLeft: onSwipedLeft,
+    onSwipedRight: onSwipedRight,
+    onSwipedDown: onSwipedDown,
+    onSwipedUp: onSwipedUp,
+    onTap: handleOnPlayPauseGame,
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true,
+  });
+
   return (
-    <div {...handlers} className={"gridContainer"}>
-      {debug ? (
-        <DebugGrid grid={grid} />
-      ) : (
-        <GridRenderer
-          grid={grid}
-          currentHeadDirection={gridObj.getCurrentHeadDirection()}
-        />
-      )}
-      <div className={"appUtils"}>
-        {/* <Score currentScore={0}></Score> */}
-        <Button
+    <div {...handlers} className={"game"}>
+      <div className={"gridContainer"}>
+        {debug ? (
+          <DebugGrid grid={grid} />
+        ) : (
+          <GridRenderer
+            grid={grid}
+            currentHeadDirection={gridObj.getCurrentHeadDirection()}
+          />
+        )}
+      </div>
+      {/* <div className={"appUtils"}>
+        { <Button
           onClick={handleOnPlayPauseGame}
           label={playing ? "Pause" : "Play"}
-        />
+        /> }
         {isDebugMode() ? (
           <Button
             onClick={handleOnDebug}
             label={debug ? "Debug Off" : "Debug On"}
           />
         ) : null}
-      </div>
+      </div> */}
       <WordTiles />
     </div>
   );
