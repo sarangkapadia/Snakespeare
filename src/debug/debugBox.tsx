@@ -4,15 +4,15 @@ import "../style/debug/debugBox.css";
 const getStringRole = (role: Role): string => {
   switch (role) {
     case Role.Body:
-      return "b";
+      return "b ";
     case Role.Head:
-      return "h";
+      return "h ";
     case Role.Tail:
-      return "t";
+      return "t ";
     case Role.Canvas:
-      return "c";
+      return "c ";
     case Role.Byte:
-      return "f";
+      return "f ";
     default:
       throw new Error("invalid role");
   }
@@ -21,28 +21,27 @@ const getStringRole = (role: Role): string => {
 const getStringDirection = (direction: Direction): string => {
   switch (direction) {
     case Direction.Down:
-      return "d";
+      return "d ";
     case Direction.Up:
-      return "u";
+      return "u ";
     case Direction.Left:
-      return "l";
+      return "l ";
     case Direction.Right:
-      return "r";
+      return "r ";
     case Direction.None:
-      return "n";
+      return "n ";
     default:
       throw new Error("invalid direction");
   }
 };
 
 export const DebugBox: React.FunctionComponent<IGridItem> = (props) => {
-  const { role, direction } = props;
+  const { role, direction, pivot } = props;
   return (
     <div className={"debugBox"}>
-      <ul>
-        {role > 0 ? <li>{getStringRole(role)}</li> : null}
-        {direction > 0 ? <li>{getStringDirection(direction)}</li> : null}
-      </ul>
+      {role > 0 ? getStringRole(role) : null}
+      {direction > 0 ? getStringDirection(direction) : null}
+      {role > 0 ? getStringDirection(pivot).toUpperCase() : null}
     </div>
   );
 };

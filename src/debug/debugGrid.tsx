@@ -13,7 +13,12 @@ export const DebugGrid: React.FunctionComponent<IDebugGridProps> = (props) => {
   return (
     <div className={"debugGrid"}>
       {grid.flat().map((item, index) => (
-        <DebugBox key={index} role={item.role} direction={item.direction} />
+        <DebugBox
+          key={index}
+          role={item.role}
+          direction={item.direction}
+          pivot={item.pivot}
+        />
       ))}
     </div>
   );

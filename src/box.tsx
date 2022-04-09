@@ -6,10 +6,13 @@ interface IBoxProps {
   id: number;
   role: Role;
   currentHeadDirection: Direction;
+  currentTailDirection: Direction;
+  currentTailPivot: Direction;
 }
 
 export const Box: React.FunctionComponent<IBoxProps> = React.memo((props) => {
-  const { role, currentHeadDirection } = props;
+  const { role, currentHeadDirection, currentTailDirection, currentTailPivot } =
+    props;
 
   const getClassNameFromDirection = (dir: Direction) => {
     switch (dir) {
@@ -37,7 +40,11 @@ export const Box: React.FunctionComponent<IBoxProps> = React.memo((props) => {
       case Role.Body:
         return "snake";
       case Role.Tail:
-        return `tail_${getClassNameFromDirection(currentHeadDirection)}`; // fix this to tail
+        return `tail_${getClassNameFromDirection(
+          currentTailPivot !== Direction.None
+            ? currentTailPivot
+            : currentTailDirection
+        )}`;
       case Role.Byte:
         return "food";
       default:

@@ -19,11 +19,13 @@ export enum Role {
 export interface IGridItem {
   role: Role;
   direction: Direction;
+  pivot: Direction;
 }
 
 class GridItem implements IGridItem {
   role = Role.Canvas;
   direction = Direction.None;
+  pivot = Direction.None;
 }
 
 export class Grid {
@@ -77,9 +79,19 @@ export class Grid {
     this.grid[head.row][head.col].direction = direction;
   }
 
+  public getPivotDirectionOnCurrentTail() {
+    const { tail } = this.snake.getSnakeEnds();
+    return this.grid[tail.row][tail.col].pivot;
+  }
+
   public setCurrentTailDirection(direction: Direction) {
     const { tail } = this.snake.getSnakeEnds();
     this.grid[tail.row][tail.col].direction = direction;
+  }
+
+  setPivotOnCurrentHeadDirection(pivot: Direction) {
+    const { head } = this.snake.getSnakeEnds();
+    this.grid[head.row][head.col].pivot = pivot;
   }
 
   public initGridData() {

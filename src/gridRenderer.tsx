@@ -6,12 +6,15 @@ import "./style/grid.css";
 interface IGridRendererProps {
   grid: IGridItem[][];
   currentHeadDirection: Direction;
+  currentTailDirection: Direction;
+  currentTailPivot: Direction;
 }
 
 export const GridRenderer: React.FunctionComponent<IGridRendererProps> = (
   props
 ) => {
-  const { grid, currentHeadDirection } = props;
+  const { grid, currentHeadDirection, currentTailDirection, currentTailPivot } =
+    props;
 
   return (
     <div className={"grid"}>
@@ -21,6 +24,8 @@ export const GridRenderer: React.FunctionComponent<IGridRendererProps> = (
           id={index}
           key={index}
           currentHeadDirection={currentHeadDirection}
+          currentTailDirection={currentTailDirection}
+          currentTailPivot={currentTailPivot}
         />
       ))}
     </div>
