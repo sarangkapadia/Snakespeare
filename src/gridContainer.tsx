@@ -67,8 +67,7 @@ export const GridContainer: React.FunctionComponent = () => {
     gridObj.setPivotOnCurrentHeadDirection(Direction.Down);
   };
 
-  // calcualte the new snake ends, and assign new roles as necessary
-  const getNewEnds = (ends: typeof snakeEnds) => {
+  const calculateNewHead = (ends: typeof snakeEnds) => {
     /* ========================= HEAD ==============================*/
     const currentHeadRow = snakeEnds.head.row;
     const currentHeadCol = snakeEnds.head.col;
@@ -110,11 +109,26 @@ export const GridContainer: React.FunctionComponent = () => {
     ends.head.row = newHeadRow;
     ends.head.col = newHeadCol;
 
-    grid[newHeadRow][newHeadCol].role = Role.Head; // canvas -> head
+    // check if new Head is a valid role
+    switch (grid[newHeadRow][newHeadCol].role) {
+      case Role.Canvas: {
+        grid[newHeadRow][newHeadCol].role = Role.Head; // canvas -> head'
+        break;
+      }
+      case Role.Byte: {
+        console.log("Byte found!");
+        break;
+      }
+      default:
+        setPlaying(false);
+        throw new Error("Head collision with invalid role");
+    }
+
     grid[newHeadRow][newHeadCol].direction = currentHeadDir; // retain previous head's dir in the new head
+  };
 
+  const calculateNewTail = (ends: typeof snakeEnds) => {
     /* ========================= TAIL ==============================*/
-
     const currentTailRow = snakeEnds.tail.row;
     const currentTailCol = snakeEnds.tail.col;
     const pivotDir = grid[currentTailRow][currentTailCol].pivot;
@@ -165,7 +179,12 @@ export const GridContainer: React.FunctionComponent = () => {
     ends.tail.col = newTailCol;
     grid[newTailRow][newTailCol].role = Role.Tail; // body -> tail
     grid[newTailRow][newTailCol].direction = currentTailDir;
+  };
 
+  // calcualte the new snake ends, and assign new roles as necessary
+  const getNewEnds = (ends: typeof snakeEnds) => {
+    calculateNewTail(ends);
+    calculateNewHead(ends);
     return ends;
   };
 
