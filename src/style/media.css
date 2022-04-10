@@ -7,7 +7,7 @@
   --boxSize: 45px;
   --debugBoxSize: 100px;
   --debugBoxBackgroundColor: rgb(65, 73, 71);
-  --tick: 0.4s;
+  --tick: 0.5s;
   --animprops: linear forwards;
   --header-height: 50px;
   --fontColor: rgb(234, 241, 237);
