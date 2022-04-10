@@ -16,7 +16,7 @@ export class Snake {
 
     this.snakeEnds = {
       tail: { row: 5, col: 5 },
-      head: { row: 12, col: 5 },
+      head: { row: 5, col: 9 },
     };
   }
 

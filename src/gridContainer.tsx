@@ -212,8 +212,8 @@ export const GridContainer: React.FunctionComponent = () => {
         currentHeadDir === Direction.None &&
         currentTailDir === Direction.None
       ) {
-        gridObj.setCurrentTailDirection(Direction.Down);
-        gridObj.setCurrentHeadDirection(Direction.Down);
+        gridObj.setCurrentTailDirection(Direction.Right);
+        gridObj.setCurrentHeadDirection(Direction.Right);
       }
     }
 
@@ -238,8 +238,6 @@ export const GridContainer: React.FunctionComponent = () => {
     trackMouse: true,
   });
 
-  const currentTailPivot = gridObj.getPivotDirectionOnCurrentTail();
-
   return (
     <div {...handlers} className={"game"}>
       <div className={"gridContainer"}>
@@ -250,7 +248,7 @@ export const GridContainer: React.FunctionComponent = () => {
             grid={grid}
             currentHeadDirection={gridObj.getCurrentHeadDirection()}
             currentTailDirection={gridObj.getCurrentTailDirection()}
-            currentTailPivot={currentTailPivot}
+            currentTailPivot={gridObj.getPivotDirectionOnCurrentTail()}
           />
         )}
       </div>
