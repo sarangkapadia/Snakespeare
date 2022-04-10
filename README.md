@@ -1,4 +1,4 @@
-# S-N-A-K-E
+# Snake Bytes
 
 A fun twist on the classic snake game.
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
