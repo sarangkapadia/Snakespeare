@@ -1,7 +1,7 @@
 :root {
   --gridSize: 15;
   --boxBackgroundColor: rgb(44, 44, 44);
-  --appBackgroundColor: rgb(29, 29, 29);
+  --appBackgroundColor: rgb(5, 5, 5);
   --snakeColor: rgb(38, 148, 44);
   --foodColor: rgb(38, 148, 44);
   --boxSize: 45px;
@@ -11,6 +11,7 @@
   --animprops: linear forwards;
   --header-height: 50px;
   --fontColor: rgb(234, 241, 237);
+  --fontFamily: "Roboto Slab", serif;
 }
 
 @media screen and (max-width: 450px) {

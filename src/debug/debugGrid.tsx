@@ -16,6 +16,7 @@ export const DebugGrid: React.FunctionComponent<IDebugGridProps> = (props) => {
         <DebugBox
           key={index}
           role={item.role}
+          letter={item.letter}
           direction={item.direction}
           pivot={item.pivot}
         />

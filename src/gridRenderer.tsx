@@ -21,6 +21,7 @@ export const GridRenderer: React.FunctionComponent<IGridRendererProps> = (
       {grid.flat().map((item, index) => (
         <Box
           role={item.role}
+          letter={item.letter}
           id={index}
           key={index}
           currentHeadDirection={currentHeadDirection}

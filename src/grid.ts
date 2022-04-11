@@ -22,13 +22,14 @@ export interface IGridItem {
   role: Role;
   direction: Direction;
   pivot: Direction;
+  letter: string;
 }
 
 class GridItem implements IGridItem {
   role = Role.Canvas;
   direction = Direction.None;
   pivot = Direction.None;
-  letter = "A";
+  letter = "";
 }
 
 export class Grid {

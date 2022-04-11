@@ -1,18 +1,25 @@
 import React from "react";
+import { Byte } from "./byte";
 import { Direction, Role } from "./grid";
 import "./style/box.css";
 
 interface IBoxProps {
   id: number;
   role: Role;
+  letter: string;
   currentHeadDirection: Direction;
   currentTailDirection: Direction;
   currentTailPivot: Direction;
 }
 
 export const Box: React.FunctionComponent<IBoxProps> = React.memo((props) => {
-  const { role, currentHeadDirection, currentTailDirection, currentTailPivot } =
-    props;
+  const {
+    role,
+    letter,
+    currentHeadDirection,
+    currentTailDirection,
+    currentTailPivot,
+  } = props;
 
   const getClassNameFromDirection = (dir: Direction) => {
     switch (dir) {
@@ -55,7 +62,9 @@ export const Box: React.FunctionComponent<IBoxProps> = React.memo((props) => {
   let className = getClassName();
 
   return className === "food" ? (
-    <div className={className}></div>
+    <div className={className}>
+      <Byte letter={letter} />
+    </div>
   ) : (
     <div className={className}></div>
   );
