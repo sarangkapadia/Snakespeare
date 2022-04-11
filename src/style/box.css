@@ -47,6 +47,7 @@
   background-size: 100% 200%;
 
   animation: t2b var(--tick) var(--animprops);
+  border-radius: 10%;
 }
 
 .head_t2b {
@@ -62,6 +63,7 @@
   background-size: 100% 200%;
 
   animation: t2b var(--tick) var(--animprops);
+  border-radius: 10%;
 }
 
 /* -------------------------- */
@@ -79,6 +81,7 @@
   background-size: 100% 200%;
 
   animation: b2t var(--tick) var(--animprops);
+  border-radius: 10%;
 }
 
 .head_b2t {
@@ -94,6 +97,7 @@
   background-size: 100% 200%;
 
   animation: b2t var(--tick) var(--animprops);
+  border-radius: 10%;
 }
 
 /* -------------------------- */
@@ -111,6 +115,7 @@
   background-size: 200%;
 
   animation: l2r var(--tick) var(--animprops);
+  border-radius: 10%;
 }
 
 .head_l2r {
@@ -126,6 +131,7 @@
   background-size: 200%;
 
   animation: l2r var(--tick) var(--animprops);
+  border-radius: 10%;
 }
 
 /* -------------------------- */
@@ -143,6 +149,7 @@
   background-size: 200%;
 
   animation: r2l var(--tick) var(--animprops);
+  border-radius: 10%;
 }
 
 .head_r2l {
@@ -158,12 +165,14 @@
   background-size: 200%;
 
   animation: r2l var(--tick) var(--animprops);
+  border-radius: 10%;
 }
 
 .box {
   width: var(--boxSize);
   height: var(--boxSize);
   background-color: var(--boxBackgroundColor);
+  border-radius: 10%;
 }
 
 .snake,
@@ -172,6 +181,7 @@
   width: var(--boxSize);
   height: var(--boxSize);
   background-color: var(--snakeColor);
+  border-radius: 10%;
 }
 
 .food {
@@ -181,4 +191,5 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 10%;
 }
