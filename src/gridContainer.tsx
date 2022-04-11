@@ -20,6 +20,7 @@ const urlSearchParams = new URLSearchParams(url.search);
 
 const gridObj = new Grid();
 gridObj.initGridData();
+// gridObj.setRandomBytePositions();
 
 const gridSize = gridObj.getGridSize();
 const grid = gridObj.getGrid();

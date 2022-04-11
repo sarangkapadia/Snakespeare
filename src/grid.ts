@@ -1,3 +1,4 @@
+import { randomBytes } from "crypto";
 import { Snake } from "./snake";
 
 export enum Direction {
@@ -14,6 +15,16 @@ export enum Role {
   Head,
   Tail,
   Byte,
+}
+
+export interface IBytePosition {
+  row: number;
+  column: number;
+}
+
+class BytePosition implements IBytePosition {
+  row = 0;
+  column = 0;
 }
 
 export interface IGridItem {
@@ -118,5 +129,28 @@ export class Grid {
     } else {
       throw new Error("Snake init invalid");
     }
+
+    this.setRandomBytePositions();
   }
-}
+
+  public setRandomBytePositions() {
+    // let positionsList: BytePosition[] = new Array<BytePosition>(5);
+
+    for (let i = 0; i < 5; i++) {
+      do {
+        let randomRow = Math.floor(Math.random() * this.gridSize);
+        let randomCol = Math.floor(Math.random() * this.gridSize);
+
+        if (this.grid[randomRow][randomCol].role === Role.Canvas) {
+          this.grid[randomRow][randomCol].role = Role.Byte;
+          // positionsList[i].row = randomRow;
+          // positionsList[i].column = randomCol;
+          break;
+        } else {
+          console.log("Invalid random position");
+        }
+      } while (1);
+    }
+    //return positionsList;
+  }
+} // end of grid

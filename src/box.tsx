@@ -54,5 +54,9 @@ export const Box: React.FunctionComponent<IBoxProps> = React.memo((props) => {
 
   let className = getClassName();
 
-  return <div className={className}></div>;
+  return className === "food" ? (
+    <div className={className}></div>
+  ) : (
+    <div className={className}></div>
+  );
 });

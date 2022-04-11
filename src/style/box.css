@@ -178,4 +178,6 @@
   width: var(--boxSize);
   height: var(--boxSize);
   background-color: var(--foodColor);
+  font-family: "Roboto Slab", serif;
+  font: bold 30px var(--fontColor);
 }
