@@ -1,4 +1,5 @@
-import { randomBytes } from "crypto";
+import { byteList } from "./byteList";
+import { Bytes } from "./bytes";
 import { Snake } from "./snake";
 
 export enum Direction {
@@ -17,16 +18,6 @@ export enum Role {
   Byte,
 }
 
-export interface IBytePosition {
-  row: number;
-  column: number;
-}
-
-class BytePosition implements IBytePosition {
-  row = 0;
-  column = 0;
-}
-
 export interface IGridItem {
   role: Role;
   direction: Direction;
@@ -37,17 +28,20 @@ class GridItem implements IGridItem {
   role = Role.Canvas;
   direction = Direction.None;
   pivot = Direction.None;
+  letter = "A";
 }
 
 export class Grid {
   private grid: GridItem[][];
   private gridSize: number;
   private snake: Snake; // Grid contains a Snake
+  private bytes: Bytes; // Grid contains Bytes
 
   public constructor() {
     const root = document.querySelector(":root")!;
     const rootStyle = getComputedStyle(root);
     this.gridSize = parseInt(rootStyle.getPropertyValue("--gridSize"));
+    this.bytes = new Bytes(byteList);
 
     this.grid = new Array(this.gridSize);
     for (let i = 0; i < this.gridSize; i++) {
@@ -133,24 +127,24 @@ export class Grid {
     this.setRandomBytePositions();
   }
 
+  // sprinkles the next word on the grid
   public setRandomBytePositions() {
-    // let positionsList: BytePosition[] = new Array<BytePosition>(5);
-
-    for (let i = 0; i < 5; i++) {
+    const nextWord = this.bytes.getNextWord();
+    for (let i = 0; i < nextWord.length; i++) {
       do {
         let randomRow = Math.floor(Math.random() * this.gridSize);
         let randomCol = Math.floor(Math.random() * this.gridSize);
 
         if (this.grid[randomRow][randomCol].role === Role.Canvas) {
           this.grid[randomRow][randomCol].role = Role.Byte;
-          // positionsList[i].row = randomRow;
-          // positionsList[i].column = randomCol;
+          this.grid[randomRow][randomCol].letter = nextWord
+            .charAt(i)
+            .toUpperCase();
           break;
         } else {
           console.log("Invalid random position");
         }
       } while (1);
     }
-    //return positionsList;
   }
 } // end of grid
