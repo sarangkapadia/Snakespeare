@@ -8,6 +8,7 @@ import { DebugGrid } from "./debug/debugGrid";
 import "./style/gridContainer.css";
 import { WordTiles } from "./wordtiles";
 
+// move this to a useEffect
 const root = document.querySelector(":root")!;
 const rootStyle = getComputedStyle(root);
 
@@ -20,7 +21,6 @@ const urlSearchParams = new URLSearchParams(url.search);
 
 const gridObj = new Grid();
 gridObj.initGridData();
-// gridObj.setRandomBytePositions();
 
 const gridSize = gridObj.getGridSize();
 const grid = gridObj.getGrid();
@@ -118,6 +118,12 @@ export const GridContainer: React.FunctionComponent = () => {
       }
       case Role.Byte: {
         console.log("Byte found!");
+        const expected = gridObj.getExpectedLetter().toUpperCase();
+        const landed = grid[newHeadRow][newHeadCol].letter;
+        if (landed !== expected)
+          throw new Error(
+            `Wrong letter, expected = ${expected}, letter = ${landed}`
+          );
         break;
       }
       default:

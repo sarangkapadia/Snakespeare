@@ -36,7 +36,10 @@ export class Grid {
   private grid: GridItem[][];
   private gridSize: number;
   private snake: Snake; // Grid contains a Snake
+
   private bytes: Bytes; // Grid contains Bytes
+  private currentBytes: string = "snake";
+  private letterIndex: number = 0;
 
   public constructor() {
     const root = document.querySelector(":root")!;
@@ -130,15 +133,15 @@ export class Grid {
 
   // sprinkles the next word on the grid
   public setRandomBytePositions() {
-    const nextWord = this.bytes.getNextWord();
-    for (let i = 0; i < nextWord.length; i++) {
+    this.currentBytes = this.bytes.getNextWord();
+    for (let i = 0; i < this.currentBytes.length; i++) {
       do {
         let randomRow = Math.floor(Math.random() * this.gridSize);
         let randomCol = Math.floor(Math.random() * this.gridSize);
 
         if (this.grid[randomRow][randomCol].role === Role.Canvas) {
           this.grid[randomRow][randomCol].role = Role.Byte;
-          this.grid[randomRow][randomCol].letter = nextWord
+          this.grid[randomRow][randomCol].letter = this.currentBytes
             .charAt(i)
             .toUpperCase();
           break;
@@ -147,5 +150,11 @@ export class Grid {
         }
       } while (1);
     }
+  }
+
+  public getExpectedLetter(): string {
+    const expected = this.currentBytes.charAt(this.letterIndex);
+    this.letterIndex = (this.letterIndex + 1) % this.currentBytes.length;
+    return expected;
   }
 } // end of grid
