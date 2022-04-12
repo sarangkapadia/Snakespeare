@@ -128,7 +128,18 @@ export const GridContainer: React.FunctionComponent = () => {
     grid[newHeadRow][newHeadCol].direction = currentHeadDir; // retain previous head's dir in the new head
   };
 
+  const isHeadOnByte = (ends: typeof snakeEnds): boolean => {
+    const currentHeadRow = snakeEnds.head.row;
+    const currentHeadCol = snakeEnds.head.col;
+    return grid[currentHeadRow][currentHeadCol].role === Role.Byte;
+  };
+
   const calculateNewTail = (ends: typeof snakeEnds) => {
+    // no-op if the head is on a byte
+    if (isHeadOnByte(snakeEnds)) {
+      return;
+    }
+
     /* ========================= TAIL ==============================*/
     const currentTailRow = snakeEnds.tail.row;
     const currentTailCol = snakeEnds.tail.col;
