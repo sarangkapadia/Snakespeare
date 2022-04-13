@@ -29,6 +29,7 @@ export const GridContainer: React.FunctionComponent = () => {
   const [snakeEnds, setSnakeEnds] = useState(gridObj.getSnake().getSnakeEnds());
   const [playing, setPlaying] = useState(false);
   const [debug, setDebug] = useState(false);
+  const [currentLetter, setCurrentLetter] = useState("");
 
   // add logic in these to detect game end
   const onSwipedLeft = () => {
@@ -124,6 +125,8 @@ export const GridContainer: React.FunctionComponent = () => {
           throw new Error(
             `Wrong letter, expected = ${expected}, letter = ${landed}`
           );
+        const currentByteSequence = currentLetter + landed;
+        setCurrentLetter(currentByteSequence);
         break;
       }
       default:
@@ -284,7 +287,7 @@ export const GridContainer: React.FunctionComponent = () => {
           />
         ) : null}
       </div>
-      <WordTiles />
+      <WordTiles bytes={currentLetter} />
     </div>
   );
 };
