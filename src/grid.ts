@@ -162,7 +162,6 @@ export class Grid {
 
   public getExpectedLetter(): string {
     const expected = this.currentBytes.charAt(this.letterIndex);
-    console.log("expected =", expected, "index = ", this.letterIndex);
     return expected;
   }
 } // end of grid

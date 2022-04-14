@@ -193,3 +193,14 @@
   align-items: center;
   border-radius: 10%;
 }
+
+@keyframes food2head {
+  0% {
+    width: var(--boxSize);
+    height: var(--boxSize);
+  }
+  100% {
+    width: calc(var(--boxSize) + 10%);
+    height: calc(var(--boxSize) + 10%);
+  }
+}
