@@ -22,7 +22,7 @@ export class Bytes {
     return array;
   }
   public constructor(byteList: string[], index?: number) {
-    alert("this should be called only once");
+    console.log("this should be called only once");
     this.byteList = this.shuffle(byteList);
     this.index = index ? index : 0;
   }

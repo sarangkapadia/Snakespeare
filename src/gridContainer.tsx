@@ -118,15 +118,23 @@ export const GridContainer: React.FunctionComponent = () => {
         break;
       }
       case Role.Byte: {
-        console.log("Byte found!");
         const expected = gridObj.getExpectedLetter().toUpperCase();
         const landed = grid[newHeadRow][newHeadCol].letter;
+
         if (landed !== expected)
           throw new Error(
             `Wrong letter, expected = ${expected}, letter = ${landed}`
           );
-        const currentByteSequence = currentLetter + landed;
+
+        const currentByteSequence =
+          gridObj.getLetterIndex() > 0 ? currentLetter + landed : landed;
         setCurrentLetter(currentByteSequence);
+
+        gridObj.incrementLetterIndex();
+        if (gridObj.getLetterIndex() === 0) {
+          gridObj.setRandomBytePositions();
+        }
+
         break;
       }
       default:

@@ -151,11 +151,18 @@ export class Grid {
     }
   }
 
+  public getLetterIndex(): number {
+    return this.letterIndex;
+  }
+
+  public incrementLetterIndex() {
+    // increment index in a circular manner 0-4 and back to 0
+    this.letterIndex = (this.letterIndex + 1) % this.currentBytes.length;
+  }
+
   public getExpectedLetter(): string {
     const expected = this.currentBytes.charAt(this.letterIndex);
-    // also increment index in a circular manner 0-4 and back to 0
-    this.letterIndex = (this.letterIndex + 1) % this.currentBytes.length;
-    if (this.letterIndex === 0) this.setRandomBytePositions();
+    console.log("expected =", expected, "index = ", this.letterIndex);
     return expected;
   }
 } // end of grid
