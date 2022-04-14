@@ -1,6 +1,5 @@
 .title {
   color: var(--fontColor);
   font-family: var(--fontFamily);
-  font-weight: bold;
   font-size: 150%;
 }

@@ -11,7 +11,7 @@
   --animprops: linear forwards;
   --header-height: 50px;
   --fontColor: rgb(234, 241, 237);
-  --fontFamily: "Roboto Slab", serif;
+  --fontFamily: "Rubik", sans-serif;
 }
 
 @media screen and (max-width: 450px) {
