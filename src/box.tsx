@@ -40,10 +40,13 @@ export const Box: React.FunctionComponent<IBoxProps> = React.memo((props) => {
 
   const getClassName = (): string => {
     switch (role) {
+      case Role.FirstTail:
       case Role.Canvas:
         return "box";
       case Role.Head:
         return `head_${getClassNameFromDirection(currentHeadDirection)}`;
+      case Role.FirstHead:
+        return "head_none";
       case Role.Body:
         return "snake";
       case Role.Tail:

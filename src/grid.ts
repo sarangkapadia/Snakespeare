@@ -16,6 +16,8 @@ export enum Role {
   Head,
   Tail,
   Byte,
+  FirstHead,
+  FirstTail,
 }
 
 export interface IGridItem {
@@ -109,8 +111,8 @@ export class Grid {
     this.grid[tail.row][tail.col].direction = Direction.None;
     this.grid[head.row][head.col].direction = Direction.None;
 
-    this.grid[tail.row][tail.col].role = Role.Tail;
-    this.grid[head.row][head.col].role = Role.Head;
+    this.grid[tail.row][tail.col].role = Role.FirstTail;
+    this.grid[head.row][head.col].role = Role.FirstHead;
 
     if (tail.row === head.row) {
       // horizontal snake

@@ -113,6 +113,7 @@ export const GridContainer: React.FunctionComponent = () => {
 
     // check if new Head is a valid role
     switch (grid[newHeadRow][newHeadCol].role) {
+      case Role.Tail:
       case Role.Canvas: {
         grid[newHeadRow][newHeadCol].role = Role.Head; // canvas -> head'
         break;
@@ -262,7 +263,7 @@ export const GridContainer: React.FunctionComponent = () => {
     onSwipedRight: onSwipedRight,
     onSwipedDown: onSwipedDown,
     onSwipedUp: onSwipedUp,
-    onTap: handleOnPlayPauseGame,
+    //onTap: handleOnPlayPauseGame,
     preventDefaultTouchmoveEvent: true,
     trackMouse: true,
   });
@@ -282,12 +283,12 @@ export const GridContainer: React.FunctionComponent = () => {
         )}
       </div>
       <div className={"appUtils"}>
-        {/* {
+        {
           <Button
             onClick={handleOnPlayPauseGame}
             label={playing ? "Pause" : "Play"}
           />
-        } */}
+        }
         {isDebugMode() ? (
           <Button
             onClick={handleOnDebug}
