@@ -1,17 +1,21 @@
 :root {
   --gridSize: 15;
-  --boxBackgroundColor: rgb(44, 44, 44);
-  --appBackgroundColor: rgb(5, 5, 5);
-  --snakeColor: rgb(38, 148, 44);
-  --foodColor: rgb(218, 142, 28);
+
   --boxSize: 45px;
   --debugBoxSize: 100px;
-  --debugBoxBackgroundColor: rgb(65, 73, 71);
+
   --tick: 0.5s;
   --animprops: linear forwards;
   --header-height: 50px;
-  --fontColor: rgb(234, 241, 237);
+
   --fontFamily: "Rubik", sans-serif;
+
+  --fontColor: #eaf1ed;
+  --snakeColor: rgb(196, 93, 178);
+  --foodColor: rgb(97, 187, 55);
+  --boxBackgroundColor: rgb(54, 43, 54);
+  --appBackgroundColor: rgb(21, 9, 22);
+  --debugBoxBackgroundColor: rgb(65, 73, 71);
 }
 
 @media screen and (max-width: 450px) {
