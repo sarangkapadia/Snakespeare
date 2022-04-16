@@ -263,7 +263,7 @@ export const GridContainer: React.FunctionComponent = () => {
     onSwipedRight: onSwipedRight,
     onSwipedDown: onSwipedDown,
     onSwipedUp: onSwipedUp,
-    //onTap: handleOnPlayPauseGame,
+    onTap: handleOnPlayPauseGame,
     preventDefaultTouchmoveEvent: true,
     trackMouse: true,
   });
@@ -283,12 +283,12 @@ export const GridContainer: React.FunctionComponent = () => {
         )}
       </div>
       <div className={"appUtils"}>
-        {
+        {/* {
           <Button
             onClick={handleOnPlayPauseGame}
             label={playing ? "Pause" : "Play"}
           />
-        }
+        } */}
         {isDebugMode() ? (
           <Button
             onClick={handleOnDebug}
