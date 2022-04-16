@@ -1,5 +1,5 @@
 :root {
-  --gridSize: 15;
+  --gridSize: 14;
 
   --boxSize: 45px;
   --debugBoxSize: 100px;
@@ -16,6 +16,7 @@
   --boxBackgroundColor: rgb(54, 43, 54);
   --appBackgroundColor: rgb(21, 9, 22);
   --debugBoxBackgroundColor: rgb(65, 73, 71);
+  --modalBackgroundColor: rgb(54, 43, 54);
 }
 
 @media screen and (max-width: 450px) {

@@ -7,6 +7,7 @@ import { Grid, Direction, Role } from "./grid";
 import { DebugGrid } from "./debug/debugGrid";
 import "./style/gridContainer.css";
 import { WordTiles } from "./wordtiles";
+import { InstructionsModal } from "./components/modals/instructions";
 
 // move this to a useEffect
 const root = document.querySelector(":root")!;
@@ -25,7 +26,13 @@ gridObj.initGridData();
 const gridSize = gridObj.getGridSize();
 const grid = gridObj.getGrid();
 
-export const GridContainer: React.FunctionComponent = () => {
+interface IGridContainer {
+  showInstructions: boolean;
+  onCloseInstructions: () => void;
+}
+export const GridContainer: React.FunctionComponent<IGridContainer> = (
+  props
+) => {
   const [snakeEnds, setSnakeEnds] = useState(gridObj.getSnake().getSnakeEnds());
   const [playing, setPlaying] = useState(false);
   const [debug, setDebug] = useState(false);
@@ -105,7 +112,9 @@ export const GridContainer: React.FunctionComponent = () => {
       }
       default: {
         setPlaying(false);
-        throw new Error("Invalid head direction!");
+        const error = "Invalid head direction!";
+        alert(error);
+        throw new Error(error);
       }
     }
     ends.head.row = newHeadRow;
@@ -122,10 +131,11 @@ export const GridContainer: React.FunctionComponent = () => {
         const expected = gridObj.getExpectedLetter().toUpperCase();
         const landed = grid[newHeadRow][newHeadCol].letter;
 
-        if (landed !== expected)
-          throw new Error(
-            `Wrong letter, expected = ${expected}, letter = ${landed}`
-          );
+        if (landed !== expected) {
+          const error = `Wrong letter, expected = ${expected}, letter = ${landed}`;
+          alert(error);
+          throw new Error(error);
+        }
 
         const currentByteSequence =
           gridObj.getLetterIndex() > 0 ? currentLetter + landed : landed;
@@ -140,7 +150,9 @@ export const GridContainer: React.FunctionComponent = () => {
       }
       default:
         setPlaying(false);
-        throw new Error("Head collision with invalid role");
+        const error = "Head collision with invalid role";
+        alert(error);
+        throw new Error(error);
     }
 
     grid[newHeadRow][newHeadCol].direction = currentHeadDir; // retain previous head's dir in the new head
@@ -201,7 +213,9 @@ export const GridContainer: React.FunctionComponent = () => {
       }
       default: {
         setPlaying(false);
-        throw new Error("Invalid tail direction!");
+        const error = "Invalid tail direction!";
+        alert(error);
+        throw new Error(error);
       }
     }
 
@@ -270,33 +284,39 @@ export const GridContainer: React.FunctionComponent = () => {
 
   return (
     <div {...handlers} className={"game"}>
-      <div className={"gridContainer"}>
-        {debug ? (
-          <DebugGrid grid={grid} />
-        ) : (
-          <GridRenderer
-            grid={grid}
-            currentHeadDirection={gridObj.getCurrentHeadDirection()}
-            currentTailDirection={gridObj.getCurrentTailDirection()}
-            currentTailPivot={gridObj.getPivotDirectionOnCurrentTail()}
-          />
-        )}
-      </div>
-      <div className={"appUtils"}>
-        {/* {
+      {props.showInstructions ? (
+        <InstructionsModal onCloseInstructions={props.onCloseInstructions} />
+      ) : (
+        <div>
+          <div className={"gridContainer"}>
+            {debug ? (
+              <DebugGrid grid={grid} />
+            ) : (
+              <GridRenderer
+                grid={grid}
+                currentHeadDirection={gridObj.getCurrentHeadDirection()}
+                currentTailDirection={gridObj.getCurrentTailDirection()}
+                currentTailPivot={gridObj.getPivotDirectionOnCurrentTail()}
+              />
+            )}
+          </div>
+          <div className={"appUtils"}>
+            {/* {
           <Button
             onClick={handleOnPlayPauseGame}
             label={playing ? "Pause" : "Play"}
           />
         } */}
-        {isDebugMode() ? (
-          <Button
-            onClick={handleOnDebug}
-            label={debug ? "Debug Off" : "Debug On"}
-          />
-        ) : null}
-      </div>
-      <WordTiles bytes={currentLetter} />
+            {isDebugMode() ? (
+              <Button
+                onClick={handleOnDebug}
+                label={debug ? "Debug Off" : "Debug On"}
+              />
+            ) : null}
+          </div>
+          <WordTiles bytes={currentLetter} />
+        </div>
+      )}
     </div>
   );
 };

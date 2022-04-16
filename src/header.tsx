@@ -25,7 +25,11 @@ const outerTheme = createTheme({
   },
 });
 
-export const Header: React.FunctionComponent = () => {
+interface IHeader {
+  onClickInstructions: () => void;
+}
+
+export const Header: React.FunctionComponent<IHeader> = (props) => {
   return (
     <ThemeProvider theme={outerTheme}>
       <div className={"header"}>
@@ -33,7 +37,12 @@ export const Header: React.FunctionComponent = () => {
           <IconButton aria-label="Menu" color="primary" size="small">
             <MenuRounded />
           </IconButton>
-          <IconButton aria-label="Instruction" color="primary" size="small">
+          <IconButton
+            aria-label="Instruction"
+            color="primary"
+            size="small"
+            onClick={props.onClickInstructions}
+          >
             <HelpRounded />
           </IconButton>
         </div>

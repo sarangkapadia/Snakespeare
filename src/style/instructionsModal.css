@@ -1,0 +1,43 @@
+@keyframes downTotop {
+  0% {
+    top: -100%;
+  }
+  100% {
+    top: 0;
+  }
+}
+.instructionsModalContainerIn {
+  position: absolute;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--modalBackgroundColor);
+  z-index: 1;
+  animation: downTotop forwards ease-in 0.5s;
+}
+
+.instructionsModalContainerOut {
+  position: absolute;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--modalBackgroundColor);
+  z-index: 1;
+  animation: downTotop forwards ease-in 0.5s;
+}
+
+.textInstructions {
+  color: var(--fontColor);
+  font-family: var(--fontFamily);
+}
+
+.playButton {
+  background-color: var(--snakeColor);
+  border: none;
+  font-family: var(--fontFamily);
+  color: var(--fontColor);
+  font-size: 20px;
+  margin: 10px;
+}
