@@ -8,16 +8,12 @@ export const App: React.FunctionComponent = () => {
   const [showInstructions, setShowInstructions] = useState(false);
 
   const onClickInstructions = () => {
-    console.log("In onInstructionsClick");
     setShowInstructions(true);
   };
 
   const onCloseInstructions = () => {
-    console.log("In onInstructionsClose");
     setShowInstructions(false);
   };
-
-  console.log("showInstructions = ", showInstructions);
 
   return (
     <div className={"appContainer"}>
@@ -26,7 +22,6 @@ export const App: React.FunctionComponent = () => {
         showInstructions={showInstructions}
         onCloseInstructions={onCloseInstructions}
       />
-      {/* <InstructionsModal show={true} /> */}
     </div>
   );
 };

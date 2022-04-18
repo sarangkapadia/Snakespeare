@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Button } from "./button";
 import { useInterval } from "./useInterval";
 import { GridRenderer } from "./gridRenderer";
@@ -33,6 +33,7 @@ interface IGridContainer {
 export const GridContainer: React.FunctionComponent<IGridContainer> = (
   props
 ) => {
+  const { showInstructions, onCloseInstructions } = props;
   const [snakeEnds, setSnakeEnds] = useState(gridObj.getSnake().getSnakeEnds());
   const [playing, setPlaying] = useState(false);
   const [debug, setDebug] = useState(false);
@@ -40,7 +41,10 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
 
   // add logic in these to detect game end
   const onSwipedLeft = () => {
-    if (!playing) return;
+    if (!playing) {
+      handleOnPlayPauseGame();
+      return;
+    }
 
     const currentHeadDir = gridObj.getCurrentHeadDirection();
     if (currentHeadDir === Direction.Left || currentHeadDir === Direction.Right)
@@ -50,7 +54,10 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
   };
 
   const onSwipedRight = () => {
-    if (!playing) return;
+    if (!playing) {
+      handleOnPlayPauseGame();
+      return;
+    }
     const currentHeadDir = gridObj.getCurrentHeadDirection();
     if (currentHeadDir === Direction.Left || currentHeadDir === Direction.Right)
       return;
@@ -59,7 +66,10 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
   };
 
   const onSwipedUp = () => {
-    if (!playing) return;
+    if (!playing) {
+      handleOnPlayPauseGame();
+      return;
+    }
     const currentHeadDir = gridObj.getCurrentHeadDirection();
     if (currentHeadDir === Direction.Down || currentHeadDir === Direction.Up)
       return;
@@ -68,7 +78,10 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
   };
 
   const onSwipedDown = () => {
-    if (!playing) return;
+    if (!playing) {
+      handleOnPlayPauseGame();
+      return;
+    }
     const currentHeadDir = gridObj.getCurrentHeadDirection();
     if (currentHeadDir === Direction.Down || currentHeadDir === Direction.Up)
       return;
@@ -247,11 +260,21 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     playing ? tickCountMs : null
   );
 
+  useEffect(() => {
+    if (showInstructions) setPlaying(false);
+  }, [showInstructions]);
+
   const handleOnPlayPauseGame = useCallback(() => {
+    if (showInstructions) {
+      // pause and return
+      setPlaying(false);
+      return;
+    }
+
     if (!playing) {
       const currentTailDir = gridObj.getCurrentTailDirection();
       const currentHeadDir = gridObj.getCurrentHeadDirection();
-      // on hitting play
+      // on play first time
       if (
         currentHeadDir === Direction.None &&
         currentTailDir === Direction.None
@@ -262,7 +285,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     }
 
     setPlaying((playing) => !playing);
-  }, [playing]);
+  }, [playing, showInstructions]);
 
   const handleOnDebug = useCallback(() => {
     setDebug((debug) => !debug);
@@ -277,46 +300,45 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     onSwipedRight: onSwipedRight,
     onSwipedDown: onSwipedDown,
     onSwipedUp: onSwipedUp,
-    onTap: handleOnPlayPauseGame,
     preventDefaultTouchmoveEvent: true,
     trackMouse: true,
   });
 
   return (
     <div {...handlers} className={"game"}>
-      {props.showInstructions ? (
-        <InstructionsModal onCloseInstructions={props.onCloseInstructions} />
-      ) : (
-        <div>
-          <div className={"gridContainer"}>
-            {debug ? (
-              <DebugGrid grid={grid} />
-            ) : (
-              <GridRenderer
-                grid={grid}
-                currentHeadDirection={gridObj.getCurrentHeadDirection()}
-                currentTailDirection={gridObj.getCurrentTailDirection()}
-                currentTailPivot={gridObj.getPivotDirectionOnCurrentTail()}
-              />
-            )}
-          </div>
-          <div className={"appUtils"}>
-            {/* {
+      <InstructionsModal
+        action={showInstructions}
+        onCloseInstructions={onCloseInstructions}
+      />
+      <div className={"gridContainer"}>
+        {debug ? (
+          <DebugGrid grid={grid} />
+        ) : (
+          <GridRenderer
+            grid={grid}
+            currentHeadDirection={gridObj.getCurrentHeadDirection()}
+            currentTailDirection={gridObj.getCurrentTailDirection()}
+            currentTailPivot={gridObj.getPivotDirectionOnCurrentTail()}
+          />
+        )}
+      </div>
+      <div className={"appUtils"}>
+        {/* {
           <Button
             onClick={handleOnPlayPauseGame}
             label={playing ? "Pause" : "Play"}
           />
         } */}
-            {isDebugMode() ? (
-              <Button
-                onClick={handleOnDebug}
-                label={debug ? "Debug Off" : "Debug On"}
-              />
-            ) : null}
-          </div>
-          <WordTiles bytes={currentLetter} />
-        </div>
-      )}
+        {isDebugMode() ? (
+          <Button
+            onClick={handleOnDebug}
+            label={debug ? "Debug Off" : "Debug On"}
+          />
+        ) : null}
+      </div>
+      {/* <div className="wordTilesContainer"> */}
+      <WordTiles bytes={currentLetter} />
+      {/* </div> */}
     </div>
   );
 };
