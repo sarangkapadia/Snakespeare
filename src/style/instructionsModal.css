@@ -34,6 +34,8 @@
   z-index: 200;
   left: 0;
   top: 0;
+
+  animation: slideIn 0.3s linear forwards;
 }
 
 .closed {
@@ -44,14 +46,16 @@
   height: 100%;
   width: 100%;
   position: absolute;
-  display: none;
+  display: flex;
   flex-flow: column nowrap;
-  justify-content: center;
-
+  justify-content: flex-start;
+  align-items: center;
   background-color: var(--modalBackgroundColor);
   z-index: 200;
   left: 0;
   top: 0;
+
+  animation: slideOut 0.3s linear forwards;
 }
 
 .modalContainer {

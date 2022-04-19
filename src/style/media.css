@@ -13,10 +13,10 @@
   --fontColor: #eaf1ed;
   --snakeColor: rgb(201, 100, 184);
   --foodColor: rgb(112, 55, 187);
-  --boxBackgroundColor: rgb(54, 43, 54);
+  --boxBackgroundColor: rgb(36, 35, 44);
   --appBackgroundColor: rgb(21, 9, 22);
   --debugBoxBackgroundColor: rgb(65, 73, 71);
-  --modalBackgroundColor: rgb(54, 43, 54);
+  --modalBackgroundColor: rgb(36, 35, 44);
 }
 
 @media screen and (max-width: 450px) {

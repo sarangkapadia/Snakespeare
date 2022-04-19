@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../style/instructionsModal.css";
 import snakeSmile from "../../snakeSmile.gif";
 
@@ -10,10 +10,18 @@ interface IInstructionsModal {
 export const InstructionsModal: React.FunctionComponent<IInstructionsModal> =
   React.memo((props) => {
     const { action, onCloseInstructions } = props;
+    const [className, setClassName] = useState("closed");
+
+    useEffect(() => {
+      setClassName(action ? "instructionsOverlayIn" : "instructionsOverlayOut");
+    }, [action]);
+
+    useEffect(() => {
+      setClassName("closed");
+    }, []);
+
     return (
-      <div
-        className={action ? "instructionsOverlayIn" : "instructionsOverlayOut"}
-      >
+      <div className={className}>
         <div className={"modalContainer"}>
           <div className={"header"}>
             <h3>How to play</h3>
