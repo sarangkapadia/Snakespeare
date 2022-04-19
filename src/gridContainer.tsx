@@ -38,9 +38,11 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
   const [playing, setPlaying] = useState(false);
   const [debug, setDebug] = useState(false);
   const [currentLetter, setCurrentLetter] = useState("");
-
+  let movePending = false;
   // add logic in these to detect game end
   const onSwipedLeft = () => {
+    if (movePending) return;
+
     if (!playing) {
       handleOnPlayPauseGame();
       return;
@@ -51,9 +53,11 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
       return;
     gridObj.setCurrentHeadDirection(Direction.Left);
     gridObj.setPivotOnCurrentHeadDirection(Direction.Left);
+    movePending = true;
   };
 
   const onSwipedRight = () => {
+    if (movePending) return;
     if (!playing) {
       handleOnPlayPauseGame();
       return;
@@ -63,9 +67,11 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
       return;
     gridObj.setCurrentHeadDirection(Direction.Right);
     gridObj.setPivotOnCurrentHeadDirection(Direction.Right);
+    movePending = true;
   };
 
   const onSwipedUp = () => {
+    if (movePending) return;
     if (!playing) {
       handleOnPlayPauseGame();
       return;
@@ -75,9 +81,11 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
       return;
     gridObj.setCurrentHeadDirection(Direction.Up);
     gridObj.setPivotOnCurrentHeadDirection(Direction.Up);
+    movePending = true;
   };
 
   const onSwipedDown = () => {
+    if (movePending) return;
     if (!playing) {
       handleOnPlayPauseGame();
       return;
@@ -87,6 +95,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
       return;
     gridObj.setCurrentHeadDirection(Direction.Down);
     gridObj.setPivotOnCurrentHeadDirection(Direction.Down);
+    movePending = true;
   };
 
   const calculateNewHead = (ends: typeof snakeEnds) => {
@@ -163,7 +172,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
       }
       default:
         setPlaying(false);
-        const error = "Head collision with invalid role";
+        const error = `Head collision with invalid role , ${grid[newHeadRow][newHeadCol].role}`;
         alert(error);
         throw new Error(error);
     }
@@ -252,6 +261,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     setSnakeEnds(newEnds);
     // set new ends
     gridObj.getSnake().setSnakeEnds(ends);
+    movePending = false;
   };
 
   useInterval(
@@ -322,23 +332,21 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
           />
         )}
       </div>
-      <div className={"appUtils"}>
-        {/* {
+      {/* <div className={"appUtils"}>
+        {
           <Button
             onClick={handleOnPlayPauseGame}
             label={playing ? "Pause" : "Play"}
           />
-        } */}
+        }
         {isDebugMode() ? (
           <Button
             onClick={handleOnDebug}
             label={debug ? "Debug Off" : "Debug On"}
           />
         ) : null}
-      </div>
-      {/* <div className="wordTilesContainer"> */}
+      </div> */}
       <WordTiles bytes={currentLetter} />
-      {/* </div> */}
     </div>
   );
 };
