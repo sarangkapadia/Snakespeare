@@ -22,13 +22,13 @@
   }
 }
 
-.instructionsModalContainerIn {
+.instructionsOverlayIn {
   height: 100%;
   width: 100%;
   position: absolute;
   display: flex;
   flex-flow: column nowrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   background-color: var(--modalBackgroundColor);
   z-index: 200;
@@ -40,30 +40,50 @@
   display: none;
 }
 
-.instructionsModalContainerOut {
+.instructionsOverlayOut {
   height: 100%;
   width: 100%;
   position: absolute;
   display: none;
   flex-flow: column nowrap;
   justify-content: center;
-  align-items: center;
+
   background-color: var(--modalBackgroundColor);
   z-index: 200;
   left: 0;
   top: 0;
 }
 
-.textInstructions {
-  color: var(--fontColor);
-  font-family: var(--fontFamily);
+.modalContainer {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
 }
 
-.playButton {
+.close {
+  border-radius: 15%;
   background-color: var(--snakeColor);
   border: none;
   font-family: var(--fontFamily);
   color: var(--fontColor);
   font-size: 20px;
+  margin: 5px 10px 5px 5px;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid;
+  border-color: var(--snakeColor);
+}
+
+h3,
+p {
+  font-family: var(--fontFamily);
+  color: var(--fontColor);
   margin: 10px;
 }
