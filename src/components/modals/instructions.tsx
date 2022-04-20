@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../../style/instructionsModal.css";
+import "../../style/modalPage.css";
 import snakeSmile from "../../snakeSmile.gif";
 import { ModalHeader } from "./modalHeader";
 
@@ -14,7 +15,7 @@ export const InstructionsModal: React.FunctionComponent<IInstructionsModal> =
     const [className, setClassName] = useState("closed");
 
     useEffect(() => {
-      setClassName(action ? "instructionsOverlayIn" : "instructionsOverlayOut");
+      setClassName(action ? "modalOverlayIn" : "modalOverlayOut");
       if (!action) {
         setTimeout(() => setClassName("closed"), 400);
       }
