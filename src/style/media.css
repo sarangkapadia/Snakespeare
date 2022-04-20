@@ -19,7 +19,27 @@
   --modalBackgroundColor: rgb(36, 35, 44);
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 350px) {
+  :root {
+    --boxSize: 23px;
+    --gridSize: 12;
+  }
+}
+
+@media screen and (min-width: 350px) and (max-width: 389px) {
+  :root {
+    --boxSize: 24px;
+    --gridSize: 13;
+  }
+}
+
+@media screen and (min-width: 390px) and (max-width: 450px) {
+  :root {
+    --boxSize: 25px;
+  }
+}
+
+@media screen and (min-width: 450px) and (max-width: 450px) {
   :root {
     --boxSize: 25px;
   }
@@ -27,12 +47,14 @@
 
 @media screen and (min-width: 450px) and (max-width: 770px) {
   :root {
-    --boxSize: 30px;
+    --gridSize: 15;
+    --boxSize: 35px;
   }
 }
 
-/* @media screen and (min-width: 1400px) {
+@media screen and (min-width: 770px) and (max-width: 2200px) {
   :root {
-    --gridSize: 20;
+    --gridSize: 16;
+    --boxSize: 45px;
   }
-} */
+}
