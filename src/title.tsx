@@ -1,6 +1,11 @@
 import React from "react";
 import "./style/title.css";
 
-export const Title: React.FunctionComponent = React.memo(() => {
-  return <div className="title">Snake Bytes</div>;
-});
+interface ITitleProps {
+  title: string;
+}
+export const Title: React.FunctionComponent<ITitleProps> = React.memo(
+  (props) => {
+    return <div className="title">{props.title}</div>;
+  }
+);

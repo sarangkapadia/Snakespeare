@@ -1,4 +1,4 @@
-@keyframes slideIn {
+@keyframes In {
   0% {
     transform: translateY(30px);
     opacity: 0;
@@ -10,14 +10,18 @@
   }
 }
 
-@keyframes slideOut {
+@keyframes Out {
   0% {
     transform: translateY(0px);
     opacity: 1;
   }
 
+  80% {
+    opacity: 0;
+  }
+
   100% {
-    transform: translateY(60px);
+    transform: translateY(70px);
     opacity: 0;
   }
 }
@@ -25,17 +29,17 @@
 .instructionsOverlayIn {
   height: 100%;
   width: 100%;
-  position: absolute;
+  position: fixed;
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: center;
-  background-color: var(--modalBackgroundColor);
+  background-color: var(--appBackgroundColor);
   z-index: 200;
   left: 0;
   top: 0;
 
-  animation: slideIn 0.3s linear forwards;
+  animation: In 0.3s linear forwards;
 }
 
 .closed {
@@ -50,12 +54,12 @@
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: center;
-  background-color: var(--modalBackgroundColor);
+  background-color: var(--appBackgroundColor);
   z-index: 200;
   left: 0;
   top: 0;
 
-  animation: slideOut 0.3s linear forwards;
+  animation: Out 0.3s linear forwards;
 }
 
 .modalContainer {
@@ -65,24 +69,6 @@
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
-}
-
-.close {
-  border-radius: 15%;
-  background-color: var(--snakeColor);
-  border: none;
-  font-family: var(--fontFamily);
-  color: var(--fontColor);
-  font-size: 20px;
-  margin: 5px 10px 5px 5px;
-}
-
-.header {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid;
-  border-color: var(--snakeColor);
 }
 
 h3,

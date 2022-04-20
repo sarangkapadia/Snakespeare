@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../../style/instructionsModal.css";
 import snakeSmile from "../../snakeSmile.gif";
+import { ModalHeader } from "./modalHeader";
 
 interface IInstructionsModal {
   action: boolean;
@@ -14,6 +15,9 @@ export const InstructionsModal: React.FunctionComponent<IInstructionsModal> =
 
     useEffect(() => {
       setClassName(action ? "instructionsOverlayIn" : "instructionsOverlayOut");
+      if (!action) {
+        setTimeout(() => setClassName("closed"), 400);
+      }
     }, [action]);
 
     useEffect(() => {
@@ -23,12 +27,7 @@ export const InstructionsModal: React.FunctionComponent<IInstructionsModal> =
     return (
       <div className={className}>
         <div className={"modalContainer"}>
-          <div className={"header"}>
-            <h3>How to play</h3>
-            <button className={"close"} onClick={onCloseInstructions}>
-              X
-            </button>
-          </div>
+          <ModalHeader onClick={onCloseInstructions} title={"How to play"} />
           <p>Swipe anywhere on the screen to start the game.</p>
           <p>
             Navigate your snake by swiping left, right, up or down. This will

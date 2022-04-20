@@ -46,7 +46,7 @@ export const Header: React.FunctionComponent<IHeader> = (props) => {
             <HelpRounded />
           </IconButton>
         </div>
-        <Title />
+        <Title title={"Snake Bytes"} />
         <div className={"menuright"}>
           <IconButton aria-label="Stats" color="primary" size="small">
             <LeaderboardRounded />

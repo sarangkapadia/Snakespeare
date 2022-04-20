@@ -1,0 +1,30 @@
+.titleContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: calc(1.5 * var(--fontSize));
+}
+
+.close {
+  height: var(--fontSize);
+  width: var(--fontSize);
+  border-radius: 15%;
+  background-color: var(--snakeColor);
+  border: none;
+  font-family: var(--fontFamily);
+  font-size: var(--fontSize);
+  color: var(--fontColor);
+  font-size: calc(var(--fontSize) - 5px);
+  margin: 5px 10px 5px 5px;
+}
+
+.instructionsHeader {
+  width: 100%;
+  height: var(--header-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid;
+  border-color: var(--foodColor);
+}
