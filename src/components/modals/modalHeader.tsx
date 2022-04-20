@@ -10,7 +10,7 @@ export const ModalHeader: React.FunctionComponent<IModalHeader> = React.memo(
   (props) => {
     const { onClick, title } = props;
     return (
-      <div className={"instructionsHeader"}>
+      <div className={"modalHeader"}>
         <div className={"titleContainer"}>
           <Title title={title} />
         </div>

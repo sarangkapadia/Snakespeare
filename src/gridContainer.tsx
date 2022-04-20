@@ -7,7 +7,8 @@ import { Grid, Direction, Role } from "./grid";
 import { DebugGrid } from "./debug/debugGrid";
 import "./style/gridContainer.css";
 import { WordTiles } from "./wordtiles";
-import { InstructionsModal } from "./components/modals/instructions";
+import { ModalPage } from "./components/modals/modalPage";
+import snakeSmile from "./snakeSmile.gif";
 
 // move this to a useEffect
 const root = document.querySelector(":root")!;
@@ -316,10 +317,25 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
 
   return (
     <div {...handlers} className={"game"}>
-      <InstructionsModal
+      <ModalPage
         action={showInstructions}
-        onCloseInstructions={onCloseInstructions}
-      />
+        onClose={onCloseInstructions}
+        title={"How to play"}
+      >
+        <p>Swipe anywhere on the screen to start the game.</p>
+        <p>
+          Navigate your snake by swiping left, right, up or down. This will
+          change the direction of the snake's head.
+        </p>
+        <p>
+          Steer the snake to capture the letters in the correct order and create
+          a 5 letter word using the randomly placed letters. Score 100 points
+          per word + bonus for speed.
+        </p>
+        <p>Avoid colliding the snake's head with it's own body.</p>
+
+        <img src={snakeSmile} alt={"funny snake GIF"} />
+      </ModalPage>
       <div className={"gridContainer"}>
         {debug ? (
           <DebugGrid grid={grid} />
