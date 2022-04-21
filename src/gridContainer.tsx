@@ -7,8 +7,6 @@ import { Grid, Direction, Role } from "./grid";
 import { DebugGrid } from "./debug/debugGrid";
 import "./style/gridContainer.css";
 import { WordTiles } from "./wordtiles";
-import { ModalPage } from "./components/modals/modalPage";
-import snakeSmile from "./snakeSmile.gif";
 
 // move this to a useEffect
 const root = document.querySelector(":root")!;
@@ -28,13 +26,12 @@ const gridSize = gridObj.getGridSize();
 const grid = gridObj.getGrid();
 
 interface IGridContainer {
-  showInstructions: boolean;
-  onCloseInstructions: () => void;
+  modalTitle: string;
 }
 export const GridContainer: React.FunctionComponent<IGridContainer> = (
   props
 ) => {
-  const { showInstructions, onCloseInstructions } = props;
+  const { modalTitle } = props;
   const [snakeEnds, setSnakeEnds] = useState(gridObj.getSnake().getSnakeEnds());
   const [playing, setPlaying] = useState(false);
   const [debug, setDebug] = useState(false);
@@ -272,11 +269,11 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
   );
 
   useEffect(() => {
-    if (showInstructions) setPlaying(false);
-  }, [showInstructions]);
+    if (modalTitle !== "") setPlaying(false);
+  }, [modalTitle]);
 
   const handleOnPlayPauseGame = useCallback(() => {
-    if (showInstructions) {
+    if (modalTitle !== "") {
       // pause and return
       setPlaying(false);
       return;
@@ -296,7 +293,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     }
 
     setPlaying((playing) => !playing);
-  }, [playing, showInstructions]);
+  }, [playing, modalTitle]);
 
   const handleOnDebug = useCallback(() => {
     setDebug((debug) => !debug);
@@ -317,25 +314,6 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
 
   return (
     <div {...handlers} className={"game"}>
-      <ModalPage
-        action={showInstructions}
-        onClose={onCloseInstructions}
-        title={"How to play"}
-      >
-        <p>Swipe anywhere on the screen to start the game.</p>
-        <p>
-          Navigate your snake by swiping left, right, up or down. This will
-          change the direction of the snake's head.
-        </p>
-        <p>
-          Steer the snake to capture the letters in the correct order and create
-          a 5 letter word using the randomly placed letters. Score 100 points
-          per word + bonus for speed.
-        </p>
-        <p>Avoid colliding the snake's head with it's own body.</p>
-
-        <img src={snakeSmile} alt={"funny snake GIF"} />
-      </ModalPage>
       <div className={"gridContainer"}>
         {debug ? (
           <DebugGrid grid={grid} />

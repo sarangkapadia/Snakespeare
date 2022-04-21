@@ -22,9 +22,3 @@
   flex-flow: column;
   justify-content: center;
 }
-
-p {
-  font-family: var(--fontFamily);
-  color: var(--fontColor);
-  margin: 10px;
-}

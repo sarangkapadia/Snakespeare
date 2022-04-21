@@ -3,22 +3,21 @@ import "../../style/modalPage.css";
 import { ModalHeader } from "./modalHeader";
 
 interface IModalPage {
-  action: boolean;
   onClose: () => void;
   title: string;
 }
 
 export const ModalPage: React.FunctionComponent<IModalPage> = React.memo(
   (props) => {
-    const { action, onClose, title } = props;
+    const { onClose, title } = props;
     const [className, setClassName] = useState("closed");
 
     useEffect(() => {
-      setClassName(action ? "modalOverlayIn" : "modalOverlayOut");
-      if (!action) {
+      setClassName(title !== "" ? "modalOverlayIn" : "modalOverlayOut");
+      if (title === "") {
         setTimeout(() => setClassName("closed"), 400);
       }
-    }, [action]);
+    }, [title]);
 
     useEffect(() => {
       setClassName("closed");

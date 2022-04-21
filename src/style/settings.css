@@ -1,0 +1,31 @@
+.settingsContainer {
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.rowContainer {
+  width: 100%;
+  height: var(--header-height);
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid;
+  border-color: var(--boxBackgroundColor);
+}
+
+.settingsTitleContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.rowTitle {
+  color: var(--fontColor);
+  font-family: var(--fontFamily);
+  font-size: calc(var(--fontSize) - 25%);
+}

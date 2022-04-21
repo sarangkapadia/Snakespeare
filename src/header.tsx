@@ -27,6 +27,7 @@ const outerTheme = createTheme({
 
 interface IHeader {
   onClickInstructions: () => void;
+  onClickSettings: () => void;
 }
 
 export const Header: React.FunctionComponent<IHeader> = (props) => {
@@ -51,7 +52,12 @@ export const Header: React.FunctionComponent<IHeader> = (props) => {
           <IconButton aria-label="Stats" color="primary" size="small">
             <LeaderboardRounded />
           </IconButton>
-          <IconButton aria-label="Settings" color="primary" size="small">
+          <IconButton
+            aria-label="Settings"
+            color="primary"
+            size="small"
+            onClick={props.onClickSettings}
+          >
             <SettingsRounded />
           </IconButton>
         </div>
