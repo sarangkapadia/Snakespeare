@@ -16,8 +16,7 @@
   --foodColor: rgb(112, 55, 187);
   --boxBackgroundColor: rgb(36, 35, 44);
   --appBackgroundColor: rgb(21, 9, 22);
-  --debugBoxBackgroundColor: rgb(65, 73, 71);
-  --modalBackgroundColor: rgb(36, 35, 44);
+  --debugBoxBackgroundColor: white;
 }
 
 @media screen and (max-width: 350px) {

@@ -10,8 +10,8 @@ export const instructions = (
     </p>
     <p>
       Steer the snake to capture the letters in the correct order and create a 5
-      letter word using the randomly placed letters. Score 100 points per word +
-      bonus for speed.
+      letter word using the randomly placed letters. Score 100 points per word
+      solved + bonus points for speedy solutions.
     </p>
     <p>Avoid colliding the snake's head with it's own body.</p>
 
