@@ -5,14 +5,14 @@ import { GridContainer } from "./gridContainer";
 import { Header } from "./header";
 import { ModalPage } from "./components/modals/modalPage";
 import { instructions } from "./components/modals/instructions";
-import { settings } from "./components/modals/settings";
+import { Settings } from "./components/modals/settings";
 
 const ModalObj = {
   None: { title: "", children: <></> },
   About: { title: "About", children: null },
   Instructions: { title: "How to play", children: instructions },
   Stats: { title: "Statistics", children: null },
-  Settings: { title: "Settings", children: settings },
+  Setting: { title: "Settings", children: <Settings /> },
 };
 
 export const App: React.FunctionComponent = () => {
@@ -25,7 +25,7 @@ export const App: React.FunctionComponent = () => {
     setModalType(ModalObj.Instructions);
   };
   const onClickSettings = () => {
-    setModalType(ModalObj.Settings);
+    setModalType(ModalObj.Setting);
   };
 
   const onCloseModal = () => {

@@ -2,12 +2,13 @@ import * as React from "react";
 import Switch from "@mui/material/Switch";
 import "../../style/settings.css";
 import { styled } from "@mui/material";
+import { useEffect, useState } from "react";
 
 const hintsLabel = { inputProps: { "aria-label": "Hints" } };
 const colorModeLabel = { inputProps: { "aria-label": "Dark mode" } };
 
 // move this to a useEffect
-const root = document.querySelector(":root")!;
+const root = document.querySelector<HTMLElement>(":root")!;
 const rootStyle = getComputedStyle(root);
 
 const switchColorMain = rootStyle.getPropertyValue("--foodColor");
@@ -25,19 +26,80 @@ const GreenSwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-export const settings = (
-  <div className="settingsContainer">
-    <div className="rowContainer">
-      <div className="settingsTitleContainer">
-        <div className="rowTitle">{"Hints"}</div>
+export const Settings: React.FunctionComponent = () => {
+  const [hintsChecked, setHintsChecked] = useState(true); // get from localStorage
+  const [darkModeChecked, setDarkModeChecked] = useState(true); // get from localStorage
+
+  useEffect(() => {
+    console.log(
+      `darkModeChecked  = ",
+      ${darkModeChecked}
+      ${rootStyle.getPropertyValue("--darkBackground").trim()}`
+    );
+
+    if (darkModeChecked) {
+      root.style.setProperty(
+        "--appBackgroundColor",
+        rootStyle.getPropertyValue("--darkBackground").trim()
+      );
+      root.style.setProperty(
+        "--fontColor",
+        rootStyle.getPropertyValue("--darkFont").trim()
+      );
+      root.style.setProperty(
+        "--boxBackgroundColor",
+        rootStyle.getPropertyValue("--darkBox").trim()
+      );
+    } else {
+      root.style.setProperty(
+        "--appBackgroundColor",
+        rootStyle.getPropertyValue("--lightBackground").trim()
+      );
+      root.style.setProperty(
+        "--fontColor",
+        rootStyle.getPropertyValue("--lightFont").trim()
+      );
+      root.style.setProperty(
+        "--boxBackgroundColor",
+        rootStyle.getPropertyValue("--lightBox").trim()
+      );
+    }
+  }, [darkModeChecked]);
+
+  // todo : write to local storage
+  const handleHintsChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setHintsChecked(event.target.checked);
+  };
+
+  // todo : write to local storage
+  const handleDarkModeChanged = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setDarkModeChecked(event.target.checked);
+  };
+
+  return (
+    <div className="settingsContainer">
+      <div className="rowContainer">
+        <div className="settingsTitleContainer">
+          <div className="rowTitle">{"Hints"}</div>
+        </div>
+        <GreenSwitch
+          {...hintsLabel}
+          checked={hintsChecked}
+          onChange={handleHintsChanged}
+        />
       </div>
-      <GreenSwitch {...hintsLabel} defaultChecked />
-    </div>
-    <div className="rowContainer">
-      <div className="settingsTitleContainer">
-        <div className="rowTitle">{"Dark mode"}</div>
+      <div className="rowContainer">
+        <div className="settingsTitleContainer">
+          <div className="rowTitle">{"Dark mode"}</div>
+        </div>
+        <GreenSwitch
+          {...colorModeLabel}
+          checked={darkModeChecked}
+          onChange={handleDarkModeChanged}
+        />
       </div>
-      <GreenSwitch {...colorModeLabel} defaultChecked />
     </div>
-  </div>
-);
+  );
+};

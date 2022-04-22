@@ -11,11 +11,20 @@
   --fontFamily: "Rubik", sans-serif;
   --fontSize: 25px;
 
-  --fontColor: #eaf1ed;
+  --darkBackground: rgb(21, 9, 22);
+  --lightBackground: rgb(255, 255, 255);
+
+  --darkFont: #eaf1ed;
+  --lightFont: #212221;
+
+  --darkBox: rgb(36, 35, 44);
+  --lightBox: rgb(103, 100, 126);
+
+  --fontColor: var(--darkFont);
   --snakeColor: rgb(201, 100, 184);
   --foodColor: rgb(112, 55, 187);
   --boxBackgroundColor: rgb(36, 35, 44);
-  --appBackgroundColor: rgb(21, 9, 22);
+  --appBackgroundColor: var(--darkBackground);
   --debugBoxBackgroundColor: white;
 }
 
