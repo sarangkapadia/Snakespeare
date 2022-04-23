@@ -1,4 +1,3 @@
-import { byteList } from "./byteList";
 import { Bytes } from "./bytes";
 import { Snake } from "./snake";
 
@@ -47,7 +46,7 @@ export class Grid {
     const root = document.querySelector(":root")!;
     const rootStyle = getComputedStyle(root);
     this.gridSize = parseInt(rootStyle.getPropertyValue("--gridSize"));
-    this.bytes = new Bytes(byteList);
+    this.bytes = new Bytes();
 
     this.grid = new Array(this.gridSize);
     for (let i = 0; i < this.gridSize; i++) {

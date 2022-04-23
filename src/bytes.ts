@@ -1,8 +1,11 @@
+import { byteList } from "./byteList";
+
 export class Bytes {
   private byteList: string[] = [];
   private index: number = 0;
 
   public shuffle(array: string[]) {
+    console.log("this should be called only once");
     let currentIndex = array.length;
     let randomIndex;
 
@@ -21,15 +24,28 @@ export class Bytes {
 
     return array;
   }
-  public constructor(byteList: string[], index?: number) {
-    console.log("this should be called only once");
-    this.byteList = this.shuffle(byteList);
-    this.index = index ? index : 0;
+  public constructor() {
+    const storageByteList = localStorage.getItem("byteList");
+    if (storageByteList) {
+      this.byteList = JSON.parse(storageByteList);
+    } else {
+      this.byteList = this.shuffle(byteList);
+      localStorage.setItem("byteList", JSON.stringify(this.byteList));
+    }
+
+    const storageIndex = localStorage.getItem("byteIndex");
+    if (storageIndex) {
+      this.index = JSON.parse(storageIndex);
+    } else {
+      this.index = 0;
+      localStorage.setItem("byteIndex", JSON.stringify(this.index));
+    }
   }
 
   public getNextWord(): string {
     const nextWord = this.byteList[this.index];
     this.index = (this.index + 1) % this.byteList.length;
+    localStorage.setItem("byteIndex", JSON.stringify(this.index));
     return nextWord;
   }
 }
