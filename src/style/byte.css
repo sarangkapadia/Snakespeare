@@ -1,5 +1,5 @@
 .byte {
-  color: var(--fontColor);
+  color: var(--darkFont);
   font-family: var(--fontFamily);
   font-size: calc(var(--boxSize) - 5px);
 }

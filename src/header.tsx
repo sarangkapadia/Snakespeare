@@ -15,22 +15,20 @@ import {
 const root = document.querySelector(":root")!;
 const rootStyle = getComputedStyle(root);
 
-const fontColor = rootStyle.getPropertyValue("--fontColor");
-
-const outerTheme = createTheme({
-  palette: {
-    primary: {
-      main: fontColor.trim(), // hex versions of --var(fontColor)
-    },
-  },
-});
-
 interface IHeader {
   onClickInstructions: () => void;
   onClickSettings: () => void;
 }
 
 export const Header: React.FunctionComponent<IHeader> = (props) => {
+  const outerTheme = createTheme({
+    palette: {
+      primary: {
+        main: rootStyle.getPropertyValue("--fontColor").trim(), // hex versions of --var(fontColor)
+      },
+    },
+  });
+
   return (
     <ThemeProvider theme={outerTheme}>
       <div className={"header"}>
@@ -47,7 +45,7 @@ export const Header: React.FunctionComponent<IHeader> = (props) => {
             <HelpRounded />
           </IconButton>
         </div>
-        <Title title={"Snake Bytes"} />
+        <Title title={"Snakespeare"} />
         <div className={"menuright"}>
           <IconButton aria-label="Stats" color="primary" size="small">
             <LeaderboardRounded />

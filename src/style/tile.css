@@ -1,13 +1,13 @@
 .tile {
-  width: 70px;
-  height: 70px;
+  width: 65px;
+  height: 65px;
   border-radius: 15%;
   background: var(--foodColor);
   margin: 1%;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--fontColor);
+  color: var(--darkFont);
   font-family: var(--fontFamily);
   font-size: 50px;
 }

@@ -6,6 +6,7 @@ import { Header } from "./header";
 import { ModalPage } from "./components/modals/modalPage";
 import { instructions } from "./components/modals/instructions";
 import { Settings } from "./components/modals/settings";
+import { initLaunchSettings } from "./launchSettings";
 
 const ModalObj = {
   None: { title: "", children: <></> },
@@ -14,6 +15,8 @@ const ModalObj = {
   Stats: { title: "Statistics", children: null },
   Setting: { title: "Settings", children: <Settings /> },
 };
+
+initLaunchSettings();
 
 export const App: React.FunctionComponent = () => {
   const [modalType, setModalType] = useState<{

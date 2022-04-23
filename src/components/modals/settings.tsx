@@ -27,16 +27,17 @@ const GreenSwitch = styled(Switch)(({ theme }) => ({
 }));
 
 export const Settings: React.FunctionComponent = () => {
-  const [hintsChecked, setHintsChecked] = useState(true); // get from localStorage
-  const [darkModeChecked, setDarkModeChecked] = useState(true); // get from localStorage
+  const darkMode = localStorage.getItem("darkMode");
+  const hints = localStorage.getItem("hints");
+
+  const [hintsChecked, setHintsChecked] = useState(
+    hints ? JSON.parse(hints) : true
+  );
+  const [darkModeChecked, setDarkModeChecked] = useState(
+    darkMode ? JSON.parse(darkMode) : true
+  );
 
   useEffect(() => {
-    console.log(
-      `darkModeChecked  = ",
-      ${darkModeChecked}
-      ${rootStyle.getPropertyValue("--darkBackground").trim()}`
-    );
-
     if (darkModeChecked) {
       root.style.setProperty(
         "--appBackgroundColor",
@@ -68,6 +69,11 @@ export const Settings: React.FunctionComponent = () => {
 
   // todo : write to local storage
   const handleHintsChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
+    try {
+      localStorage.setItem("hints", JSON.stringify(event.target.checked));
+    } catch (e) {
+      console.log("cannot write to localStorage ", e);
+    }
     setHintsChecked(event.target.checked);
   };
 
@@ -75,6 +81,11 @@ export const Settings: React.FunctionComponent = () => {
   const handleDarkModeChanged = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
+    try {
+      localStorage.setItem("darkMode", JSON.stringify(event.target.checked));
+    } catch (e) {
+      console.log("cannot write to localStorage ", e);
+    }
     setDarkModeChecked(event.target.checked);
   };
 
