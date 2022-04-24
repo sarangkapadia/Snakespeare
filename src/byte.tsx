@@ -6,5 +6,5 @@ interface IByteProps {
 }
 export const Byte: React.FunctionComponent<IByteProps> = React.memo((props) => {
   const { letter } = props;
-  return <div className="byte">{letter}</div>;
+  return <div className="byteLetter">{letter}</div>;
 });

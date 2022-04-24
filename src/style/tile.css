@@ -1,13 +1,31 @@
-.tile {
-  width: 65px;
-  height: 65px;
+.tileContainer {
+  display: flex;
+}
+
+.tileLetter {
+  width: 45px;
+  height: 45px;
   border-radius: 15%;
-  background: var(--foodColor);
-  margin: 1%;
+  background: var(--byteColor);
+  margin: var(--gap);
   display: flex;
   justify-content: center;
   align-items: center;
   color: var(--darkFont);
   font-family: var(--fontFamily);
-  font-size: 50px;
+  font-size: 30px;
+}
+
+.tileNumber {
+  width: 45px;
+  height: 45px;
+  border-radius: 15%;
+  background: var(--scoreColor);
+  margin: var(--gap);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--darkFont);
+  font-family: var(--fontFamily);
+  font-size: 30px;
 }

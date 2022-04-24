@@ -37,6 +37,9 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
   const [debug, setDebug] = useState(false);
   const [currentLetter, setCurrentLetter] = useState("");
   let movePending = false;
+  const hints = localStorage.getItem("hints");
+  const hintsOn = hints ? JSON.parse(hints) : "true";
+  console.log("hints ON = ", hintsOn);
   // add logic in these to detect game end
   const onSwipedLeft = () => {
     if (movePending) return;
@@ -340,7 +343,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
           />
         ) : null}
       </div> */}
-      <WordTiles bytes={currentLetter} />
+      <WordTiles bytes={currentLetter} score={123} />
     </div>
   );
 };

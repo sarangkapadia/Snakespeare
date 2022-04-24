@@ -1,8 +1,8 @@
 .wordTilesContainer {
-  width: calc(var(--gridSize) * var(--boxSize));
+  width: calc(var(--gridSize) * var(--boxSize) + var(--gridSize) * var(--gap));
   display: flex;
   flex-flow: row nowrap;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-start;
   height: 100px;
 }

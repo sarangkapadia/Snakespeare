@@ -1,4 +1,4 @@
-.byte {
+.byteLetter {
   color: var(--darkFont);
   font-family: var(--fontFamily);
   font-size: calc(var(--boxSize) - 5px);

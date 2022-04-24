@@ -56,7 +56,7 @@ export const Box: React.FunctionComponent<IBoxProps> = React.memo((props) => {
             : currentTailDirection
         )}`;
       case Role.Byte:
-        return "food";
+        return "byte";
       default:
         throw new Error("invalid role");
     }
@@ -64,7 +64,7 @@ export const Box: React.FunctionComponent<IBoxProps> = React.memo((props) => {
 
   let className = getClassName();
 
-  return className === "food" ? (
+  return className === "byte" ? (
     <div className={className}>
       <Byte letter={letter} />
     </div>

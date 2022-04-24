@@ -3,6 +3,7 @@
 
   --boxSize: 45px;
   --debugBoxSize: 100px;
+  --gap: 2px;
 
   --tick: 0.5s;
   --animprops: linear forwards;
@@ -22,7 +23,8 @@
 
   --fontColor: var(--darkFont);
   --snakeColor: rgb(201, 100, 184);
-  --foodColor: rgb(112, 55, 187);
+  --byteColor: rgb(112, 55, 187);
+  --scoreColor: rgb(55, 187, 99);
   --boxBackgroundColor: rgb(36, 35, 44);
   --appBackgroundColor: var(--darkBackground);
   --debugBoxBackgroundColor: white;

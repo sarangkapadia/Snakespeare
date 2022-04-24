@@ -11,7 +11,7 @@ const colorModeLabel = { inputProps: { "aria-label": "Dark mode" } };
 const root = document.querySelector<HTMLElement>(":root")!;
 const rootStyle = getComputedStyle(root);
 
-const switchColorMain = rootStyle.getPropertyValue("--foodColor");
+const switchColorMain = rootStyle.getPropertyValue("--byteColor");
 const switchColorLight = rootStyle.getPropertyValue("--snakeColor");
 
 const GreenSwitch = styled(Switch)(({ theme }) => ({

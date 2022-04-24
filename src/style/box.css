@@ -184,17 +184,39 @@
   border-radius: 10%;
 }
 
-.food {
+.byte {
   width: var(--boxSize);
   height: var(--boxSize);
-  background-color: var(--foodColor);
+  background-color: var(--byteColor);
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 10%;
 }
 
-@keyframes food2head {
+.hintedByte {
+  width: var(--boxSize);
+  height: var(--boxSize);
+  background-image: linear-gradient(
+    45deg,
+    var(--byteColor),
+    #7f3fbb,
+    #b86d42,
+    #b8ba4e,
+    #5591b9,
+    #66cc33,
+    var(--snakeColor)
+  );
+  background-size: 200%;
+  background-position: left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10%;
+  animation: l2r infinite alternate ease-in-out 0.5s;
+}
+
+/* @keyframes byte2head {
   0% {
     width: var(--boxSize);
     height: var(--boxSize);
@@ -203,4 +225,4 @@
     width: calc(var(--boxSize) + 10%);
     height: calc(var(--boxSize) + 10%);
   }
-}
+} */
