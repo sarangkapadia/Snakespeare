@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 //import { Button } from "./button";
 import { useInterval } from "./useInterval";
 import { GridRenderer } from "./gridRenderer";
@@ -25,6 +25,9 @@ gridObj.initGridData();
 const gridSize = gridObj.getGridSize();
 const grid = gridObj.getGrid();
 
+const pointsPerWord = 10;
+let score = 0;
+
 interface IGridContainer {
   modalTitle: string;
 }
@@ -39,7 +42,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
   let movePending = false;
   const hints = localStorage.getItem("hints");
   const hintsOn = hints ? JSON.parse(hints) : "true";
-  console.log("hints ON = ", hintsOn);
+  let startDate = useRef(new Date());
   // add logic in these to detect game end
   const onSwipedLeft = () => {
     if (movePending) return;
@@ -97,6 +100,16 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     gridObj.setCurrentHeadDirection(Direction.Down);
     gridObj.setPivotOnCurrentHeadDirection(Direction.Down);
     movePending = true;
+  };
+
+  const calculateScore = () => {
+    const endDate = new Date();
+    const seconds = Math.abs(
+      (endDate.getTime() - startDate.current.getTime()) / 1000
+    );
+    const bonus = Math.floor(100 / seconds);
+    score += pointsPerWord;
+    score += bonus >= 2 ? bonus : 0; //min bonus of 2 is needed.
   };
 
   const calculateNewHead = (ends: typeof snakeEnds) => {
@@ -165,8 +178,12 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
         setCurrentLetter(currentByteSequence);
 
         gridObj.incrementLetterIndex();
+
+        // new word
         if (gridObj.getLetterIndex() === 0) {
           gridObj.setRandomBytePositions();
+
+          calculateScore();
         }
 
         break;
@@ -293,8 +310,8 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
         gridObj.setCurrentTailDirection(Direction.Right);
         gridObj.setCurrentHeadDirection(Direction.Right);
       }
+      startDate.current = new Date();
     }
-
     setPlaying((playing) => !playing);
   }, [playing, modalTitle]);
 
@@ -343,7 +360,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
           />
         ) : null}
       </div> */}
-      <WordTiles bytes={currentLetter} score={123} />
+      <WordTiles bytes={currentLetter} score={score} />
     </div>
   );
 };
