@@ -201,19 +201,20 @@
     45deg,
     var(--byteColor),
     #7f3fbb,
-    #b86d42,
-    #b8ba4e,
-    #5591b9,
-    #66cc33,
-    var(--snakeColor)
+    #4e42ba,
+    var(--byteColor),
+    #b359b9,
+    #7add67,
+    #5ca578,
+    var(--scoreColor)
   );
-  background-size: 200%;
+  background-size: 500%;
   background-position: left;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 10%;
-  animation: l2r infinite alternate ease-in-out 0.5s;
+  animation: l2r infinite alternate ease-in-out 3s;
 }
 
 /* @keyframes byte2head {

@@ -16,13 +16,15 @@ export const WordTiles: React.FunctionComponent<IWordTileProps> = React.memo(
             </div>
           ))}
         </div>
-        <div className="tileContainer">
-          {[...props.score.toString()].map((digit, index) => (
-            <div key={index} className={"tileNumber"}>
-              {digit}
-            </div>
-          ))}
-        </div>
+        {props.score > 0 ? (
+          <div className="tileContainer">
+            {[...props.score.toString()].map((digit, index) => (
+              <div key={index} className={"tileNumber"}>
+                {digit}
+              </div>
+            ))}
+          </div>
+        ) : null}
       </div>
     );
   }

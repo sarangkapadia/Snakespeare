@@ -15,6 +15,7 @@ export enum Role {
   Head,
   Tail,
   Byte,
+  HintedByte,
   FirstHead,
   FirstTail,
 }
@@ -24,6 +25,11 @@ export interface IGridItem {
   direction: Direction;
   pivot: Direction;
   letter: string;
+}
+
+export interface IHintItem {
+  row: number;
+  column: number;
 }
 
 class GridItem implements IGridItem {
@@ -41,6 +47,8 @@ export class Grid {
   private bytes: Bytes; // Grid contains Bytes
   private currentBytes: string = "snake";
   private letterIndex: number = 0;
+  private hintsPerWord: number = 2;
+  private hintList: IHintItem[];
 
   public constructor() {
     const root = document.querySelector(":root")!;
@@ -60,6 +68,7 @@ export class Grid {
     }
 
     this.snake = new Snake();
+    this.hintList = new Array(this.hintsPerWord);
   }
 
   public getGrid(): GridItem[][] {
@@ -144,6 +153,10 @@ export class Grid {
           this.grid[randomRow][randomCol].letter = this.currentBytes
             .charAt(i)
             .toUpperCase();
+
+          if (i < this.hintsPerWord)
+            this.hintList[i] = { row: randomRow, column: randomCol };
+
           break;
         } else {
           console.log("Invalid random position");
@@ -164,5 +177,22 @@ export class Grid {
   public getExpectedLetter(): string {
     const expected = this.currentBytes.charAt(this.letterIndex);
     return expected;
+  }
+
+  // set the role of hinted byte on the lowest index
+  public setHint(): void {
+    const index = this.getLetterIndex();
+    if (index < this.hintsPerWord) {
+      console.log(
+        "setting Hint on ",
+        this.grid[this.hintList[index].row][this.hintList[index].column].letter
+      );
+      this.grid[this.hintList[index].row][this.hintList[index].column].role =
+        Role.HintedByte;
+    }
+  }
+
+  public getHintsPerWord(): number {
+    return this.hintsPerWord;
   }
 } // end of grid

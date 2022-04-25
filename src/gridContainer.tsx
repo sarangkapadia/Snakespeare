@@ -27,6 +27,8 @@ const grid = gridObj.getGrid();
 
 const pointsPerWord = 10;
 let score = 0;
+const hintTimeoutMs = 14 * 1000;
+const hintTimeout2Ms = 10 * 1000;
 
 interface IGridContainer {
   modalTitle: string;
@@ -163,6 +165,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
         grid[newHeadRow][newHeadCol].role = Role.Head; // canvas -> head'
         break;
       }
+      case Role.HintedByte:
       case Role.Byte: {
         const expected = gridObj.getExpectedLetter().toUpperCase();
         const landed = grid[newHeadRow][newHeadCol].letter;
@@ -180,12 +183,15 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
         gridObj.incrementLetterIndex();
 
         // new word
-        if (gridObj.getLetterIndex() === 0) {
+        const letterIndex = gridObj.getLetterIndex();
+        if (letterIndex === 0) {
           gridObj.setRandomBytePositions();
 
           calculateScore();
+          if (hintsOn) setTimeout(onHintTimer, hintTimeoutMs);
+        } else if (letterIndex < gridObj.getHintsPerWord()) {
+          if (hintsOn) setTimeout(onHintTimer, hintTimeout2Ms);
         }
-
         break;
       }
       default:
@@ -292,6 +298,10 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     if (modalTitle !== "") setPlaying(false);
   }, [modalTitle]);
 
+  const onHintTimer = () => {
+    gridObj.setHint();
+  };
+
   const handleOnPlayPauseGame = useCallback(() => {
     if (modalTitle !== "") {
       // pause and return
@@ -311,9 +321,10 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
         gridObj.setCurrentHeadDirection(Direction.Right);
       }
       startDate.current = new Date();
+      if (hintsOn) setTimeout(onHintTimer, hintTimeout2Ms);
     }
     setPlaying((playing) => !playing);
-  }, [playing, modalTitle]);
+  }, [playing, modalTitle, hintsOn]);
 
   const handleOnDebug = useCallback(() => {
     setDebug((debug) => !debug);
