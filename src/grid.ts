@@ -183,10 +183,6 @@ export class Grid {
   public setHint(): void {
     const index = this.getLetterIndex();
     if (index < this.hintsPerWord) {
-      console.log(
-        "setting Hint on ",
-        this.grid[this.hintList[index].row][this.hintList[index].column].letter
-      );
       this.grid[this.hintList[index].row][this.hintList[index].column].role =
         Role.HintedByte;
     }

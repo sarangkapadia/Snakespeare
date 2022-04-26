@@ -44,7 +44,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
   const hints = localStorage.getItem("hints");
   const hintsOn = hints ? JSON.parse(hints) : "true";
   let hintsTimeOutId: any = useRef(null);
-  let startDate = useRef(new Date());
+  let startDate: any = useRef(null);
   // add logic in these to detect game end
   const onSwipedLeft = () => {
     if (movePending) return;
@@ -112,6 +112,8 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     const bonus = Math.floor(100 / seconds);
     score += pointsPerWord;
     score += bonus >= 2 ? bonus : 0; //min bonus of 2 is needed.
+    // refresh the new start date
+    startDate.current = new Date();
   };
 
   const calculateNewHead = (ends: typeof snakeEnds) => {
@@ -328,7 +330,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
         gridObj.setCurrentTailDirection(Direction.Right);
         gridObj.setCurrentHeadDirection(Direction.Right);
       }
-      startDate.current = new Date();
+      if (!startDate.current) startDate.current = new Date();
       resetTimer();
     }
     setPlaying((playing) => !playing);
