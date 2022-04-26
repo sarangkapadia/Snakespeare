@@ -304,8 +304,10 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
 
   const resetTimer = useCallback(() => {
     clearTimeout(hintsTimeOutId.current);
-    if (hintsOn)
+    const letterIndex = gridObj.getLetterIndex();
+    if (hintsOn && letterIndex < gridObj.getHintsPerWord()) {
       hintsTimeOutId.current = setTimeout(onHintTimer, hintTimeoutMs);
+    }
   }, [hintsOn]);
 
   const handleOnPlayPauseGame = useCallback(() => {
