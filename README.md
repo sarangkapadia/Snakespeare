@@ -1,6 +1,6 @@
 # Snakespeare
 
-A fun twist on the classic snake game.
+A snake who's great with words!
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
