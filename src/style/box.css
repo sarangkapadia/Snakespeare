@@ -200,21 +200,20 @@
   background-image: linear-gradient(
     45deg,
     var(--byteColor),
-    #7f3fbb,
     #4e42ba,
-    var(--byteColor),
+    #7f3fbb,
     #b359b9,
-    #7add67,
+    #5c8354,
     #5ca578,
     var(--scoreColor)
   );
   background-size: 500%;
-  background-position: left;
+  background-position: bottom left;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 10%;
-  animation: l2r infinite alternate ease-in-out 3s;
+  animation: r2l infinite alternate ease-in-out 3s;
 }
 
 /* @keyframes byte2head {

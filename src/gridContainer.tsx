@@ -28,7 +28,6 @@ const grid = gridObj.getGrid();
 const pointsPerWord = 10;
 let score = 0;
 const hintTimeoutMs = 14 * 1000;
-const hintTimeout2Ms = 10 * 1000;
 
 interface IGridContainer {
   modalTitle: string;
@@ -44,6 +43,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
   let movePending = false;
   const hints = localStorage.getItem("hints");
   const hintsOn = hints ? JSON.parse(hints) : "true";
+  let hintsTimeOutId: any = useRef(null);
   let startDate = useRef(new Date());
   // add logic in these to detect game end
   const onSwipedLeft = () => {
@@ -188,9 +188,9 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
           gridObj.setRandomBytePositions();
 
           calculateScore();
-          if (hintsOn) setTimeout(onHintTimer, hintTimeoutMs);
+          resetTimer();
         } else if (letterIndex < gridObj.getHintsPerWord()) {
-          if (hintsOn) setTimeout(onHintTimer, hintTimeout2Ms);
+          resetTimer();
         }
         break;
       }
@@ -302,6 +302,12 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     gridObj.setHint();
   };
 
+  const resetTimer = useCallback(() => {
+    clearTimeout(hintsTimeOutId.current);
+    if (hintsOn)
+      hintsTimeOutId.current = setTimeout(onHintTimer, hintTimeoutMs);
+  }, [hintsOn]);
+
   const handleOnPlayPauseGame = useCallback(() => {
     if (modalTitle !== "") {
       // pause and return
@@ -321,10 +327,10 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
         gridObj.setCurrentHeadDirection(Direction.Right);
       }
       startDate.current = new Date();
-      if (hintsOn) setTimeout(onHintTimer, hintTimeout2Ms);
+      resetTimer();
     }
     setPlaying((playing) => !playing);
-  }, [playing, modalTitle, hintsOn]);
+  }, [playing, modalTitle, resetTimer]);
 
   const handleOnDebug = useCallback(() => {
     setDebug((debug) => !debug);
