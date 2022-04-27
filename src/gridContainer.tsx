@@ -373,7 +373,9 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
             currentTailPivot={gridObj.getPivotDirectionOnCurrentTail()}
           />
         )}
+        <WordTiles bytes={currentLetter} score={score} />
       </div>
+
       {/* <div className={"appUtils"}>
         {
           <Button
@@ -388,7 +390,6 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
           />
         ) : null}
       </div> */}
-      <WordTiles bytes={currentLetter} score={score} />
     </div>
   );
 };
