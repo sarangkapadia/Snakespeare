@@ -32,4 +32,11 @@ export const initLaunchSettings = () => {
       rootStyle.getPropertyValue("--lightBox").trim()
     );
   }
+
+  const isFirst = localStorage.getItem("isFirst");
+  const isFirstVisit: boolean = isFirst ? JSON.parse(isFirst) : true;
+  if (isFirstVisit)
+    localStorage.setItem("isFirst", JSON.stringify(!isFirstVisit));
+
+  return isFirstVisit;
 };

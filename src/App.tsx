@@ -16,13 +16,13 @@ const ModalObj = {
   Setting: { title: "Settings", children: <Settings /> },
 };
 
-initLaunchSettings();
+const isFirstVisit = initLaunchSettings();
 
 export const App: React.FunctionComponent = () => {
   const [modalType, setModalType] = useState<{
     title: string;
     children: JSX.Element;
-  }>(ModalObj.None);
+  }>(isFirstVisit ? ModalObj.Instructions : ModalObj.None);
 
   const onClickInstructions = () => {
     setModalType(ModalObj.Instructions);

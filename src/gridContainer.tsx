@@ -190,9 +190,9 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
           gridObj.setRandomBytePositions();
 
           calculateScore();
-          resetTimer();
-        } else if (letterIndex < gridObj.getHintsPerWord()) {
-          resetTimer();
+          resetHintTimer();
+        } else if (letterIndex <= gridObj.getHintsPerWord()) {
+          resetHintTimer();
         }
         break;
       }
@@ -296,21 +296,28 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     playing ? tickCountMs : null
   );
 
-  useEffect(() => {
-    if (modalTitle !== "") setPlaying(false);
-  }, [modalTitle]);
-
-  const onHintTimer = () => {
-    gridObj.setHint();
-  };
-
-  const resetTimer = useCallback(() => {
+  const resetHintTimer = useCallback(() => {
     clearTimeout(hintsTimeOutId.current);
+    gridObj.resetHint();
     const letterIndex = gridObj.getLetterIndex();
     if (hintsOn && letterIndex < gridObj.getHintsPerWord()) {
       hintsTimeOutId.current = setTimeout(onHintTimer, hintTimeoutMs);
     }
   }, [hintsOn]);
+
+  useEffect(() => {
+    if (modalTitle !== "") {
+      clearTimeout(hintsTimeOutId.current);
+      setPlaying(false);
+    }
+    if (!hintsOn) {
+      resetHintTimer();
+    }
+  }, [modalTitle, hintsOn, resetHintTimer]);
+
+  const onHintTimer = () => {
+    gridObj.setHint();
+  };
 
   const handleOnPlayPauseGame = useCallback(() => {
     if (modalTitle !== "") {
@@ -331,10 +338,10 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
         gridObj.setCurrentHeadDirection(Direction.Right);
       }
       if (!startDate.current) startDate.current = new Date();
-      resetTimer();
+      resetHintTimer();
     }
     setPlaying((playing) => !playing);
-  }, [playing, modalTitle, resetTimer]);
+  }, [playing, modalTitle, resetHintTimer]);
 
   const handleOnDebug = useCallback(() => {
     setDebug((debug) => !debug);

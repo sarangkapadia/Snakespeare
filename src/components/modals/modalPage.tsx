@@ -19,10 +19,6 @@ export const ModalPage: React.FunctionComponent<IModalPage> = React.memo(
       }
     }, [title]);
 
-    useEffect(() => {
-      setClassName("closed");
-    }, []);
-
     return (
       <div className={className}>
         <div className={"modalContainer"}>

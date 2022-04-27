@@ -200,11 +200,11 @@
   background-image: linear-gradient(
     45deg,
     var(--byteColor),
-    #4e42ba,
-    #7f3fbb,
-    #b359b9,
-    #5c8354,
-    #5ca578,
+    #4d42b8,
+    #4b69a0,
+    #3baaa5,
+    #4ba35e,
+    #6aaa40,
     var(--scoreColor)
   );
   background-size: 500%;

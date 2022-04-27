@@ -188,6 +188,17 @@ export class Grid {
     }
   }
 
+  public resetHint(): void {
+    for (let i = 0; i < this.hintsPerWord; i++) {
+      if (
+        this.grid[this.hintList[i].row][this.hintList[i].column].role ===
+        Role.HintedByte
+      )
+        this.grid[this.hintList[i].row][this.hintList[i].column].role =
+          Role.Byte;
+    }
+  }
+
   public getHintsPerWord(): number {
     return this.hintsPerWord;
   }
