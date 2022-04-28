@@ -75,6 +75,18 @@ export class Grid {
     return this.grid;
   }
 
+  public resetGrid() {
+    for (let i = 0; i < this.gridSize; i++) {
+      for (let j = 0; j < this.gridSize; j++) {
+        this.grid[i][j].role = Role.Canvas;
+        this.grid[i][j].direction = Direction.None;
+        this.grid[i][j].pivot = Direction.None;
+        this.grid[i][j].letter = "";
+      }
+    }
+    this.letterIndex = 0;
+  }
+
   public getGridSize(): number {
     return this.gridSize;
   }
@@ -177,6 +189,10 @@ export class Grid {
   public getExpectedLetter(): string {
     const expected = this.currentBytes.charAt(this.letterIndex);
     return expected;
+  }
+
+  public getCurrentBytes(): string {
+    return this.currentBytes;
   }
 
   // set the role of hinted byte on the lowest index

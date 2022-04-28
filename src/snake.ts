@@ -6,18 +6,23 @@ export interface ISnakeEnds {
 }
 
 export class Snake {
-  private snakeEnds: ISnakeEnds;
+  private snakeEnds: ISnakeEnds = {
+    tail: { row: 5, col: 5 },
+    head: { row: 5, col: 10 },
+  };
 
   public constructor(snakeEnds?: ISnakeEnds) {
     if (snakeEnds) {
       this.snakeEnds = snakeEnds;
       return;
     }
+  }
 
-    this.snakeEnds = {
+  public resetSnakeEnds() {
+    this.setSnakeEnds({
       tail: { row: 5, col: 5 },
       head: { row: 5, col: 10 },
-    };
+    });
   }
 
   public getSnakeEnds(): ISnakeEnds {

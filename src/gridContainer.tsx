@@ -18,7 +18,6 @@ const tickCountMs =
 
 const url: URL = new URL(window.location.href);
 const urlSearchParams = new URLSearchParams(url.search);
-
 const gridObj = new Grid();
 gridObj.initGridData();
 
@@ -27,6 +26,7 @@ const grid = gridObj.getGrid();
 
 const pointsPerWord = 10;
 let score = 0;
+let currentLetter = "";
 const hintTimeoutMs = 14 * 1000;
 
 interface IGridContainer {
@@ -39,7 +39,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
   const [snakeEnds, setSnakeEnds] = useState(gridObj.getSnake().getSnakeEnds());
   const [playing, setPlaying] = useState(false);
   const [debug, setDebug] = useState(false);
-  const [currentLetter, setCurrentLetter] = useState("");
+
   let movePending = false;
   const hints = localStorage.getItem("hints");
   const hintsOn = hints ? JSON.parse(hints) : "true";
@@ -104,6 +104,26 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     movePending = true;
   };
 
+  const resetGameToStart = (ends: typeof snakeEnds) => {
+    setPlaying(false);
+    gridObj.getSnake().resetSnakeEnds();
+    gridObj.resetGrid();
+    gridObj.initGridData();
+
+    clearTimeout(hintsTimeOutId);
+    startDate.current = null;
+
+    const newEnds = gridObj.getSnake().getSnakeEnds();
+    ends.head.row = newEnds.head.row;
+    ends.head.col = newEnds.head.col;
+
+    ends.tail.row = newEnds.tail.row;
+    ends.tail.col = newEnds.tail.col;
+
+    currentLetter = "";
+    score = 0;
+  };
+
   const calculateScore = () => {
     const endDate = new Date();
     const seconds = Math.abs(
@@ -151,10 +171,9 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
         break;
       }
       default: {
-        setPlaying(false);
         const error = "Invalid head direction!";
         alert(error);
-        throw new Error(error);
+        resetGameToStart(ends);
       }
     }
     ends.head.row = newHeadRow;
@@ -173,15 +192,14 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
         const landed = grid[newHeadRow][newHeadCol].letter;
 
         if (landed !== expected) {
-          const error = `Wrong letter, expected = ${expected}, letter = ${landed}`;
+          const error = `Wrong letter, expected = ${expected}, letter = ${landed} solution: ${gridObj.getCurrentBytes()}`;
           alert(error);
-          throw new Error(error);
+          resetGameToStart(ends);
+          return;
         }
 
-        const currentByteSequence =
+        currentLetter =
           gridObj.getLetterIndex() > 0 ? currentLetter + landed : landed;
-        setCurrentLetter(currentByteSequence);
-
         gridObj.incrementLetterIndex();
 
         // new word
@@ -197,10 +215,9 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
         break;
       }
       default:
-        setPlaying(false);
-        const error = `Head collision with invalid role , ${grid[newHeadRow][newHeadCol].role}`;
+        const error = `Head collision with, ${grid[newHeadRow][newHeadCol].role}`;
         alert(error);
-        throw new Error(error);
+        resetGameToStart(ends);
     }
 
     grid[newHeadRow][newHeadCol].direction = currentHeadDir; // retain previous head's dir in the new head
@@ -260,10 +277,9 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
         break;
       }
       default: {
-        setPlaying(false);
         const error = "Invalid tail direction!";
         alert(error);
-        throw new Error(error);
+        resetGameToStart(ends);
       }
     }
 
@@ -356,6 +372,9 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     onSwipedRight: onSwipedRight,
     onSwipedDown: onSwipedDown,
     onSwipedUp: onSwipedUp,
+    // onTap: () => {
+    //   console.log("swallow tap");
+    // },
     preventDefaultTouchmoveEvent: true,
     trackMouse: true,
   });
@@ -376,20 +395,22 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
         <WordTiles bytes={currentLetter} score={score} />
       </div>
 
-      {/* <div className={"appUtils"}>
-        {
-          <Button
-            onClick={handleOnPlayPauseGame}
-            label={playing ? "Pause" : "Play"}
-          />
-        }
-        {isDebugMode() ? (
-          <Button
-            onClick={handleOnDebug}
-            label={debug ? "Debug Off" : "Debug On"}
-          />
-        ) : null}
-      </div> */}
+      {/* {
+        <div className={"appUtils"}>
+          {
+            <Button
+              onClick={handleOnPlayPauseGame}
+              label={playing ? "Pause" : "Play"}
+            />
+          }
+          {isDebugMode() ? (
+            <Button
+              onClick={handleOnDebug}
+              label={debug ? "Debug Off" : "Debug On"}
+            />
+          ) : null}
+        </div>
+      }  */}
     </div>
   );
 };
