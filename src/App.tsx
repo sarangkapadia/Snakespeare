@@ -7,12 +7,13 @@ import { ModalPage } from "./components/modals/modalPage";
 import { instructions } from "./components/modals/instructions";
 import { Settings } from "./components/modals/settings";
 import { initLaunchSettings } from "./launchSettings";
+import { statistics } from "./components/modals/statistics";
 
 const ModalObj = {
-  None: { title: "", children: <></> },
+  None: { title: "", children: null },
   About: { title: "About", children: null },
   Instructions: { title: "How to play", children: instructions },
-  Stats: { title: "Statistics", children: null },
+  Statistics: { title: "Statistics", children: statistics },
   Setting: { title: "Settings", children: <Settings /> },
 };
 
@@ -21,7 +22,7 @@ const isFirstVisit = initLaunchSettings();
 export const App: React.FunctionComponent = () => {
   const [modalType, setModalType] = useState<{
     title: string;
-    children: JSX.Element;
+    children: JSX.Element | null;
   }>(isFirstVisit ? ModalObj.Instructions : ModalObj.None);
 
   const onClickInstructions = () => {
@@ -29,6 +30,9 @@ export const App: React.FunctionComponent = () => {
   };
   const onClickSettings = () => {
     setModalType(ModalObj.Setting);
+  };
+  const onClickStatistics = () => {
+    setModalType(ModalObj.Statistics);
   };
 
   const onCloseModal = () => {
@@ -40,6 +44,7 @@ export const App: React.FunctionComponent = () => {
       <Header
         onClickInstructions={onClickInstructions}
         onClickSettings={onClickSettings}
+        onClickStatistics={onClickStatistics}
       />
       <ModalPage onClose={onCloseModal} title={modalType.title}>
         {modalType.children}

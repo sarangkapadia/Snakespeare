@@ -105,6 +105,8 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
   };
 
   const resetGameToStart = (ends: typeof snakeEnds) => {
+    currentLetter = gridObj.getCurrentBytes().toUpperCase();
+
     setPlaying(false);
     gridObj.getSnake().resetSnakeEnds();
     gridObj.resetGrid();
@@ -119,9 +121,6 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
 
     ends.tail.row = newEnds.tail.row;
     ends.tail.col = newEnds.tail.col;
-
-    currentLetter = "";
-    score = 0;
   };
 
   const calculateScore = () => {
@@ -174,6 +173,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
         const error = "Invalid head direction!";
         alert(error);
         resetGameToStart(ends);
+        return;
       }
     }
     ends.head.row = newHeadRow;
@@ -192,8 +192,6 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
         const landed = grid[newHeadRow][newHeadCol].letter;
 
         if (landed !== expected) {
-          const error = `Wrong letter, expected = ${expected}, letter = ${landed} solution: ${gridObj.getCurrentBytes()}`;
-          alert(error);
           resetGameToStart(ends);
           return;
         }
@@ -280,6 +278,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
         const error = "Invalid tail direction!";
         alert(error);
         resetGameToStart(ends);
+        return;
       }
     }
 
@@ -355,6 +354,8 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
       }
       if (!startDate.current) startDate.current = new Date();
       resetHintTimer();
+      score = 0;
+      currentLetter = "";
     }
     setPlaying((playing) => !playing);
   }, [playing, modalTitle, resetHintTimer]);

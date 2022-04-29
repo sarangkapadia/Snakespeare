@@ -18,6 +18,7 @@ const rootStyle = getComputedStyle(root);
 interface IHeader {
   onClickInstructions: () => void;
   onClickSettings: () => void;
+  onClickStatistics: () => void;
 }
 
 export const Header: React.FunctionComponent<IHeader> = (props) => {
@@ -47,7 +48,12 @@ export const Header: React.FunctionComponent<IHeader> = (props) => {
         </div>
         <Title title={"Snakespeare"} />
         <div className={"menuright"}>
-          <IconButton aria-label="Stats" color="primary" size="small">
+          <IconButton
+            aria-label="Stats"
+            color="primary"
+            size="small"
+            onClick={props.onClickStatistics}
+          >
             <LeaderboardRounded />
           </IconButton>
           <IconButton

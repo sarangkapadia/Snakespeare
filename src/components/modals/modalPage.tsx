@@ -19,13 +19,13 @@ export const ModalPage: React.FunctionComponent<IModalPage> = React.memo(
       }
     }, [title]);
 
-    return (
+    return props.children ? (
       <div className={className}>
         <div className={"modalContainer"}>
           <ModalHeader onClick={onClose} title={title} />
           {props.children}
         </div>
       </div>
-    );
+    ) : null;
   }
 );
