@@ -49,7 +49,10 @@ export const App: React.FunctionComponent = () => {
       <ModalPage onClose={onCloseModal} title={modalType.title}>
         {modalType.children}
       </ModalPage>
-      <GridContainer modalTitle={modalType.title} />
+      <GridContainer
+        modalTitle={modalType.title}
+        onGameEnd={onClickStatistics}
+      />
     </div>
   );
 };

@@ -11,13 +11,6 @@ export class Snake {
     head: { row: 5, col: 10 },
   };
 
-  public constructor(snakeEnds?: ISnakeEnds) {
-    if (snakeEnds) {
-      this.snakeEnds = snakeEnds;
-      return;
-    }
-  }
-
   public resetSnakeEnds() {
     this.setSnakeEnds({
       tail: { row: 5, col: 5 },

@@ -1,6 +1,6 @@
 import React from "react";
 import { Box } from "./box";
-import { Direction, IGridItem } from "./grid";
+import { Direction, IGridItem, Role } from "./grid";
 import "./style/grid.css";
 
 interface IGridRendererProps {
@@ -24,9 +24,15 @@ export const GridRenderer: React.FunctionComponent<IGridRendererProps> = (
           letter={item.letter}
           id={index}
           key={index}
-          currentHeadDirection={currentHeadDirection}
-          currentTailDirection={currentTailDirection}
-          currentTailPivot={currentTailPivot}
+          currentHeadDirection={
+            item.role === Role.Head ? currentHeadDirection : undefined
+          }
+          currentTailDirection={
+            item.role === Role.Tail ? currentTailDirection : undefined
+          }
+          currentTailPivot={
+            item.role === Role.Tail ? currentTailPivot : undefined
+          }
         />
       ))}
     </div>

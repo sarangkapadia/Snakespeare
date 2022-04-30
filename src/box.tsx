@@ -7,9 +7,9 @@ interface IBoxProps {
   id: number;
   role: Role;
   letter: string;
-  currentHeadDirection: Direction;
-  currentTailDirection: Direction;
-  currentTailPivot: Direction;
+  currentHeadDirection?: Direction;
+  currentTailDirection?: Direction;
+  currentTailPivot?: Direction;
 }
 
 export const Box: React.FunctionComponent<IBoxProps> = React.memo((props) => {
@@ -21,7 +21,7 @@ export const Box: React.FunctionComponent<IBoxProps> = React.memo((props) => {
     currentTailPivot,
   } = props;
 
-  const getClassNameFromDirection = (dir: Direction) => {
+  const getClassNameFromDirection = (dir: Direction | undefined) => {
     switch (dir) {
       case Direction.Down:
         return "t2b";
@@ -32,6 +32,7 @@ export const Box: React.FunctionComponent<IBoxProps> = React.memo((props) => {
       case Direction.Right:
         return "l2r";
       case Direction.None:
+        alert("this should never hit");
         return "none";
       default:
         throw new Error("invalid dir");

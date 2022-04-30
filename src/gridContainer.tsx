@@ -31,11 +31,12 @@ const hintTimeoutMs = 14 * 1000;
 
 interface IGridContainer {
   modalTitle: string;
+  onGameEnd: () => void;
 }
 export const GridContainer: React.FunctionComponent<IGridContainer> = (
   props
 ) => {
-  const { modalTitle } = props;
+  const { modalTitle, onGameEnd } = props;
   const [snakeEnds, setSnakeEnds] = useState(gridObj.getSnake().getSnakeEnds());
   const [playing, setPlaying] = useState(false);
   const [debug, setDebug] = useState(false);
@@ -97,6 +98,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
       return;
     }
     const currentHeadDir = gridObj.getCurrentHeadDirection();
+
     if (currentHeadDir === Direction.Down || currentHeadDir === Direction.Up)
       return;
     gridObj.setCurrentHeadDirection(Direction.Down);
@@ -104,23 +106,22 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     movePending = true;
   };
 
-  const resetGameToStart = (ends: typeof snakeEnds) => {
+  const resetGameToStart = () => {
     currentLetter = gridObj.getCurrentBytes().toUpperCase();
-
     setPlaying(false);
-    gridObj.getSnake().resetSnakeEnds();
-    gridObj.resetGrid();
-    gridObj.initGridData();
+    // all this needs to be delayed
+    setTimeout(() => {
+      onGameEnd();
+      gridObj.getSnake().resetSnakeEnds();
+      gridObj.resetGrid();
+      gridObj.initGridData();
+      setSnakeEnds(gridObj.getSnake().getSnakeEnds());
 
-    clearTimeout(hintsTimeOutId);
-    startDate.current = null;
-
-    const newEnds = gridObj.getSnake().getSnakeEnds();
-    ends.head.row = newEnds.head.row;
-    ends.head.col = newEnds.head.col;
-
-    ends.tail.row = newEnds.tail.row;
-    ends.tail.col = newEnds.tail.col;
+      clearTimeout(hintsTimeOutId);
+      startDate.current = null;
+      score = 0;
+      currentLetter = "";
+    }, 3000);
   };
 
   const calculateScore = () => {
@@ -170,9 +171,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
         break;
       }
       default: {
-        const error = "Invalid head direction!";
-        alert(error);
-        resetGameToStart(ends);
+        resetGameToStart();
         return;
       }
     }
@@ -192,7 +191,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
         const landed = grid[newHeadRow][newHeadCol].letter;
 
         if (landed !== expected) {
-          resetGameToStart(ends);
+          resetGameToStart();
           return;
         }
 
@@ -215,7 +214,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
       default:
         const error = `Head collision with, ${grid[newHeadRow][newHeadCol].role}`;
         alert(error);
-        resetGameToStart(ends);
+        resetGameToStart();
     }
 
     grid[newHeadRow][newHeadCol].direction = currentHeadDir; // retain previous head's dir in the new head
@@ -277,7 +276,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
       default: {
         const error = "Invalid tail direction!";
         alert(error);
-        resetGameToStart(ends);
+        resetGameToStart();
         return;
       }
     }
@@ -354,8 +353,6 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
       }
       if (!startDate.current) startDate.current = new Date();
       resetHintTimer();
-      score = 0;
-      currentLetter = "";
     }
     setPlaying((playing) => !playing);
   }, [playing, modalTitle, resetHintTimer]);
