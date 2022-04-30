@@ -50,6 +50,8 @@ export const Box: React.FunctionComponent<IBoxProps> = React.memo((props) => {
         return "head_none";
       case Role.Body:
         return "snake";
+      case Role.WrongBody:
+        return "wrongBody";
       case Role.Tail:
         return `tail_${getClassNameFromDirection(
           currentTailPivot !== Direction.None
@@ -60,6 +62,8 @@ export const Box: React.FunctionComponent<IBoxProps> = React.memo((props) => {
         return "byte";
       case Role.HintedByte:
         return "hintedByte";
+      case Role.WrongByte:
+        return "wrongByte";
       default:
         throw new Error("invalid role");
     }
@@ -67,7 +71,9 @@ export const Box: React.FunctionComponent<IBoxProps> = React.memo((props) => {
 
   let className = getClassName();
 
-  return className === "byte" || className === "hintedByte" ? (
+  return className === "byte" ||
+    className === "hintedByte" ||
+    className === "wrongByte" ? (
     <div className={className}>
       <Byte letter={letter} />
     </div>

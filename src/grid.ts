@@ -12,10 +12,12 @@ export enum Direction {
 export enum Role {
   Canvas,
   Body,
+  WrongBody,
   Head,
   Tail,
   Byte,
   HintedByte,
+  WrongByte,
   FirstHead,
   FirstTail,
 }

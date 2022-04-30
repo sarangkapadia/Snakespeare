@@ -109,19 +109,22 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
   const resetGameToStart = () => {
     currentLetter = gridObj.getCurrentBytes().toUpperCase();
     setPlaying(false);
-    // all this needs to be delayed
+
+    // wait 4s, then show the stats dialog, then wait 500ms and clear the game state.
     setTimeout(() => {
       onGameEnd();
-      gridObj.getSnake().resetSnakeEnds();
-      gridObj.resetGrid();
-      gridObj.initGridData();
-      setSnakeEnds(gridObj.getSnake().getSnakeEnds());
+      setTimeout(() => {
+        gridObj.getSnake().resetSnakeEnds();
+        gridObj.resetGrid();
+        gridObj.initGridData();
+        setSnakeEnds(gridObj.getSnake().getSnakeEnds());
 
-      clearTimeout(hintsTimeOutId);
-      startDate.current = null;
-      score = 0;
-      currentLetter = "";
-    }, 3000);
+        clearTimeout(hintsTimeOutId);
+        startDate.current = null;
+        score = 0;
+        currentLetter = "";
+      }, 500);
+    }, 4000);
   };
 
   const calculateScore = () => {
@@ -171,6 +174,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
         break;
       }
       default: {
+        grid[newHeadRow][newHeadCol].role = Role.WrongBody;
         resetGameToStart();
         return;
       }
@@ -190,7 +194,9 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
         const expected = gridObj.getExpectedLetter().toUpperCase();
         const landed = grid[newHeadRow][newHeadCol].letter;
 
+        // Landed on incorrect byte
         if (landed !== expected) {
+          grid[newHeadRow][newHeadCol].role = Role.WrongByte;
           resetGameToStart();
           return;
         }
@@ -212,9 +218,9 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
         break;
       }
       default:
-        const error = `Head collision with, ${grid[newHeadRow][newHeadCol].role}`;
-        alert(error);
+        grid[newHeadRow][newHeadCol].role = Role.WrongBody;
         resetGameToStart();
+        return;
     }
 
     grid[newHeadRow][newHeadCol].direction = currentHeadDir; // retain previous head's dir in the new head
