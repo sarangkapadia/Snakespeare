@@ -64,6 +64,8 @@ export const Box: React.FunctionComponent<IBoxProps> = React.memo((props) => {
         return "hintedByte";
       case Role.WrongByte:
         return "wrongByte";
+      case Role.CorrectByte:
+        return "correctByte";
       default:
         throw new Error("invalid role");
     }
@@ -73,6 +75,7 @@ export const Box: React.FunctionComponent<IBoxProps> = React.memo((props) => {
 
   return className === "byte" ||
     className === "hintedByte" ||
+    className === "correctByte" ||
     className === "wrongByte" ? (
     <div className={className}>
       <Byte letter={letter} />

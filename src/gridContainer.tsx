@@ -200,6 +200,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
           resetGameToStart();
           return;
         }
+        grid[newHeadRow][newHeadCol].role = Role.CorrectByte;
 
         currentLetter =
           gridObj.getLetterIndex() > 0 ? currentLetter + landed : landed;

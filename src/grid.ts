@@ -18,6 +18,7 @@ export enum Role {
   Byte,
   HintedByte,
   WrongByte,
+  CorrectByte,
   FirstHead,
   FirstTail,
 }
