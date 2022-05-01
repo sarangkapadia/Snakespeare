@@ -200,6 +200,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
           resetGameToStart();
           return;
         }
+
         grid[newHeadRow][newHeadCol].role = Role.CorrectByte;
 
         currentLetter =
@@ -230,7 +231,15 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
   const isHeadOnByte = (ends: typeof snakeEnds): boolean => {
     const currentHeadRow = snakeEnds.head.row;
     const currentHeadCol = snakeEnds.head.col;
-    return grid[currentHeadRow][currentHeadCol].role === Role.Byte;
+
+    switch (grid[currentHeadRow][currentHeadCol].role) {
+      case Role.Byte:
+      case Role.HintedByte:
+      case Role.CorrectByte:
+        return true;
+    }
+
+    return false;
   };
 
   const calculateNewTail = (ends: typeof snakeEnds) => {
