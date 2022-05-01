@@ -4,10 +4,10 @@
 
 @keyframes tileAnimation {
   from {
-    opacity: 0%;
+    opacity: 0;
   }
   to {
-    opacity: 100%;
+    opacity: 1;
   }
 }
 
@@ -23,7 +23,7 @@
   color: var(--darkFont);
   font-family: var(--fontFamily);
   font-size: calc((1.5 * var(--boxSize)) - 10px);
-  /* animation: tileAnimation linear forwards 0.5s; */
+  animation: tileAnimation linear forwards 0.5s;
 }
 
 .tileNumber {
@@ -38,5 +38,5 @@
   color: var(--darkFont);
   font-family: var(--fontFamily);
   font-size: calc((1.5 * var(--boxSize)) - 10px);
-  /* animation: tileAnimation linear forwards 0.5s; */
+  animation: tileAnimation linear forwards 0.5s;
 }
