@@ -7,6 +7,7 @@ interface IBoxProps {
   id: number;
   role: Role;
   letter: string;
+  letterIndex?: number;
   currentHeadDirection?: Direction;
   currentTailDirection?: Direction;
   currentTailPivot?: Direction;
@@ -16,6 +17,7 @@ export const Box: React.FunctionComponent<IBoxProps> = React.memo((props) => {
   const {
     role,
     letter,
+    letterIndex,
     currentHeadDirection,
     currentTailDirection,
     currentTailPivot,
@@ -73,7 +75,15 @@ export const Box: React.FunctionComponent<IBoxProps> = React.memo((props) => {
 
   let className = getClassName();
 
-  return className === "byte" ||
+  if (className.startsWith("byte")) {
+    className = `byte byte${
+      letterIndex !== undefined && letterIndex >= 0
+        ? letterIndex.toString()
+        : ""
+    }`;
+  }
+
+  return className.startsWith("byte") ||
     className === "hintedByte" ||
     className === "correctByte" ||
     className === "wrongByte" ? (

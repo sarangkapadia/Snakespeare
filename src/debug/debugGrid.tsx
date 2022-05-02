@@ -14,6 +14,7 @@ export const DebugGrid: React.FunctionComponent<IDebugGridProps> = (props) => {
     <div className={"debugGrid"}>
       {grid.flat().map((item, index) => (
         <DebugBox
+          letterIndex={item.letterIndex}
           key={index}
           role={item.role}
           letter={item.letter}

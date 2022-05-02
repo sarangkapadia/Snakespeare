@@ -28,6 +28,7 @@ export interface IGridItem {
   direction: Direction;
   pivot: Direction;
   letter: string;
+  letterIndex: number;
 }
 
 export interface IHintItem {
@@ -40,6 +41,7 @@ class GridItem implements IGridItem {
   direction = Direction.None;
   pivot = Direction.None;
   letter = "";
+  letterIndex = -1;
 }
 
 export class Grid {
@@ -85,6 +87,7 @@ export class Grid {
         this.grid[i][j].direction = Direction.None;
         this.grid[i][j].pivot = Direction.None;
         this.grid[i][j].letter = "";
+        this.grid[i][j].letterIndex = -1;
       }
     }
     this.letterIndex = 0;
@@ -168,6 +171,7 @@ export class Grid {
           this.grid[randomRow][randomCol].letter = this.currentBytes
             .charAt(i)
             .toUpperCase();
+          this.grid[randomRow][randomCol].letterIndex = i;
 
           if (i < this.hintsPerWord)
             this.hintList[i] = { row: randomRow, column: randomCol };

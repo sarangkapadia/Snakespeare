@@ -194,7 +194,17 @@
   animation: r2l forwards linear 0.5s;
 }
 
+@keyframes byteAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .byte {
+  opacity: 0;
   width: var(--boxSize);
   height: var(--boxSize);
   background-color: var(--byteColor);
@@ -202,6 +212,23 @@
   justify-content: center;
   align-items: center;
   border-radius: 10%;
+  animation: byteAnimation linear forwards 0.5s;
+}
+
+.byte0 {
+  animation-delay: 0.1s;
+}
+.byte1 {
+  animation-delay: 0.2s;
+}
+.byte2 {
+  animation-delay: 0.3s;
+}
+.byte3 {
+  animation-delay: 0.4s;
+}
+.byte4 {
+  animation-delay: 0.5s;
 }
 
 .hintedByte {
@@ -236,7 +263,7 @@
   justify-content: center;
   align-items: center;
   border-radius: 10%;
-  animation: r2l forwards linear 0.5s;
+  animation: r2l forwards ease-in 1s;
 }
 
 .correctByte {

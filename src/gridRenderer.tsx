@@ -24,6 +24,11 @@ export const GridRenderer: React.FunctionComponent<IGridRendererProps> = (
           letter={item.letter}
           id={index}
           key={index}
+          letterIndex={
+            item.letter !== "" && item.letterIndex !== -1
+              ? item.letterIndex
+              : undefined
+          }
           currentHeadDirection={
             item.role === Role.Head ? currentHeadDirection : undefined
           }
