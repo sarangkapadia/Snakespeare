@@ -22,7 +22,7 @@
   z-index: 200;
   left: 0;
   top: 0;
-
+  user-select: none;
   animation: In 0.3s linear forwards;
 }
 

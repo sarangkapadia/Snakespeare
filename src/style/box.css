@@ -213,6 +213,7 @@
   align-items: center;
   border-radius: 10%;
   animation: byteAnimation linear forwards 0.5s;
+  user-select: none;
 }
 
 .byte0 {
