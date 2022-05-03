@@ -39,6 +39,10 @@ export const App: React.FunctionComponent = () => {
     setModalType(ModalObj.None);
   };
 
+  const isWindow =
+    modalType.title === ModalObj.Instructions.title ||
+    modalType.title === ModalObj.Statistics.title;
+
   return (
     <div className={"appContainer"}>
       <Header
@@ -46,7 +50,11 @@ export const App: React.FunctionComponent = () => {
         onClickSettings={onClickSettings}
         onClickStatistics={onClickStatistics}
       />
-      <ModalPage onClose={onCloseModal} title={modalType.title}>
+      <ModalPage
+        onClose={onCloseModal}
+        title={modalType.title}
+        isWindow={isWindow}
+      >
         {modalType.children}
       </ModalPage>
       <GridContainer

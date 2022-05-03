@@ -5,23 +5,31 @@ import { ModalHeader } from "./modalHeader";
 interface IModalPage {
   onClose: () => void;
   title: string;
+  isWindow: boolean;
 }
 
 export const ModalPage: React.FunctionComponent<IModalPage> = React.memo(
   (props) => {
-    const { onClose, title } = props;
+    const { onClose, title, isWindow } = props;
     const [className, setClassName] = useState("closed");
+    const [containerClassName, setContainerClassName] = useState(
+      "floatingContainerWindow"
+    );
 
     useEffect(() => {
-      setClassName(title !== "" ? "modalOverlayIn" : "modalOverlayOut");
-      if (title === "") {
-        setTimeout(() => setClassName("closed"), 400);
+      if (title !== "") {
+        setClassName("modalOverlayIn");
       }
-    }, [title]);
+      if (isWindow) {
+        setContainerClassName("floatingContainerWindow");
+      } else {
+        setContainerClassName("floatingContainerFullScreen");
+      }
+    }, [title, isWindow]);
 
     return props.children ? (
       <div className={className}>
-        <div className={"modalContainer"}>
+        <div className={containerClassName}>
           <ModalHeader onClick={onClose} title={title} />
           {props.children}
         </div>

@@ -15,7 +15,7 @@ export const ModalHeader: React.FunctionComponent<IModalHeader> = React.memo(
           <Title title={title} />
         </div>
         <button className={"close"} onClick={onClick}>
-          X
+          {"x"}
         </button>
       </div>
     );

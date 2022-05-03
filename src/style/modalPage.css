@@ -10,22 +10,6 @@
   }
 }
 
-@keyframes Out {
-  0% {
-    transform: translateY(0px);
-    opacity: 1;
-  }
-
-  80% {
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateY(70px);
-    opacity: 0;
-  }
-}
-
 .modalOverlayIn {
   height: 100%;
   width: 100%;
@@ -34,7 +18,7 @@
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: center;
-  background-color: var(--appBackgroundColor);
+  background-color: rgba(201, 100, 184, 0.5);
   z-index: 200;
   left: 0;
   top: 0;
@@ -46,22 +30,6 @@
   display: none;
 }
 
-.modalOverlayOut {
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: flex-start;
-  align-items: center;
-  background-color: var(--appBackgroundColor);
-  z-index: 200;
-  left: 0;
-  top: 0;
-
-  animation: Out 0.3s linear forwards;
-}
-
 .modalContainer {
   position: relative;
   width: 100%;
@@ -69,4 +37,25 @@
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
+}
+
+.floatingContainerWindow {
+  height: 75%;
+  width: 90%;
+  max-width: 500px;
+  background-color: var(--appBackgroundColor);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+}
+
+.floatingContainerFullScreen {
+  height: 100%;
+  width: 100%;
+  background-color: var(--appBackgroundColor);
+  position: fixed;
+  top: 0;
+  left: 0;
 }
