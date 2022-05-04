@@ -7,6 +7,10 @@ export const initLaunchSettings = () => {
 
   if (darkModeChecked) {
     root.style.setProperty(
+      "--modalOverlayColor",
+      rootStyle.getPropertyValue("--darkModalOverlay").trim()
+    );
+    root.style.setProperty(
       "--appBackgroundColor",
       rootStyle.getPropertyValue("--darkBackground").trim()
     );
@@ -19,6 +23,10 @@ export const initLaunchSettings = () => {
       rootStyle.getPropertyValue("--darkBox").trim()
     );
   } else {
+    root.style.setProperty(
+      "--modalOverlayColor",
+      rootStyle.getPropertyValue("--lightModalOverlay").trim()
+    );
     root.style.setProperty(
       "--appBackgroundColor",
       rootStyle.getPropertyValue("--lightBackground").trim()

@@ -10,6 +10,15 @@
   }
 }
 
+.modalContainer {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+}
+
 .modalOverlayIn {
   height: 100%;
   width: 100%;
@@ -18,7 +27,7 @@
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: center;
-  background-color: rgba(201, 100, 184, 0.5);
+  background-color: rgba(var(--modalOverlayColor), 0.5);
   z-index: 200;
   left: 0;
   top: 0;
@@ -30,20 +39,11 @@
   display: none;
 }
 
-.modalContainer {
-  position: relative;
-  width: 100%;
-  max-width: 500px;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-}
-
 .floatingContainerWindow {
   height: 75%;
   width: 90%;
   max-width: 500px;
-  background-color: var(--appBackgroundColor);
+  background-color: var(--boxBackgroundColor);
   position: fixed;
   top: 50%;
   left: 50%;

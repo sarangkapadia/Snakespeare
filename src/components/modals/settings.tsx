@@ -40,6 +40,10 @@ export const Settings: React.FunctionComponent = () => {
   useEffect(() => {
     if (darkModeChecked) {
       root.style.setProperty(
+        "--modalOverlayColor",
+        rootStyle.getPropertyValue("--darkModalOverlay").trim()
+      );
+      root.style.setProperty(
         "--appBackgroundColor",
         rootStyle.getPropertyValue("--darkBackground").trim()
       );
@@ -52,6 +56,10 @@ export const Settings: React.FunctionComponent = () => {
         rootStyle.getPropertyValue("--darkBox").trim()
       );
     } else {
+      root.style.setProperty(
+        "--modalOverlayColor",
+        rootStyle.getPropertyValue("--lightModalOverlay").trim()
+      );
       root.style.setProperty(
         "--appBackgroundColor",
         rootStyle.getPropertyValue("--lightBackground").trim()

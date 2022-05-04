@@ -15,19 +15,23 @@
   --darkBackground: rgb(21, 9, 22);
   --lightBackground: rgb(255, 255, 255);
 
+  --darkModalOverlay: 21, 9, 22;
+  --lightModalOverlay: 255, 255, 255;
+
   --darkFont: #eaf1ed;
   --lightFont: #212221;
 
   --darkBox: rgb(36, 35, 44);
   --lightBox: rgb(222, 212, 226);
 
-  --fontColor: var(--darkFont);
   --snakeColor: rgb(201, 100, 184);
   --byteColor: rgb(112, 55, 187);
   --scoreColor: rgb(55, 187, 99);
-  --boxBackgroundColor: rgb(36, 35, 44);
-  --appBackgroundColor: var(--darkBackground);
   --debugBoxBackgroundColor: white;
+  --boxBackgroundColor: var(var(--darkBox));
+  --modalOverlayColor: 21, 9, 22;
+  --fontColor: var(--darkFont);
+  --appBackgroundColor: var(--darkBackground);
 }
 
 @media screen and (max-width: 350px) {
