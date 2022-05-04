@@ -13,8 +13,7 @@ const root = document.querySelector(":root")!;
 const rootStyle = getComputedStyle(root);
 
 const tickCount = rootStyle.getPropertyValue("--tick");
-const tickCountMs =
-  parseFloat(tickCount.substr(0, tickCount.length - 1)) * 1000;
+let tickCountMs = parseFloat(tickCount.substr(0, tickCount.length - 1)) * 1000;
 
 const url: URL = new URL(window.location.href);
 const urlSearchParams = new URLSearchParams(url.search);
@@ -43,7 +42,11 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
 
   let movePending = false;
   const hints = localStorage.getItem("hints");
+  const progressiveSpeed = localStorage.getItem("progressiveSpeed");
   const hintsOn = hints ? JSON.parse(hints) : "true";
+  const progressiveSpeedOn = progressiveSpeed
+    ? JSON.parse(progressiveSpeed)
+    : "true";
   let hintsTimeOutId: any = useRef(null);
   let startDate: any = useRef(null);
   // add logic in these to detect game end
@@ -112,7 +115,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
 
     // wait 4s, then show the stats dialog, then wait 500ms and clear the game state.
     setTimeout(() => {
-      onGameEnd();
+      onGameEnd(); //this shows the stats
       setTimeout(() => {
         gridObj.getSnake().resetSnakeEnds();
         gridObj.resetGrid();
@@ -123,6 +126,9 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
         startDate.current = null;
         score = 0;
         currentLetter = "";
+        tickCountMs = 500;
+        const root = document.querySelector<HTMLElement>(":root")!;
+        root.style.setProperty("--tick", "0.5s");
       }, 500);
     }, 4000);
   };
@@ -137,6 +143,19 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     score += bonus >= 2 ? bonus : 0; //min bonus of 2 is needed.
     // refresh the new start date
     startDate.current = new Date();
+  };
+
+  const increaseSpeed = () => {
+    if (progressiveSpeedOn) {
+      const root = document.querySelector<HTMLElement>(":root")!;
+      if (score >= 50 && score <= 80 && tickCountMs === 500) {
+        root.style.setProperty("--tick", "0.4s");
+        tickCountMs = 400;
+      } else if (score > 80 && tickCountMs === 400) {
+        root.style.setProperty("--tick", "0.3s");
+        tickCountMs = 300;
+      }
+    }
   };
 
   const calculateNewHead = (ends: typeof snakeEnds) => {
@@ -214,6 +233,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
 
           calculateScore();
           resetHintTimer();
+          increaseSpeed();
         } else if (letterIndex <= gridObj.getHintsPerWord()) {
           resetHintTimer();
         }

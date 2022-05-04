@@ -29,12 +29,16 @@ const GreenSwitch = styled(Switch)(({ theme }) => ({
 export const Settings: React.FunctionComponent = () => {
   const darkMode = localStorage.getItem("darkMode");
   const hints = localStorage.getItem("hints");
+  const progressiveSpeed = localStorage.getItem("progressiveSpeed");
 
   const [hintsChecked, setHintsChecked] = useState(
     hints ? JSON.parse(hints) : true
   );
   const [darkModeChecked, setDarkModeChecked] = useState(
     darkMode ? JSON.parse(darkMode) : true
+  );
+  const [progressiveSpeedChecked, setProgressiveSpeedChecked] = useState(
+    progressiveSpeed ? JSON.parse(progressiveSpeed) : true
   );
 
   useEffect(() => {
@@ -85,7 +89,6 @@ export const Settings: React.FunctionComponent = () => {
     setHintsChecked(event.target.checked);
   };
 
-  // todo : write to local storage
   const handleDarkModeChanged = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -95,6 +98,20 @@ export const Settings: React.FunctionComponent = () => {
       console.log("cannot write to localStorage ", e);
     }
     setDarkModeChecked(event.target.checked);
+  };
+
+  const handleProgressiveSpeedChanged = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    try {
+      localStorage.setItem(
+        "progressiveSpeed",
+        JSON.stringify(event.target.checked)
+      );
+    } catch (e) {
+      console.log("cannot write to localStorage ", e);
+    }
+    setProgressiveSpeedChecked(event.target.checked);
   };
 
   return (
@@ -117,6 +134,16 @@ export const Settings: React.FunctionComponent = () => {
           {...colorModeLabel}
           checked={darkModeChecked}
           onChange={handleDarkModeChanged}
+        />
+      </div>
+      <div className="rowContainer">
+        <div className="settingsTitleContainer">
+          <div className="rowTitle">{"Progressive speed"}</div>
+        </div>
+        <GreenSwitch
+          {...colorModeLabel}
+          checked={progressiveSpeedChecked}
+          onChange={handleProgressiveSpeedChanged}
         />
       </div>
     </div>

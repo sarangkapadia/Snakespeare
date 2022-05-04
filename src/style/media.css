@@ -28,7 +28,7 @@
   --byteColor: rgb(112, 55, 187);
   --scoreColor: rgb(55, 187, 99);
   --debugBoxBackgroundColor: white;
-  --boxBackgroundColor: var(var(--darkBox));
+  --boxBackgroundColor: var(--darkBox);
   --modalOverlayColor: 21, 9, 22;
   --fontColor: var(--darkFont);
   --appBackgroundColor: var(--darkBackground);
