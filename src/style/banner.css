@@ -1,0 +1,51 @@
+@keyframes showHideBanner {
+  0% {
+    opacity: 0;
+    background-position: right;
+  }
+  25% {
+    opacity: 0.5;
+    background-position: right;
+  }
+  50% {
+    opacity: 1;
+    background-position: bottom;
+  }
+  75% {
+    opacity: 1;
+    background-position: left;
+  }
+  100% {
+    opacity: 0;
+    background-position: bottom;
+  }
+}
+
+.banner {
+  min-height: calc(var(--boxSize/2) + 15px);
+  min-width: calc(var(--boxSize/2) + 50px);
+  margin: 25px;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: var(--scoreColor);
+  color: var(--fontColor);
+
+  font-size: calc(var(--boxSize) / 2);
+  font-family: var(--fontFamily);
+
+  background-image: linear-gradient(
+    45deg,
+    var(--snakeColor),
+    var(--byteColor),
+    var(--scoreColor)
+  );
+  background-size: 400%;
+  background-position: bottom left;
+}
+
+.openBanner {
+  animation: showHideBanner linear forwards 3s;
+}
+.closedBanner {
+  opacity: 0;
+}

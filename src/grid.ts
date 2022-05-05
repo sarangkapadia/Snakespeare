@@ -177,7 +177,8 @@ export class Grid {
           switch (currentHeadDir) {
             case Direction.Right:
             case Direction.Left:
-              if (horizontalDistance <= delta) {
+            case Direction.None:
+              if (horizontalDistance <= delta && randomRow === head.row) {
                 console.log("too close to head, horz");
                 continue;
               }
@@ -185,10 +186,13 @@ export class Grid {
 
             case Direction.Up:
             case Direction.Down:
-              if (verticalDistance <= delta) {
+              if (verticalDistance <= delta && randomCol === head.col) {
                 console.log("too close to head, vertical");
                 continue;
               }
+              break;
+            default:
+              throw new Error("Head direction default!");
           }
 
           this.grid[randomRow][randomCol].role = Role.Byte;

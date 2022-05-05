@@ -7,7 +7,10 @@ import { Grid, Direction, Role } from "./grid";
 import { DebugGrid } from "./debug/debugGrid";
 import "./style/gridContainer.css";
 import { WordTiles } from "./wordtiles";
+import { Banner } from "./banner";
 
+const showBannerAfterMs = 7000;
+const hideBannerAfterMs = 3200; // if you change this , also change the banner.css animation to Xs
 // move this to a useEffect
 const root = document.querySelector(":root")!;
 const rootStyle = getComputedStyle(root);
@@ -39,6 +42,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
   const [snakeEnds, setSnakeEnds] = useState(gridObj.getSnake().getSnakeEnds());
   const [playing, setPlaying] = useState(false);
   const [debug, setDebug] = useState(false);
+  const [bannerText, setBannerText] = useState("Text");
 
   let movePending = false;
   const hints = localStorage.getItem("hints");
@@ -49,6 +53,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     : "true";
   let hintsTimeOutId: any = useRef(null);
   let startDate: any = useRef(null);
+  let playingRef = useRef(playing);
   // add logic in these to detect game end
   const onSwipedLeft = () => {
     if (movePending) return;
@@ -112,6 +117,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
   const resetGameToStart = () => {
     currentLetter = gridObj.getCurrentBytes().toUpperCase();
     setPlaying(false);
+    playingRef.current = false;
 
     // wait 4s, then show the stats dialog, then wait 500ms and clear the game state.
     setTimeout(() => {
@@ -130,7 +136,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
         const root = document.querySelector<HTMLElement>(":root")!;
         root.style.setProperty("--tick", "0.5s");
       }, 500);
-    }, 4000);
+    }, 3000);
   };
 
   const calculateScore = () => {
@@ -141,6 +147,29 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     const bonus = Math.floor(100 / seconds);
     score += pointsPerWord;
     score += bonus >= 2 ? bonus : 0; //min bonus of 2 is needed.
+    switch (bonus) {
+      case 3:
+        setBannerText("Speedy");
+        break;
+      case 4:
+        setBannerText("Swift !");
+        break;
+      case 5:
+        setBannerText("Electric !!");
+        break;
+      case 6:
+        setBannerText("Supersonic !!");
+        break;
+      default: {
+        if (bonus > 6) {
+          setBannerText("Hypersonic !!!");
+          break;
+        }
+      }
+    }
+    if (bonus > 3) {
+      setTimeout(() => setBannerText("Text"), hideBannerAfterMs);
+    }
     // refresh the new start date
     startDate.current = new Date();
   };
@@ -359,11 +388,23 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     if (modalTitle !== "") {
       clearTimeout(hintsTimeOutId.current);
       setPlaying(false);
+      playingRef.current = false;
     }
     if (!hintsOn) {
       resetHintTimer();
     }
   }, [modalTitle, hintsOn, resetHintTimer]);
+
+  useEffect(() => {
+    if (!playing && modalTitle === "" && currentLetter === "") {
+      setTimeout(() => {
+        if (!playingRef.current && modalTitle === "") {
+          setBannerText("Swipe anywhere to start");
+          setTimeout(() => setBannerText("Text"), hideBannerAfterMs);
+        }
+      }, showBannerAfterMs);
+    }
+  }, [playing, modalTitle]);
 
   const onHintTimer = () => {
     gridObj.setHint();
@@ -373,6 +414,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     if (modalTitle !== "") {
       // pause and return
       setPlaying(false);
+      playingRef.current = false;
       return;
     }
 
@@ -390,6 +432,9 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
       if (!startDate.current) startDate.current = new Date();
       resetHintTimer();
     }
+
+    // here is where we set playing to true
+    playingRef.current = !playing;
     setPlaying((playing) => !playing);
   }, [playing, modalTitle, resetHintTimer]);
 
@@ -416,6 +461,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
   return (
     <div {...handlers} className={"game"}>
       <div className={"gridContainer"}>
+        <Banner text={bannerText} />
         {debug ? (
           <DebugGrid grid={grid} />
         ) : (
