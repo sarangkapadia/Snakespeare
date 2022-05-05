@@ -161,12 +161,36 @@ export class Grid {
   // sprinkles the next word on the grid
   public setRandomBytePositions() {
     this.currentBytes = this.bytes.getNextWord();
+    const { head } = this.snake.getSnakeEnds();
+    const currentHeadDir = this.grid[head.row][head.col].direction;
+    const delta = 3;
+
     for (let i = 0; i < this.currentBytes.length; i++) {
       do {
         let randomRow = Math.floor(Math.random() * this.gridSize);
         let randomCol = Math.floor(Math.random() * this.gridSize);
 
         if (this.grid[randomRow][randomCol].role === Role.Canvas) {
+          let horizontalDistance = Math.abs(randomCol - head.col);
+          let verticalDistance = Math.abs(randomRow - head.row);
+
+          switch (currentHeadDir) {
+            case Direction.Right:
+            case Direction.Left:
+              if (horizontalDistance <= delta) {
+                console.log("too close to head, horz");
+                continue;
+              }
+              break;
+
+            case Direction.Up:
+            case Direction.Down:
+              if (verticalDistance <= delta) {
+                console.log("too close to head, vertical");
+                continue;
+              }
+          }
+
           this.grid[randomRow][randomCol].role = Role.Byte;
           this.grid[randomRow][randomCol].letter = this.currentBytes
             .charAt(i)
