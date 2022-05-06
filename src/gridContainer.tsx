@@ -150,26 +150,29 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     switch (bonus) {
       case 3:
         setBannerText("Speedy");
+        setTimeout(() => setBannerText("Text"), hideBannerAfterMs);
         break;
       case 4:
         setBannerText("Swift !");
+        setTimeout(() => setBannerText("Text"), hideBannerAfterMs);
         break;
       case 5:
         setBannerText("Electric !!");
+        setTimeout(() => setBannerText("Text"), hideBannerAfterMs);
         break;
       case 6:
         setBannerText("Supersonic !!");
+        setTimeout(() => setBannerText("Text"), hideBannerAfterMs);
         break;
       default: {
         if (bonus > 6) {
           setBannerText("Hypersonic !!!");
+          setTimeout(() => setBannerText("Text"), hideBannerAfterMs);
           break;
         }
       }
     }
-    if (bonus > 3) {
-      setTimeout(() => setBannerText("Text"), hideBannerAfterMs);
-    }
+
     // refresh the new start date
     startDate.current = new Date();
   };
