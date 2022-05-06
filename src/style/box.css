@@ -246,7 +246,7 @@
     var(--scoreColor)
   );
   background-size: 500%;
-  background-position: bottom left;
+  background-position: top left;
   display: flex;
   justify-content: center;
   align-items: center;
