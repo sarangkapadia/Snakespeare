@@ -11,11 +11,10 @@
   }
 }
 
-.tileLetter {
+.tile {
   width: calc(1.5 * var(--boxSize));
   height: calc(1.5 * var(--boxSize));
   border-radius: 15%;
-  background: var(--byteColor);
   margin: calc(var(--gap) / 2);
   display: flex;
   justify-content: center;
@@ -26,17 +25,10 @@
   animation: tileAnimation linear forwards 0.5s;
 }
 
-.tileNumber {
-  width: calc(1.5 * var(--boxSize));
-  height: calc(1.5 * var(--boxSize));
-  border-radius: 15%;
+.letter {
+  background: var(--byteColor);
+}
+
+.number {
   background: var(--scoreColor);
-  margin: calc(var(--gap) / 2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--darkFont);
-  font-family: var(--fontFamily);
-  font-size: calc((1.5 * var(--boxSize)) - 10px);
-  animation: tileAnimation linear forwards 0.5s;
 }

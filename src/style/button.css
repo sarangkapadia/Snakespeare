@@ -1,4 +1,23 @@
-.newGame {
-  background-color: var(--boxBackgroundColor);
-  color: var(--appBackgroundColor);
+@keyframes shimmer {
+  0% {
+    background-position: bottom left;
+  }
+  100% {
+    background-position: top right;
+  }
+}
+
+.button {
+  height: calc(1.5 * var(--boxSize));
+  border-radius: 10%;
+  font-size: calc((1.5 * var(--boxSize)) - 20px);
+  font-family: var(--fontFamily);
+  color: var(--darkFont);
+
+  background-image: linear-gradient(45deg, var(--snakeColor), var(--byteColor));
+  background-size: 300% 300%;
+  background-position: bottom left;
+  animation: shimmer 6s ease-in-out alternate infinite;
+  border: none;
+  padding: 0px 10px 0px 10px;
 }

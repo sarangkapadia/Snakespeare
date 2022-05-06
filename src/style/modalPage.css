@@ -41,7 +41,7 @@
 
 .floatingContainerWindow {
   height: 75%;
-  width: 90%;
+  width: 95%;
   max-width: 500px;
   background-color: var(--boxBackgroundColor);
   position: fixed;
@@ -49,6 +49,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 5px;
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
 }
 
 .floatingContainerFullScreen {

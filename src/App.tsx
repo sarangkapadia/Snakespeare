@@ -7,13 +7,13 @@ import { ModalPage } from "./components/modals/modalPage";
 import { instructions } from "./components/modals/instructions";
 import { Settings } from "./components/modals/settings";
 import { initLaunchSettings } from "./launchSettings";
-import { statistics } from "./components/modals/statistics";
+import { Statistics } from "./components/modals/statistics";
 
 const ModalObj = {
   None: { title: "", children: null },
   About: { title: "About", children: null },
   Instructions: { title: "How to play", children: instructions },
-  Statistics: { title: "Statistics", children: statistics },
+  Statistics: { title: "Statistics", children: <Statistics /> },
   Setting: { title: "Settings", children: <Settings /> },
 };
 
