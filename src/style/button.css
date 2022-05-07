@@ -10,7 +10,7 @@
 .button {
   height: calc(1.5 * var(--boxSize));
   border-radius: 5px;
-  font-size: calc((1.5 * var(--boxSize)) - 20px);
+  font-size: calc((0.75 * var(--boxSize)));
   font-family: var(--fontFamily);
   color: var(--darkFont);
 
@@ -19,5 +19,17 @@
   background-position: bottom left;
   animation: shimmer 6s ease-in-out alternate infinite;
   border: none;
+}
+.shareLogo {
+  padding: 0px 5px 0px 5px;
+  width: calc((0.75 * var(--boxSize)));
+  height: calc((0.75 * var(--boxSize)));
+}
+.buttonContainer {
+  min-width: 100px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
   padding: 0px 10px 0px 10px;
 }
