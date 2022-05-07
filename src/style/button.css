@@ -9,7 +9,7 @@
 
 .button {
   height: calc(1.5 * var(--boxSize));
-  border-radius: 10%;
+  border-radius: 5px;
   font-size: calc((1.5 * var(--boxSize)) - 20px);
   font-family: var(--fontFamily);
   color: var(--darkFont);
