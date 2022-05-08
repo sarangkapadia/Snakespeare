@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/SnakeBytes/static/css/main.534b88fb.chunk.css",
-    "main.js": "/SnakeBytes/static/js/main.66df9762.chunk.js",
-    "main.js.map": "/SnakeBytes/static/js/main.66df9762.chunk.js.map",
+    "main.css": "/SnakeBytes/static/css/main.0c3646bf.chunk.css",
+    "main.js": "/SnakeBytes/static/js/main.97af6932.chunk.js",
+    "main.js.map": "/SnakeBytes/static/js/main.97af6932.chunk.js.map",
     "runtime-main.js": "/SnakeBytes/static/js/runtime-main.08490473.js",
     "runtime-main.js.map": "/SnakeBytes/static/js/runtime-main.08490473.js.map",
-    "static/js/2.92b97913.chunk.js": "/SnakeBytes/static/js/2.92b97913.chunk.js",
-    "static/js/2.92b97913.chunk.js.map": "/SnakeBytes/static/js/2.92b97913.chunk.js.map",
+    "static/js/2.6fa0b13c.chunk.js": "/SnakeBytes/static/js/2.6fa0b13c.chunk.js",
+    "static/js/2.6fa0b13c.chunk.js.map": "/SnakeBytes/static/js/2.6fa0b13c.chunk.js.map",
     "index.html": "/SnakeBytes/index.html",
-    "static/css/main.534b88fb.chunk.css.map": "/SnakeBytes/static/css/main.534b88fb.chunk.css.map",
-    "static/js/2.92b97913.chunk.js.LICENSE.txt": "/SnakeBytes/static/js/2.92b97913.chunk.js.LICENSE.txt",
+    "static/css/main.0c3646bf.chunk.css.map": "/SnakeBytes/static/css/main.0c3646bf.chunk.css.map",
+    "static/js/2.6fa0b13c.chunk.js.LICENSE.txt": "/SnakeBytes/static/js/2.6fa0b13c.chunk.js.LICENSE.txt",
     "static/media/share.5d1c5272.svg": "/SnakeBytes/static/media/share.5d1c5272.svg",
     "static/media/snakeSmile.c4c253be.gif": "/SnakeBytes/static/media/snakeSmile.c4c253be.gif"
   },
   "entrypoints": [
     "static/js/runtime-main.08490473.js",
-    "static/js/2.92b97913.chunk.js",
-    "static/css/main.534b88fb.chunk.css",
-    "static/js/main.66df9762.chunk.js"
+    "static/js/2.6fa0b13c.chunk.js",
+    "static/css/main.0c3646bf.chunk.css",
+    "static/js/main.97af6932.chunk.js"
   ]
 }
