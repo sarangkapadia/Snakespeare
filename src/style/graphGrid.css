@@ -1,0 +1,6 @@
+.graphGridContainer {
+  display: grid;
+  grid-template-columns: repeat(var(--graphGridSize), var(--graphBoxSize));
+  gap: 4px;
+  width: fit-content;
+}

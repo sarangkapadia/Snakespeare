@@ -52,6 +52,10 @@ export const Settings: React.FunctionComponent = () => {
         rootStyle.getPropertyValue("--darkBackground").trim()
       );
       root.style.setProperty(
+        "--statsOverlay",
+        rootStyle.getPropertyValue("--darkStatsOverlay").trim()
+      );
+      root.style.setProperty(
         "--fontColor",
         rootStyle.getPropertyValue("--darkFont").trim()
       );
@@ -67,6 +71,10 @@ export const Settings: React.FunctionComponent = () => {
       root.style.setProperty(
         "--appBackgroundColor",
         rootStyle.getPropertyValue("--lightBackground").trim()
+      );
+      root.style.setProperty(
+        "--statsOverlay",
+        rootStyle.getPropertyValue("--lightStatsOverlay").trim()
       );
       root.style.setProperty(
         "--fontColor",

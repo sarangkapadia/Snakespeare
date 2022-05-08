@@ -1,0 +1,26 @@
+.basicBox {
+  width: var(--graphBoxSize);
+  height: var(--graphBoxSize);
+  border-radius: 10%;
+  color: var(--darkFont);
+  font-family: var(--fontFamily);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.empty {
+  opacity: 0;
+}
+
+.podium {
+  background-color: var(--snakeColor);
+}
+
+.score {
+  background-color: var(--scoreColor);
+}
+
+.country {
+  background-color: var(--byteColor);
+}

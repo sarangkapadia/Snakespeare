@@ -1,13 +1,15 @@
 :root {
   --gridSize: 14;
-
+  --graphGridSize: 5;
+  --graphBoxSize: 26px;
+  --wordTilesHeight: 100px;
+  --header-height: 50px;
   --boxSize: 45px;
   --debugBoxSize: 100px;
   --gap: 2px;
 
   --tick: 0.5s;
   --animprops: linear forwards;
-  --header-height: 50px;
 
   --fontFamily: "Rubik", sans-serif;
   --fontSize: 25px;
@@ -17,6 +19,9 @@
 
   --darkModalOverlay: 21, 9, 22;
   --lightModalOverlay: 255, 255, 255;
+
+  --darkStatsOverlay: rgb(19, 19, 21);
+  --lightStatsOverlay: rgb(192, 184, 202);
 
   --darkFont: #eaf1ed;
   --lightFont: #212221;
@@ -32,6 +37,7 @@
   --modalOverlayColor: 21, 9, 22;
   --fontColor: var(--darkFont);
   --appBackgroundColor: var(--darkBackground);
+  --statsOverlay: var(--darkStatsOverlay);
 }
 
 @media screen and (max-width: 350px) {

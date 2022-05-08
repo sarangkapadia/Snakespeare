@@ -11,8 +11,8 @@ export const initLaunchSettings = () => {
       rootStyle.getPropertyValue("--darkModalOverlay").trim()
     );
     root.style.setProperty(
-      "--appBackgroundColor",
-      rootStyle.getPropertyValue("--darkBackground").trim()
+      "--statsOverlay",
+      rootStyle.getPropertyValue("--darkStatsOverlay").trim()
     );
     root.style.setProperty(
       "--fontColor",
@@ -26,6 +26,10 @@ export const initLaunchSettings = () => {
     root.style.setProperty(
       "--modalOverlayColor",
       rootStyle.getPropertyValue("--lightModalOverlay").trim()
+    );
+    root.style.setProperty(
+      "--statsOverlay",
+      rootStyle.getPropertyValue("--lightStatsOverlay").trim()
     );
     root.style.setProperty(
       "--appBackgroundColor",
