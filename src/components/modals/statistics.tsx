@@ -24,16 +24,18 @@ export const Statistics: React.FunctionComponent<IStatisticsProps> = React.memo(
       const shareData = {
         title: "Snakespeare",
         text: `Score: ${currentScore} 
-    80     
-60  🟪
-🟪  🟪  50
-🟪  🟪  🟪`,
+
+🟪 🟪 🟪 ${currentScore + 20}
+🟪 🟪 ${currentScore + 10}
+🟪 ${currentScore + 5}
+
+`,
         url: "https://sarangkapadia.github.io/SnakeBytes/",
       };
       try {
         await navigator.share(shareData);
       } catch (e) {
-        alert(e);
+        console.log(e);
       }
     };
 
@@ -41,6 +43,7 @@ export const Statistics: React.FunctionComponent<IStatisticsProps> = React.memo(
       <div className="statsContainer">
         <div className="worldContainer">
           <div className="overlayContainer">
+            <GraphGrid grid={world.getGrid()} />
             <div className="iconContainer">
               <img
                 className="statsIcon"
@@ -49,12 +52,12 @@ export const Statistics: React.FunctionComponent<IStatisticsProps> = React.memo(
               />
               <div className="iconLabel">World</div>
             </div>
-            <GraphGrid grid={world.getGrid()} />
           </div>
         </div>
 
         <div className="personalContainer">
           <div className="overlayContainer">
+            <GraphGrid grid={personal.getGrid()} />
             <div className="iconContainer">
               <img
                 className="statsIcon"
@@ -63,7 +66,6 @@ export const Statistics: React.FunctionComponent<IStatisticsProps> = React.memo(
               />
               <div className="iconLabel">Me</div>
             </div>
-            <GraphGrid grid={personal.getGrid()} />
           </div>
         </div>
 

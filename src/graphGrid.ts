@@ -6,15 +6,15 @@ export enum GraphRole {
 }
 
 const ScoreIndexs = {
-  silver: { row: 1, col: 1 },
-  gold: { row: 0, col: 2 },
-  bronze: { row: 2, col: 3 },
+  gold: { row: 1, col: 4 },
+  silver: { row: 2, col: 3 },
+  bronze: { row: 3, col: 2 },
 };
 
 const CountryIndexs = {
-  silver: { row: 4, col: 1 },
-  gold: { row: 4, col: 2 },
-  bronze: { row: 4, col: 3 },
+  gold: { row: 1, col: 0 },
+  silver: { row: 2, col: 0 },
+  bronze: { row: 3, col: 0 },
 };
 
 export type IGraphGridValue = number | string | null;
@@ -46,28 +46,28 @@ export class GraphData {
       }
     }
 
-    this.grid[4][1].role =
-      this.grid[4][2].role =
-      this.grid[4][3].role =
+    this.grid[1][0].role =
+      this.grid[2][0].role =
+      this.grid[3][0].role =
         GraphRole.Country;
 
-    this.grid[4][1].value =
-      this.grid[4][2].value =
-      this.grid[4][3].value =
+    this.grid[1][0].value =
+      this.grid[2][0].value =
+      this.grid[3][0].value =
         "US"; // default value
 
-    this.grid[3][1].role = this.grid[2][1].role = GraphRole.Podium;
-
-    this.grid[3][2].role =
-      this.grid[2][2].role =
+    this.grid[1][1].role =
       this.grid[1][2].role =
+      this.grid[1][3].role =
         GraphRole.Podium;
 
-    this.grid[3][3].role = GraphRole.Podium;
+    this.grid[2][1].role = this.grid[2][2].role = GraphRole.Podium;
 
-    this.grid[0][2].role = GraphRole.Score;
-    this.grid[1][1].role = GraphRole.Score;
+    this.grid[3][1].role = GraphRole.Podium;
+
+    this.grid[1][4].role = GraphRole.Score;
     this.grid[2][3].role = GraphRole.Score;
+    this.grid[3][2].role = GraphRole.Score;
   }
 
   public getGoldData(): IGraphData {

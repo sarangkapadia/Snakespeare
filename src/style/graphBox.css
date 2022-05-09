@@ -15,14 +15,14 @@
 
 .podium {
   background-image: linear-gradient(
-    to top,
+    to right,
     var(--snakeColor) 50%,
     var(--statsOverlay) 50%
   );
 
-  background-size: 100% 200%;
+  background-size: 200%;
 
-  animation: b2t 1s var(--animprops);
+  animation: l2r 1s var(--animprops);
 }
 
 @keyframes showData {
@@ -37,9 +37,11 @@
 .score {
   background-color: var(--scoreColor);
   animation: showData 2s var(--animprops);
+  opacity: 0;
 }
 
 .country {
   background-color: var(--byteColor);
   animation: showData 2s var(--animprops);
+  opacity: 0;
 }
