@@ -31,7 +31,7 @@ const pointsPerWord = 10;
 let score = 0;
 let currentLetter = "";
 const hintTimeoutMs = 14 * 1000;
-
+const ScoreInstance = Score.getInstance();
 interface IGridContainer {
   modalTitle: string;
   onGameEnd: () => void;
@@ -119,7 +119,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     currentLetter = gridObj.getCurrentBytes().toUpperCase();
     setPlaying(false);
     playingRef.current = false;
-    Score.getInstance().setCurrentScore(score);
+    ScoreInstance.setCurrentScore(score);
 
     // wait 4s, then show the stats dialog, then wait 500ms and clear the game state.
     setTimeout(() => {
@@ -149,13 +149,16 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     const bonus = Math.floor(100 / seconds);
     score += pointsPerWord;
     score += bonus >= 2 ? bonus : 0; //min bonus of 2 is needed.
+
+    ScoreInstance.setCurrentScore(score);
+
     switch (bonus) {
       case 3:
-        setBannerText("Speedy");
+        setBannerText("Brisk !");
         setTimeout(() => setBannerText("Text"), hideBannerAfterMs);
         break;
       case 4:
-        setBannerText("Swift !");
+        setBannerText("Speedy !");
         setTimeout(() => setBannerText("Text"), hideBannerAfterMs);
         break;
       case 5:

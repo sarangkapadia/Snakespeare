@@ -23,12 +23,11 @@ export const Statistics: React.FunctionComponent<IStatisticsProps> = React.memo(
     const handleOnShareClick = async () => {
       const shareData = {
         title: "Snakespeare",
-        text: `Score: ${currentScore} 
+        text: `Current game score: ${currentScore} 
 
 🟪 🟪 🟪 ${currentScore + 20}
 🟪 🟪 ${currentScore + 10}
 🟪 ${currentScore + 5}
-
 `,
         url: "https://sarangkapadia.github.io/SnakeBytes/",
       };
