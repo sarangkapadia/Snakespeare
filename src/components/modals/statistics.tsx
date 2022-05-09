@@ -6,21 +6,24 @@ import { NumberTiles } from "../../wordtiles";
 import { GraphGrid } from "../graphGrid";
 import worldIcon from "../../globe-white-96.png";
 import userIcon from "../../user-white-90.png";
+import { Score } from "../../scores";
 
 interface IStatisticsProps {
   world: GraphData;
   personal: GraphData;
 }
 
+const nav: any = window.navigator;
+
 export const Statistics: React.FunctionComponent<IStatisticsProps> = React.memo(
   (props) => {
     const { world, personal } = props;
+    const currentScore = Score.getInstance().getCurrentScore();
 
     const handleOnShareClick = async () => {
-      alert("On Share Click");
       const shareData = {
         title: "Snakespeare",
-        text: "Current score: 45, highest score: 80",
+        text: `Score: ${currentScore}, Highest: 80`,
         url: "https://sarangkapadia.github.io/SnakeBytes/",
       };
       try {
@@ -61,8 +64,10 @@ export const Statistics: React.FunctionComponent<IStatisticsProps> = React.memo(
         </div>
 
         <div className="footerContainer">
-          <NumberTiles score={45} />
-          <Button label={"Share"} onClick={handleOnShareClick}></Button>
+          <NumberTiles score={currentScore} />
+          {nav.canShare ? (
+            <Button label={"Share"} onClick={handleOnShareClick}></Button>
+          ) : null}
         </div>
       </div>
     );

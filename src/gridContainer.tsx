@@ -8,6 +8,7 @@ import { DebugGrid } from "./debug/debugGrid";
 import "./style/gridContainer.css";
 import { WordTiles } from "./wordtiles";
 import { Banner } from "./banner";
+import { Score } from "./scores";
 
 const showBannerAfterMs = 7000;
 const hideBannerAfterMs = 3200; // if you change this , also change the banner.css animation to Xs
@@ -118,6 +119,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     currentLetter = gridObj.getCurrentBytes().toUpperCase();
     setPlaying(false);
     playingRef.current = false;
+    Score.getInstance().setCurrentScore(score);
 
     // wait 4s, then show the stats dialog, then wait 500ms and clear the game state.
     setTimeout(() => {
