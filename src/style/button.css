@@ -26,7 +26,7 @@
   height: calc((0.75 * var(--boxSize)));
 }
 .buttonContainer {
-  min-width: 100px;
+  min-width: 80px;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;

@@ -25,6 +25,7 @@ export const Statistics: React.FunctionComponent<IStatisticsProps> = React.memo(
                 src={worldIcon}
                 alt={"world scores icon"}
               />
+              <div className="iconLabel">World</div>
             </div>
             <GraphGrid grid={world.getGrid()} />
           </div>
@@ -38,6 +39,7 @@ export const Statistics: React.FunctionComponent<IStatisticsProps> = React.memo(
                 src={userIcon}
                 alt={"user scores icon"}
               />
+              <div className="iconLabel">Me</div>
             </div>
             <GraphGrid grid={personal.getGrid()} />
           </div>

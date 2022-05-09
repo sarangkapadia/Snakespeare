@@ -3,4 +3,5 @@
   grid-template-columns: repeat(var(--graphGridSize), var(--graphBoxSize));
   gap: 4px;
   width: fit-content;
+  padding: 10px;
 }

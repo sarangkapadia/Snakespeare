@@ -27,7 +27,7 @@ const ModalObj = {
   About: { title: "About", children: null },
   Instructions: { title: "How to play", children: instructions },
   Statistics: {
-    title: "Statistics",
+    title: "High Scores",
     children: <Statistics world={worldGraph} personal={personalGraph} />,
   },
   Setting: { title: "Settings", children: <Settings /> },

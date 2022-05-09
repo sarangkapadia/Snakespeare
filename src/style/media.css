@@ -20,8 +20,8 @@
   --darkModalOverlay: 21, 9, 22;
   --lightModalOverlay: 255, 255, 255;
 
-  --darkStatsOverlay: rgb(19, 19, 21);
-  --lightStatsOverlay: rgb(192, 184, 202);
+  --darkStatsOverlay: rgb(64, 68, 80);
+  --lightStatsOverlay: rgb(194, 188, 194);
 
   --darkFont: #eaf1ed;
   --lightFont: #212221;
@@ -72,5 +72,30 @@
   :root {
     --gridSize: 16;
     --boxSize: 45px;
+  }
+}
+
+/* height */
+@media screen and (max-height: 600px) {
+  :root {
+    --graphBoxSize: 25px;
+  }
+}
+
+@media screen and (min-height: 601px) and (max-height: 900px) {
+  :root {
+    --graphBoxSize: 26px;
+  }
+}
+
+@media screen and (min-height: 901px) and (max-height: 1100px) {
+  :root {
+    --graphBoxSize: 32px;
+  }
+}
+
+@media screen and (min-height: 1101px) and (max-height: 2000px) {
+  :root {
+    --graphBoxSize: 35px;
   }
 }
