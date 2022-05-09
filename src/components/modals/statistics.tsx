@@ -15,6 +15,21 @@ interface IStatisticsProps {
 export const Statistics: React.FunctionComponent<IStatisticsProps> = React.memo(
   (props) => {
     const { world, personal } = props;
+
+    const handleOnShareClick = async () => {
+      alert("On Share Click");
+      const shareData = {
+        title: "Snakespeare",
+        text: "Current score: 45, highest score: 80",
+        url: "https://sarangkapadia.github.io/SnakeBytes/",
+      };
+      try {
+        await navigator.share(shareData);
+      } catch (e) {
+        alert(e);
+      }
+    };
+
     return (
       <div className="statsContainer">
         <div className="worldContainer">
@@ -47,10 +62,7 @@ export const Statistics: React.FunctionComponent<IStatisticsProps> = React.memo(
 
         <div className="footerContainer">
           <NumberTiles score={45} />
-          <Button
-            label={"Share"}
-            onClick={() => console.log("share!")}
-          ></Button>
+          <Button label={"Share"} onClick={handleOnShareClick}></Button>
         </div>
       </div>
     );
