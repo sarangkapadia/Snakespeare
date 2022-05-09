@@ -3,18 +3,18 @@
   "name": "Snakespeare",
   "icons": [
     {
-      "src": "snakespeare-dark.svg",
+      "src": "snakespeare-dark.png",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/svg+xml"
+      "type": "image/png"
     },
     {
-      "src": "snakespeare-dark.svg",
-      "type": "image/svg+xml",
+      "src": "snakespeare-dark.png",
+      "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "snakespeare-dark.svg",
-      "type": "image/svg+xml",
+      "src": "snakespeare-dark.png",
+      "type": "image/png",
       "sizes": "512x512"
     }
   ],
