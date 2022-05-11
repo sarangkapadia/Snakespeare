@@ -4,7 +4,6 @@ import { useInterval } from "./useInterval";
 import { GridRenderer } from "./gridRenderer";
 import { useSwipeable } from "react-swipeable";
 import { Grid, Direction, Role } from "./grid";
-import { DebugGrid } from "./debug/debugGrid";
 import "./style/gridContainer.css";
 import { WordTiles } from "./wordtiles";
 import { Banner } from "./banner";
@@ -19,8 +18,8 @@ const rootStyle = getComputedStyle(root);
 const tickCount = rootStyle.getPropertyValue("--tick");
 let tickCountMs = parseFloat(tickCount.substr(0, tickCount.length - 1)) * 1000;
 
-const url: URL = new URL(window.location.href);
-const urlSearchParams = new URLSearchParams(url.search);
+// const url: URL = new URL(window.location.href);
+// const urlSearchParams = new URLSearchParams(url.search);
 const gridObj = new Grid();
 gridObj.initGridData();
 
@@ -42,7 +41,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
   const { modalTitle, onGameEnd } = props;
   const [snakeEnds, setSnakeEnds] = useState(gridObj.getSnake().getSnakeEnds());
   const [playing, setPlaying] = useState(false);
-  const [debug, setDebug] = useState(false);
+  //const [debug, setDebug] = useState(false);
   const [bannerText, setBannerText] = useState("Text");
   const ScoreInstance = Score.getInstance();
 
@@ -447,6 +446,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     setPlaying((playing) => !playing);
   }, [playing, modalTitle, resetHintTimer]);
 
+  /*
   const handleOnDebug = useCallback(() => {
     setDebug((debug) => !debug);
   }, []);
@@ -454,7 +454,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
   const isDebugMode = () => {
     return urlSearchParams.get("debug") === "true";
   };
-
+*/
   const handlers = useSwipeable({
     onSwipedLeft: onSwipedLeft,
     onSwipedRight: onSwipedRight,
@@ -471,16 +471,16 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     <div {...handlers} className={"game"}>
       <div className={"gridContainer"}>
         <Banner text={bannerText} />
-        {debug ? (
+        {/* {debug ? (
           <DebugGrid grid={grid} />
-        ) : (
-          <GridRenderer
-            grid={grid}
-            currentHeadDirection={gridObj.getCurrentHeadDirection()}
-            currentTailDirection={gridObj.getCurrentTailDirection()}
-            currentTailPivot={gridObj.getPivotDirectionOnCurrentTail()}
-          />
-        )}
+        ) : ( */}
+        <GridRenderer
+          grid={grid}
+          currentHeadDirection={gridObj.getCurrentHeadDirection()}
+          currentTailDirection={gridObj.getCurrentTailDirection()}
+          currentTailPivot={gridObj.getPivotDirectionOnCurrentTail()}
+        />
+        {/* )} */}
         <WordTiles bytes={currentLetter} score={score} />
       </div>
 
