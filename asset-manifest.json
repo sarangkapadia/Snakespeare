@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/Snakespeare/static/css/main.ce332900.chunk.css",
-    "main.js": "/Snakespeare/static/js/main.b6e9108e.chunk.js",
-    "main.js.map": "/Snakespeare/static/js/main.b6e9108e.chunk.js.map",
+    "main.css": "/Snakespeare/static/css/main.8a4c39e1.chunk.css",
+    "main.js": "/Snakespeare/static/js/main.663b4f7d.chunk.js",
+    "main.js.map": "/Snakespeare/static/js/main.663b4f7d.chunk.js.map",
     "runtime-main.js": "/Snakespeare/static/js/runtime-main.f3e6931f.js",
     "runtime-main.js.map": "/Snakespeare/static/js/runtime-main.f3e6931f.js.map",
-    "static/js/2.ff52f446.chunk.js": "/Snakespeare/static/js/2.ff52f446.chunk.js",
-    "static/js/2.ff52f446.chunk.js.map": "/Snakespeare/static/js/2.ff52f446.chunk.js.map",
+    "static/js/2.9c4c5517.chunk.js": "/Snakespeare/static/js/2.9c4c5517.chunk.js",
+    "static/js/2.9c4c5517.chunk.js.map": "/Snakespeare/static/js/2.9c4c5517.chunk.js.map",
     "index.html": "/Snakespeare/index.html",
-    "static/css/main.ce332900.chunk.css.map": "/Snakespeare/static/css/main.ce332900.chunk.css.map",
-    "static/js/2.ff52f446.chunk.js.LICENSE.txt": "/Snakespeare/static/js/2.ff52f446.chunk.js.LICENSE.txt",
+    "static/css/main.8a4c39e1.chunk.css.map": "/Snakespeare/static/css/main.8a4c39e1.chunk.css.map",
+    "static/js/2.9c4c5517.chunk.js.LICENSE.txt": "/Snakespeare/static/js/2.9c4c5517.chunk.js.LICENSE.txt",
     "static/media/share.5d1c5272.svg": "/Snakespeare/static/media/share.5d1c5272.svg",
     "static/media/snakeSmile.c4c253be.gif": "/Snakespeare/static/media/snakeSmile.c4c253be.gif"
   },
   "entrypoints": [
     "static/js/runtime-main.f3e6931f.js",
-    "static/js/2.ff52f446.chunk.js",
-    "static/css/main.ce332900.chunk.css",
-    "static/js/main.b6e9108e.chunk.js"
+    "static/js/2.9c4c5517.chunk.js",
+    "static/css/main.8a4c39e1.chunk.css",
+    "static/js/main.663b4f7d.chunk.js"
   ]
 }
