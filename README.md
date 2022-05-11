@@ -1,6 +1,6 @@
 # Snakespeare
 
-Snakespeare - A snake who is great with words!
+Snakespeare - A snake who is great with words!!
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
