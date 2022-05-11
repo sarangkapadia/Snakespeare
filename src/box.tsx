@@ -34,10 +34,11 @@ export const Box: React.FunctionComponent<IBoxProps> = React.memo((props) => {
       case Direction.Right:
         return "l2r";
       case Direction.None:
-        alert("this should never hit");
+        console.log("this should never hit");
         return "none";
       default:
-        throw new Error("invalid dir");
+        console.log("invalid dir");
+        return "none";
     }
   };
 
@@ -69,7 +70,8 @@ export const Box: React.FunctionComponent<IBoxProps> = React.memo((props) => {
       case Role.CorrectByte:
         return "correctByte";
       default:
-        throw new Error("invalid role");
+        console.log("invalid role");
+        return "box";
     }
   };
 

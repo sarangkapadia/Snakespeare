@@ -13,7 +13,7 @@ const getClassName = (role: GraphRole): string => {
     case GraphRole.Score:
       return "basicBox score";
     default:
-      alert("Invalid GraphRole");
+      console.log("Invalid GraphRole");
       return "basicBox empty";
   }
 };

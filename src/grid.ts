@@ -152,9 +152,8 @@ export class Grid {
         this.grid[i][tail.col].role = Role.Body;
         this.grid[i][tail.col].role = Role.Body;
       }
-    } else {
-      throw new Error("Snake init invalid");
     }
+
     this.setRandomBytePositions();
   }
 
@@ -192,7 +191,8 @@ export class Grid {
               }
               break;
             default:
-              throw new Error("Head direction default!");
+              console.log("Error: Head direction default");
+              break;
           }
 
           this.grid[randomRow][randomCol].role = Role.Byte;

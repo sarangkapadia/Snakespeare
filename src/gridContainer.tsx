@@ -349,7 +349,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
       }
       default: {
         const error = "Invalid tail direction!";
-        alert(error);
+        console.log(error);
         resetGameToStart();
         return;
       }

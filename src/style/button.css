@@ -20,6 +20,31 @@
   animation: shimmer 4s ease-in-out alternate infinite;
   border: none;
 }
+
+@keyframes onClick {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0.5;
+  }
+  ,
+  50% {
+    opacity: 0.5;
+  }
+  ,
+  75% {
+    opacity: 0.5;
+  }
+  ,
+  100% {
+    opacity: 1;
+  }
+}
+
+.button:focus {
+  animation: onClick 1s ease-in-out forwards;
+}
 .shareLogo {
   padding: 0px 5px 0px 5px;
   width: calc((0.75 * var(--boxSize)));
