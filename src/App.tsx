@@ -6,21 +6,8 @@ import { Header } from "./header";
 import { ModalPage } from "./components/modals/modalPage";
 import { instructions } from "./components/modals/instructions";
 import { Settings } from "./components/modals/settings";
-import { initLaunchSettings } from "./launchSettings";
+import { initCountry, initLaunchSettings } from "./launchSettings";
 import { Statistics } from "./components/modals/statistics";
-import { GraphData } from "./graphGrid";
-
-// temp code
-const worldGraph = new GraphData();
-worldGraph.setSilverData({ score: 50, country: "UK" });
-worldGraph.setGoldData({ score: 80, country: "IN" });
-worldGraph.setBronzeData({ score: 30, country: "FR" });
-
-const personalGraph = new GraphData();
-personalGraph.setSilverData({ score: 35, country: "JP" });
-personalGraph.setGoldData({ score: 75, country: "CH" });
-personalGraph.setBronzeData({ score: 25, country: "CA" });
-// temp code
 
 const ModalObj = {
   None: { title: "", children: null },
@@ -28,12 +15,13 @@ const ModalObj = {
   Instructions: { title: "How to play", children: instructions },
   Statistics: {
     title: "High Scores",
-    children: <Statistics world={worldGraph} personal={personalGraph} />,
+    children: <Statistics />,
   },
   Setting: { title: "Settings", children: <Settings /> },
 };
 
 const isFirstVisit = initLaunchSettings();
+if (isFirstVisit) initCountry();
 
 export const App: React.FunctionComponent = () => {
   const [modalType, setModalType] = useState<{

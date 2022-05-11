@@ -1,3 +1,34 @@
+import { IGraphData } from "./graphGrid";
+import { getCountryCode } from "./scores";
+
+export interface IScore {
+  gold: IGraphData;
+  silver: IGraphData;
+  bronze: IGraphData;
+}
+const personalScores: IScore = {
+  gold: {
+    score: 0,
+    country: "--",
+  },
+  silver: {
+    score: 0,
+    country: "--",
+  },
+  bronze: {
+    score: 0,
+    country: "--",
+  },
+};
+
+export const initCountry = async () => {
+  const flag = await getCountryCode();
+  localStorage.setItem(
+    "myCountry",
+    JSON.stringify({ flag: flag, date: Date.now() })
+  );
+};
+
 export const initLaunchSettings = () => {
   const root = document.querySelector<HTMLElement>(":root")!;
   const rootStyle = getComputedStyle(root);
@@ -47,8 +78,11 @@ export const initLaunchSettings = () => {
 
   const isFirst = localStorage.getItem("isFirst");
   const isFirstVisit: boolean = isFirst ? JSON.parse(isFirst) : true;
-  if (isFirstVisit)
+  if (isFirstVisit) {
+    console.log("first visit");
     localStorage.setItem("isFirst", JSON.stringify(!isFirstVisit));
+    localStorage.setItem("personalScores", JSON.stringify(personalScores));
+  }
 
   return isFirstVisit;
 };

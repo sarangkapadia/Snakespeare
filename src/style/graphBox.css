@@ -41,7 +41,8 @@
 }
 
 .country {
-  background-color: var(--byteColor);
+  background-color: var(--darkFont);
   animation: showData 2s var(--animprops);
   opacity: 0;
+  font-size: 120%;
 }
