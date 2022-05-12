@@ -23,7 +23,7 @@ export const Statistics: React.FunctionComponent = React.memo((props) => {
 🟪 🟪 ${personal.getSilverData().score}
 🟪 ${personal.getBronzeData().score}
 `,
-      url: "https://sarangkapadia.github.io/Snakespeare/",
+      url: "https://snakespeare.netlify.app",
     };
     try {
       await navigator.share(shareData);
