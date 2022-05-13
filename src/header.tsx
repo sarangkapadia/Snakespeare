@@ -19,6 +19,7 @@ interface IHeader {
   onClickInstructions: () => void;
   onClickSettings: () => void;
   onClickStatistics: () => void;
+  onClickAbout: () => void;
 }
 
 export const Header: React.FunctionComponent<IHeader> = (props) => {
@@ -34,7 +35,12 @@ export const Header: React.FunctionComponent<IHeader> = (props) => {
     <ThemeProvider theme={outerTheme}>
       <div className={"header"}>
         <div className={"menuleft"}>
-          <IconButton aria-label="Menu" color="primary" size="small">
+          <IconButton
+            aria-label="menu"
+            color="primary"
+            size="small"
+            onClick={props.onClickAbout}
+          >
             <MenuRounded />
           </IconButton>
           <IconButton

@@ -12,10 +12,11 @@ import {
   initLaunchSettings,
 } from "./launchSettings";
 import { Statistics } from "./components/modals/statistics";
+import { About } from "./components/modals/about";
 
 const ModalObj = {
   None: { title: "", children: null },
-  About: { title: "About", children: null },
+  About: { title: "About", children: <About /> },
   Instructions: { title: "How to play", children: instructions },
   Statistics: {
     title: "High Scores",
@@ -33,6 +34,9 @@ export const App: React.FunctionComponent = () => {
     children: JSX.Element | null;
   }>(isFirstVisit ? ModalObj.Instructions : ModalObj.None);
 
+  const onClickAbout = () => {
+    setModalType(ModalObj.About);
+  };
   const onClickInstructions = () => {
     setModalType(ModalObj.Instructions);
   };
@@ -58,6 +62,7 @@ export const App: React.FunctionComponent = () => {
         onClickInstructions={onClickInstructions}
         onClickSettings={onClickSettings}
         onClickStatistics={onClickStatistics}
+        onClickAbout={onClickAbout}
       />
       <ModalPage
         onClose={onCloseModal}

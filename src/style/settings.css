@@ -1,5 +1,6 @@
 .settingsContainer {
   width: 100%;
+  max-width: 500px;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
