@@ -6,7 +6,11 @@ import { Header } from "./header";
 import { ModalPage } from "./components/modals/modalPage";
 import { instructions } from "./components/modals/instructions";
 import { Settings } from "./components/modals/settings";
-import { initCountry, initLaunchSettings } from "./launchSettings";
+import {
+  getWorldScores,
+  initCountry,
+  initLaunchSettings,
+} from "./launchSettings";
 import { Statistics } from "./components/modals/statistics";
 
 const ModalObj = {
@@ -35,7 +39,8 @@ export const App: React.FunctionComponent = () => {
   const onClickSettings = () => {
     setModalType(ModalObj.Setting);
   };
-  const onClickStatistics = () => {
+  const onClickStatistics = async () => {
+    await getWorldScores();
     setModalType(ModalObj.Statistics);
   };
 

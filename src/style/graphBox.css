@@ -22,7 +22,7 @@
 
   background-size: 200%;
 
-  animation: l2r 1s var(--animprops);
+  animation: l2r 0.5s var(--animprops);
 }
 
 @keyframes showData {
@@ -36,13 +36,13 @@
 
 .score {
   background-color: var(--scoreColor);
-  animation: showData 2s var(--animprops);
+  animation: showData 1s var(--animprops);
   opacity: 0;
 }
 
 .country {
   background-color: var(--darkFont);
-  animation: showData 2s var(--animprops);
+  animation: showData 1s var(--animprops);
   opacity: 0;
   font-size: 120%;
 }

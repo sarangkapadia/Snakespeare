@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-//import { Button } from "./button";
 import { useInterval } from "./useInterval";
 import { GridRenderer } from "./gridRenderer";
 import { useSwipeable } from "react-swipeable";
@@ -18,8 +17,6 @@ const rootStyle = getComputedStyle(root);
 const tickCount = rootStyle.getPropertyValue("--tick");
 let tickCountMs = parseFloat(tickCount.substr(0, tickCount.length - 1)) * 1000;
 
-// const url: URL = new URL(window.location.href);
-// const urlSearchParams = new URLSearchParams(url.search);
 const gridObj = new Grid();
 gridObj.initGridData();
 
@@ -41,9 +38,8 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
   const { modalTitle, onGameEnd } = props;
   const [snakeEnds, setSnakeEnds] = useState(gridObj.getSnake().getSnakeEnds());
   const [playing, setPlaying] = useState(false);
-  //const [debug, setDebug] = useState(false);
+
   const [bannerText, setBannerText] = useState("Text");
-  const ScoreInstance = Score.getInstance();
 
   let movePending = false;
   const hints = localStorage.getItem("hints");
@@ -119,9 +115,9 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     currentLetter = gridObj.getCurrentBytes().toUpperCase();
     setPlaying(false);
     playingRef.current = false;
-    ScoreInstance.setCurrentScore(score, false);
+    Score.getInstance().setCurrentScore(score, false);
 
-    // wait 4s, then show the stats dialog, then wait 500ms and clear the game state.
+    // wait 3s, then show the stats dialog, then wait 500ms and clear the game state.
     setTimeout(() => {
       onGameEnd(); //this shows the stats
       setTimeout(() => {
@@ -150,7 +146,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     score += pointsPerWord;
     score += bonus >= 2 ? bonus : 0; //min bonus of 2 is needed.
 
-    ScoreInstance.setCurrentScore(score);
+    Score.getInstance().setCurrentScore(score);
 
     switch (bonus) {
       case 3:
@@ -446,23 +442,11 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     setPlaying((playing) => !playing);
   }, [playing, modalTitle, resetHintTimer]);
 
-  /*
-  const handleOnDebug = useCallback(() => {
-    setDebug((debug) => !debug);
-  }, []);
-
-  const isDebugMode = () => {
-    return urlSearchParams.get("debug") === "true";
-  };
-*/
   const handlers = useSwipeable({
     onSwipedLeft: onSwipedLeft,
     onSwipedRight: onSwipedRight,
     onSwipedDown: onSwipedDown,
     onSwipedUp: onSwipedUp,
-    // onTap: () => {
-    //   console.log("swallow tap");
-    // },
     preventDefaultTouchmoveEvent: true,
     trackMouse: true,
   });
@@ -471,35 +455,16 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     <div {...handlers} className={"game"}>
       <div className={"gridContainer"}>
         <Banner text={bannerText} />
-        {/* {debug ? (
-          <DebugGrid grid={grid} />
-        ) : ( */}
+
         <GridRenderer
           grid={grid}
           currentHeadDirection={gridObj.getCurrentHeadDirection()}
           currentTailDirection={gridObj.getCurrentTailDirection()}
           currentTailPivot={gridObj.getPivotDirectionOnCurrentTail()}
         />
-        {/* )} */}
+
         <WordTiles bytes={currentLetter} score={score} />
       </div>
-
-      {/* {
-        <div className={"appUtils"}>
-          {
-            <Button
-              onClick={handleOnPlayPauseGame}
-              label={playing ? "Pause" : "Play"}
-            />
-          }
-          {isDebugMode() ? (
-            <Button
-              onClick={handleOnDebug}
-              label={debug ? "Debug Off" : "Debug On"}
-            />
-          ) : null}
-        </div>
-      }  */}
     </div>
   );
 };

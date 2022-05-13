@@ -11,7 +11,7 @@ const nav: any = window.navigator;
 
 export const Statistics: React.FunctionComponent = React.memo((props) => {
   const currentScore = Score.getInstance().getCurrentScore();
-  const world = Score.getInstance().getMyScoresGraph(); // <----- fix
+  const world = Score.getInstance().getWorldScoresGraph();
   const personal = Score.getInstance().getMyScoresGraph();
 
   const handleOnShareClick = async () => {

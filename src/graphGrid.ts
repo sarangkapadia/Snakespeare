@@ -54,7 +54,7 @@ export class GraphData {
     this.grid[1][0].value =
       this.grid[2][0].value =
       this.grid[3][0].value =
-        "US"; // default value
+        "🇺🇸"; // default value
 
     this.grid[1][1].role =
       this.grid[1][2].role =
