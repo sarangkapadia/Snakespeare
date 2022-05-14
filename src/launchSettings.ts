@@ -83,7 +83,7 @@ export const initLaunchSettings = () => {
   const rootStyle = getComputedStyle(root);
 
   const darkMode = localStorage.getItem("darkMode");
-  const darkModeChecked = darkMode ? JSON.parse(darkMode) : true; // default turn on dark mode
+  const darkModeChecked = darkMode ? JSON.parse(darkMode) : false; // default turn on dark mode
 
   if (darkModeChecked) {
     root.style.setProperty(
@@ -131,6 +131,7 @@ export const initLaunchSettings = () => {
     console.log("first visit");
     localStorage.setItem("isFirst", JSON.stringify(!isFirstVisit));
     localStorage.setItem("personalScores", JSON.stringify(personalScores));
+    localStorage.setItem("darkMode", JSON.stringify(false));
   }
 
   return isFirstVisit;

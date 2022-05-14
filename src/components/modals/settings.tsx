@@ -35,7 +35,7 @@ export const Settings: React.FunctionComponent = () => {
     hints ? JSON.parse(hints) : true
   );
   const [darkModeChecked, setDarkModeChecked] = useState(
-    darkMode ? JSON.parse(darkMode) : true
+    darkMode ? JSON.parse(darkMode) : false
   );
   const [progressiveSpeedChecked, setProgressiveSpeedChecked] = useState(
     progressiveSpeed ? JSON.parse(progressiveSpeed) : true

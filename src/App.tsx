@@ -4,7 +4,7 @@ import "./style/App.css";
 import { GridContainer } from "./gridContainer";
 import { Header } from "./header";
 import { ModalPage } from "./components/modals/modalPage";
-import { instructions } from "./components/modals/instructions";
+import { Instructions } from "./components/modals/instructions";
 import { Settings } from "./components/modals/settings";
 import {
   getWorldScores,
@@ -17,7 +17,7 @@ import { About } from "./components/modals/about";
 const ModalObj = {
   None: { title: "", children: null },
   About: { title: "About", children: <About /> },
-  Instructions: { title: "How to play", children: instructions },
+  Instructions: { title: "How to play", children: <Instructions /> },
   Statistics: {
     title: "High Scores",
     children: <Statistics />,

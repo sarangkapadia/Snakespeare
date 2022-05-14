@@ -10,30 +10,31 @@ export const About: React.FunctionComponent = () => {
       <div className="aboutChunkContainer">
         <div className="aboutBlock aboutBlockPink" />
         <div className="aboutChunkText">
-          A fun twist on the popular game of snake. Solve a world puzzle while
-          keeping your snake alive and <i>slithering.</i>
+          A fun twist on the popular game of snake. The goal is to solve word
+          puzzles while keeping your snake alive and <i>slithering.</i>
         </div>
       </div>
       <div className="aboutChunkContainer">
         <div className="aboutBlock aboutBlockPurple" />
         <div className="aboutChunkText">
-          In <i>settings</i>, hints are ON to help you if you are stuck, and
-          progressive speeds so you can start slow before transitioning to
-          higher speeds.
+          <b>Settings:</b> Hints are default ON to help you if you are stuck,
+          and progressive speed ensures your snake starts slow before
+          transitioning to higher speeds.
         </div>
       </div>
       <div className="aboutChunkContainer">
         <div className="aboutBlock aboutBlockGreen" />
         <div className="aboutChunkText">
-          The <i>high scores</i> dialog, shows you not only your own top scores,
-          but also top world wide scores. Feel free to <i>share</i> your results
-          with friends and family!
+          <b>High scores:</b> Shows you your top scores, and also top world wide
+          scores. It also allows you to <i>share</i> your results with friends
+          and family!
         </div>
       </div>
       <div className="aboutChunkContainer">
         <div className="aboutBlock aboutBlockPink" />
         <div className="aboutChunkText">
-          {`I hope you will enjoy playing the game, as much as I did creating it,
+          <b>Feedback:</b>
+          {` I hope you will enjoy playing the game, as much as I did creating it,
           and would love to hear your feedback over `}
           <a
             className="aboutLink"

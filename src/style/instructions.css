@@ -1,5 +1,23 @@
 p {
   font-family: var(--fontFamily);
   color: var(--fontColor);
-  margin: 10px;
+  margin: 5px;
+}
+
+.demoVideo {
+  max-width: 60%;
+  max-height: 40%;
+  margin: 5px 10px;
+  border-radius: 5px;
+  border: 2px solid;
+  border-color: var(--snakeColor);
+}
+
+.instructionsContainer {
+  width: 100%;
+  height: calc(100% - var(--header-height));
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-evenly;
+  align-items: center;
 }
