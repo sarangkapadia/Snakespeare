@@ -13,6 +13,10 @@ p {
   border-color: var(--snakeColor);
 }
 
+video::-internal-media-controls-overlay-cast-button {
+  display: none;
+}
+
 .instructionsContainer {
   width: 100%;
   height: calc(100% - var(--header-height));

@@ -11,13 +11,13 @@ export const About: React.FunctionComponent = () => {
         <div className="aboutBlock aboutBlockPink" />
         <div className="aboutChunkText">
           A fun twist on the popular game of snake. The goal is to solve word
-          puzzles while keeping your snake alive and <i>slithering.</i>
+          puzzles while keeping your snake alive and slithering.
         </div>
       </div>
       <div className="aboutChunkContainer">
         <div className="aboutBlock aboutBlockPurple" />
         <div className="aboutChunkText">
-          <b>Settings:</b> Hints are default ON to help you if you are stuck,
+          <b>SETTINGS:</b> Hints are default ON to help you if you are stuck,
           and progressive speed ensures your snake starts slow before
           transitioning to higher speeds.
         </div>
@@ -25,15 +25,15 @@ export const About: React.FunctionComponent = () => {
       <div className="aboutChunkContainer">
         <div className="aboutBlock aboutBlockGreen" />
         <div className="aboutChunkText">
-          <b>High scores:</b> Shows you your top scores, and also top world wide
-          scores. It also allows you to <i>share</i> your results with friends
-          and family!
+          <b>HIGH SCORES:</b> Shows you your top scores, and also top world wide
+          scores. It also allows you to share your results with friends and
+          family!
         </div>
       </div>
       <div className="aboutChunkContainer">
         <div className="aboutBlock aboutBlockPink" />
         <div className="aboutChunkText">
-          <b>Feedback:</b>
+          <b>FEEDBACK:</b>
           {` I hope you will enjoy playing the game, as much as I did creating it,
           and would love to hear your feedback over `}
           <a
