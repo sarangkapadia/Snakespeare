@@ -7,26 +7,26 @@ export const Instructions: React.FunctionComponent = () => {
   return (
     <div className="instructionsContainer">
       <p>
-        <b>START:</b> Swipe anywhere on the screen to start the game. Swipe up,
+        <b>Start:</b> Swipe anywhere on the screen to start the game. Swipe up,
         down, left or right to steer the snake in the desired direction.
       </p>
 
       <p>
-        <b>GOAL:</b> Capture the randomly placed letters in the correct order to
+        <b>Goal:</b> Capture the randomly placed letters in the correct order to
         form a 5 letter word.
       </p>
 
       <p>
-        <b>SCORE:</b> 10 points for every word solved + a time bonus for faster
-        solutions.
+        <b>Score:</b> 10 points for every word solved + bonus points for solving
+        speed.
       </p>
 
       <p>
-        <b>END:</b> The game ends when the snake's head collides into itself, OR
+        <b>End:</b> The game ends when the snake's head collides into itself, OR
         if it captures a letter in the incorrect order.
       </p>
 
-      <video className="demoVideo" loop muted autoPlay>
+      <video className="demoVideo" loop muted autoPlay preload={"auto"}>
         <source
           src={darkModeChecked ? "snake_dark.mp4" : "snake_light.mp4"}
           type={"video/mp4"}

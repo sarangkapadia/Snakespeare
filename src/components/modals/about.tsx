@@ -1,4 +1,11 @@
 import "../../style/about.css";
+import { Splash } from "../splashScreen";
+import {
+  SettingsRounded,
+  GamesRounded,
+  EmailRounded,
+  LeaderboardRounded,
+} from "@mui/icons-material";
 
 export const About: React.FunctionComponent = () => {
   return (
@@ -8,34 +15,39 @@ export const About: React.FunctionComponent = () => {
         <div className="aboutSubtitle">A snake who is good with words!</div>
       </div>
       <div className="aboutChunkContainer">
-        <div className="aboutBlock aboutBlockPink" />
+        <div className="aboutBlock">
+          <GamesRounded color={"inherit"} fontSize={"large"} />
+        </div>
         <div className="aboutChunkText">
-          A fun twist on the popular game of snake. The goal is to solve word
-          puzzles while keeping your snake alive and slithering.
+          A fun twist on the popular game of snake. The goal is to solve as many
+          word puzzles while carefully navigating your snake.
         </div>
       </div>
       <div className="aboutChunkContainer">
-        <div className="aboutBlock aboutBlockPurple" />
+        <div className="aboutBlock">
+          <SettingsRounded color={"inherit"} fontSize={"large"} />
+        </div>
         <div className="aboutChunkText">
-          <b>SETTINGS:</b> Hints are default ON to help you if you are stuck,
-          and progressive speed ensures your snake starts slow before
-          transitioning to higher speeds.
+          Hints are ON by default. Progressive speeds are also ON by default, so
+          that your snake starts slow at first, and quickens as you improve.
         </div>
       </div>
       <div className="aboutChunkContainer">
-        <div className="aboutBlock aboutBlockGreen" />
+        <div className="aboutBlock">
+          <LeaderboardRounded color={"inherit"} fontSize={"large"} />
+        </div>
         <div className="aboutChunkText">
-          <b>HIGH SCORES:</b> Shows you your top scores, and also top world wide
-          scores. It also allows you to share your results with friends and
-          family!
+          Shows the top 3 scores around the world as well as your personal
+          bests. Don't forget to share them with your friends!
         </div>
       </div>
       <div className="aboutChunkContainer">
-        <div className="aboutBlock aboutBlockPink" />
+        <div className="aboutBlock">
+          <EmailRounded color={"inherit"} fontSize={"large"} />
+        </div>
         <div className="aboutChunkText">
-          <b>FEEDBACK:</b>
-          {` I hope you will enjoy playing the game, as much as I did creating it,
-          and would love to hear your feedback over `}
+          {` I hope you enjoy playing the game, as much as I did creating it. 
+          I'd love to hear your feedback via `}
           <a
             className="aboutLink"
             href="mailto:snakespeare.game@gmail.com?subject=Snakespeare%20Feedback&amp;body= :-) What I liked :%0A%0A:-( What could improve :"
@@ -45,6 +57,7 @@ export const About: React.FunctionComponent = () => {
           </a>
         </div>
       </div>
+      <Splash noTitle={true} />
     </div>
   );
 };

@@ -1,7 +1,7 @@
 .aboutContainer {
   display: flex;
   flex-flow: column nowrap;
-  height: 70%;
+  height: 100vh;
   width: 100%;
   max-width: 500px;
   font-family: var(--fontFamily);
@@ -9,6 +9,7 @@
   align-items: center;
   justify-content: space-around;
   padding: 10px;
+  font-size: 2vh;
 }
 
 .aboutTitle {
@@ -22,6 +23,9 @@
   width: 50px;
   height: 50px;
   border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .aboutBlockPink {
@@ -39,8 +43,8 @@
 .aboutChunkContainer {
   display: flex;
   justify-content: space-between;
-  margin: 5px;
-  padding: 2px;
+  margin: 10px;
+  max-height: fit-content;
   max-height: fit-content;
 }
 

@@ -1,7 +1,7 @@
 p {
   font-family: var(--fontFamily);
   color: var(--fontColor);
-  margin: 5px;
+  margin: 5px 10px;
 }
 
 .demoVideo {
@@ -24,4 +24,5 @@ video::-internal-media-controls-overlay-cast-button {
   flex-flow: column nowrap;
   justify-content: space-evenly;
   align-items: center;
+  font-size: 2vh;
 }

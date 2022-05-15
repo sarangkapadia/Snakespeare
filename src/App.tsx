@@ -39,8 +39,9 @@ export const App: React.FunctionComponent = () => {
 
   useEffect(() => {
     setLoading(true);
-    setTimeout(() => setLoading(false), 2000);
+    setTimeout(() => setLoading(false), 1500);
   }, []);
+
   const onClickAbout = () => {
     setModalType(ModalObj.About);
   };
@@ -64,7 +65,7 @@ export const App: React.FunctionComponent = () => {
     modalType.title === ModalObj.Statistics.title;
 
   return loading ? (
-    <Splash />
+    <Splash noTitle={false} />
   ) : (
     <div className={"appContainer"}>
       <Header
