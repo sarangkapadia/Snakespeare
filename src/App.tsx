@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./style/App.css";
 
 import { GridContainer } from "./gridContainer";
@@ -13,6 +13,7 @@ import {
 } from "./launchSettings";
 import { Statistics } from "./components/modals/statistics";
 import { About } from "./components/modals/about";
+import { Splash } from "./components/splashScreen";
 
 const ModalObj = {
   None: { title: "", children: null },
@@ -34,6 +35,12 @@ export const App: React.FunctionComponent = () => {
     children: JSX.Element | null;
   }>(isFirstVisit ? ModalObj.Instructions : ModalObj.None);
 
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => setLoading(false), 2000);
+  }, []);
   const onClickAbout = () => {
     setModalType(ModalObj.About);
   };
@@ -56,7 +63,9 @@ export const App: React.FunctionComponent = () => {
     modalType.title === ModalObj.Instructions.title ||
     modalType.title === ModalObj.Statistics.title;
 
-  return (
+  return loading ? (
+    <Splash />
+  ) : (
     <div className={"appContainer"}>
       <Header
         onClickInstructions={onClickInstructions}
