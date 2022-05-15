@@ -83,7 +83,7 @@ export const initLaunchSettings = () => {
   const rootStyle = getComputedStyle(root);
 
   const darkMode = localStorage.getItem("darkMode");
-  const darkModeChecked = darkMode ? JSON.parse(darkMode) : false; // default turn on dark mode
+  const darkModeChecked = darkMode ? JSON.parse(darkMode) : false; // default turn off dark mode
 
   if (darkModeChecked) {
     root.style.setProperty(

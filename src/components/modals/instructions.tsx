@@ -2,7 +2,7 @@ import "../../style/instructions.css";
 
 export const Instructions: React.FunctionComponent = () => {
   const darkMode = localStorage.getItem("darkMode");
-  const darkModeChecked = darkMode ? JSON.parse(darkMode) : true; // default turn on dark mode
+  const darkModeChecked = darkMode ? JSON.parse(darkMode) : false; // default turn off dark mode
 
   return (
     <div className="instructionsContainer">
