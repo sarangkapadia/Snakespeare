@@ -26,7 +26,14 @@ export const Instructions: React.FunctionComponent = () => {
         if it captures a letter in the incorrect order.
       </p>
 
-      <video className="demoVideo" loop muted autoPlay preload={"auto"}>
+      <video
+        className="demoVideo"
+        loop
+        muted
+        autoPlay
+        preload={"auto"}
+        disableRemotePlayback={true}
+      >
         <source
           src={darkModeChecked ? "snake_dark.mp4" : "snake_light.mp4"}
           type={"video/mp4"}
