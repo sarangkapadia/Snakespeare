@@ -154,18 +154,22 @@ export class Grid {
       }
     }
 
-    this.setRandomBytePositions();
+    this.setRandomBytePositions(this.grid[head.row][head.col].direction);
   }
 
   // sprinkles the next word on the grid
-  public setRandomBytePositions() {
+  public setRandomBytePositions(currentHeadDir: Direction) {
     this.currentBytes = this.bytes.getNextWord();
     const { head } = this.snake.getSnakeEnds();
-    const currentHeadDir = this.grid[head.row][head.col].direction;
+
+    const role = this.grid[head.row][head.col].role;
+    if (role !== Role.Head) {
+      console.log("Wrong head dir!, role", role);
+    }
     const delta = 3;
 
     for (let i = 0; i < this.currentBytes.length; i++) {
-      do {
+      while (1) {
         let randomRow = Math.floor(Math.random() * this.gridSize);
         let randomCol = Math.floor(Math.random() * this.gridSize);
 
@@ -173,26 +177,25 @@ export class Grid {
           let horizontalDistance = Math.abs(randomCol - head.col);
           let verticalDistance = Math.abs(randomRow - head.row);
 
-          switch (currentHeadDir) {
-            case Direction.Right:
-            case Direction.Left:
-            case Direction.None:
-              if (horizontalDistance <= delta && randomRow === head.row) {
-                console.log("too close to head, horz");
-                continue;
-              }
-              break;
-
-            case Direction.Up:
-            case Direction.Down:
-              if (verticalDistance <= delta && randomCol === head.col) {
-                console.log("too close to head, vertical");
-                continue;
-              }
-              break;
-            default:
-              console.log("Error: Head direction default");
-              break;
+          if (
+            currentHeadDir === Direction.Right ||
+            currentHeadDir === Direction.Left ||
+            currentHeadDir === Direction.None
+          ) {
+            if (horizontalDistance <= delta && randomRow === head.row) {
+              console.log("too close to head, horz");
+              continue;
+            }
+          } else if (
+            currentHeadDir === Direction.Up ||
+            currentHeadDir === Direction.Down
+          ) {
+            if (verticalDistance <= delta && randomCol === head.col) {
+              console.log("too close to head, vertical");
+              continue;
+            }
+          } else {
+            console.log("Error: Head direction not valid");
           }
 
           this.grid[randomRow][randomCol].role = Role.Byte;
@@ -208,7 +211,7 @@ export class Grid {
         } else {
           console.log("Invalid random position");
         }
-      } while (1);
+      }
     }
   }
 

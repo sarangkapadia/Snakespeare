@@ -49,6 +49,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     ? JSON.parse(progressiveSpeed)
     : "true";
   let hintsTimeOutId: any = useRef(null);
+  let bannerTimeOutId: any = useRef(null);
   let startDate: any = useRef(null);
   let playingRef = useRef(playing);
   // add logic in these to detect game end
@@ -262,7 +263,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
         // new word
         const letterIndex = gridObj.getLetterIndex();
         if (letterIndex === 0) {
-          gridObj.setRandomBytePositions();
+          gridObj.setRandomBytePositions(currentHeadDir);
 
           calculateScore();
           resetHintTimer();
@@ -401,7 +402,8 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
 
   useEffect(() => {
     if (!playing && modalTitle === "" && currentLetter === "") {
-      setTimeout(() => {
+      clearTimeout(bannerTimeOutId.current);
+      bannerTimeOutId.current = setTimeout(() => {
         if (!playingRef.current && modalTitle === "") {
           setBannerText("Swipe anywhere to start");
           setTimeout(() => setBannerText("Text"), hideBannerAfterMs);
