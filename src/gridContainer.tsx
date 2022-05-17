@@ -8,7 +8,7 @@ import { WordTiles } from "./wordtiles";
 import { Banner } from "./banner";
 import { Score } from "./scores";
 
-const showBannerAfterMs = 7000;
+const showBannerAfterMs = 5000;
 const hideBannerAfterMs = 3200; // if you change this , also change the banner.css animation to Xs
 // move this to a useEffect
 const root = document.querySelector(":root")!;
@@ -401,7 +401,8 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
   }, [modalTitle, hintsOn, resetHintTimer]);
 
   useEffect(() => {
-    if (!playing && modalTitle === "" && currentLetter === "") {
+    console.log("in use effect", playing, modalTitle, currentLetter);
+    if (!playing && modalTitle === "") {
       clearTimeout(bannerTimeOutId.current);
       bannerTimeOutId.current = setTimeout(() => {
         if (!playingRef.current && modalTitle === "") {
