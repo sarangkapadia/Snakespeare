@@ -81,6 +81,7 @@ export class Score {
       method: "PUT",
       headers: myHeaders,
       body: newScores,
+      signal: Timeout(3000).signal,
     };
 
     try {
