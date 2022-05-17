@@ -26,7 +26,7 @@ const grid = gridObj.getGrid();
 const pointsPerWord = 10;
 let score = 0;
 let currentLetter = "";
-const hintTimeoutMs = 14 * 1000;
+const hintTimeoutMs = 10 * 1000;
 
 interface IGridContainer {
   modalTitle: string;

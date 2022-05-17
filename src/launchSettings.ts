@@ -25,6 +25,15 @@ const personalScores: IScore = {
   },
 };
 
+export const Timeout = (timeInMS: number) => {
+  let controller = new AbortController();
+  setTimeout(() => {
+    console.log("aborting call ", timeInMS);
+    controller.abort();
+  }, timeInMS);
+  return controller;
+};
+
 // fetches worldScores and puts into localStorage
 export const getWorldScores = async () => {
   const worldScores = localStorage.getItem("worldScores");
@@ -48,22 +57,26 @@ export const getWorldScores = async () => {
     "$2b$10$k/NZNRRra1kD8akN1cw5nu3sxp7RSvLNx7xBlUb5GhDLhGlZbDx5m"
   );
 
+  const url = "https://api.jsonbin.io/v3/b/626b05ce38be296761f98e18/latest";
+
   let requestOptions = {
     method: "GET",
     headers: myHeaders,
+    signal: Timeout(2000).signal,
   };
 
   console.log("Fetching world data");
+
   try {
-    const response = await fetch(
-      "https://api.jsonbin.io/v3/b/626b05ce38be296761f98e18/latest",
-      requestOptions
-    );
+    const response = await fetch(url, requestOptions);
 
     if (response.status === 200) {
+      console.log("response 200");
       const data = await response.json();
       localStorage.setItem("worldScores", JSON.stringify(data));
       localStorage.setItem("worldScoresTimeStamp", JSON.stringify(Date.now()));
+    } else {
+      console.log("response = ", response.status);
     }
   } catch (e) {
     console.log(e);

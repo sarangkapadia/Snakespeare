@@ -1,5 +1,5 @@
 import { GraphData } from "./graphGrid";
-import { getWorldScores, IScore } from "./launchSettings";
+import { getWorldScores, IScore, Timeout } from "./launchSettings";
 
 const days_to_wait = 7;
 
@@ -18,7 +18,7 @@ export const getCountryCode = async (): Promise<string> => {
 
   const url =
     "https://ipgeolocation.abstractapi.com/v1/?api_key=0a280173921d485985d6bb19559927bd";
-  const response = await fetch(url);
+  const response = await fetch(url, { signal: Timeout(2000).signal });
   if (response.status === 200) {
     const data = await response.json();
     const flag = data.flag.emoji;
