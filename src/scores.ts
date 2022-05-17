@@ -174,10 +174,11 @@ export class Score {
 
   public async setCurrentScore(score: number, intermediate: boolean = true) {
     this.currentScore = score;
-    if (intermediate) return;
-
     await getWorldScores();
     this.loadWorldScores();
+
+    if (intermediate) return;
+
     await this.updateMyScore(score);
     await this.updateWorldScore(score);
   }
