@@ -71,7 +71,6 @@ export const getWorldScores = async () => {
     const response = await fetch(url, requestOptions);
 
     if (response.status === 200) {
-      console.log("response 200");
       const data = await response.json();
       localStorage.setItem("worldScores", JSON.stringify(data));
       localStorage.setItem("worldScoresTimeStamp", JSON.stringify(Date.now()));

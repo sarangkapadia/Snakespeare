@@ -5,7 +5,6 @@ export class Bytes {
   private index: number = 0;
 
   public shuffle(array: string[]) {
-    console.log("this should be called only once");
     let currentIndex = array.length;
     let randomIndex;
 

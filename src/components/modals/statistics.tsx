@@ -18,10 +18,11 @@ export const Statistics: React.FunctionComponent = React.memo((props) => {
     const shareData = {
       title: "Snakespeare",
       text: `Current game score: ${currentScore} 
-
+My top scores:
 🟪 🟪 🟪 ${personal.getGoldData().score}
 🟪 🟪 ${personal.getSilverData().score}
 🟪 ${personal.getBronzeData().score}
+
 `,
       url: "https://snakespeare.netlify.app",
     };

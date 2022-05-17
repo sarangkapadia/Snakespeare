@@ -162,14 +162,11 @@ export class Grid {
     this.currentBytes = this.bytes.getNextWord();
     const { head } = this.snake.getSnakeEnds();
 
-    const role = this.grid[head.row][head.col].role;
-    if (role !== Role.Head) {
-      console.log("Wrong head dir!, role", role);
-    }
     const delta = 3;
 
     for (let i = 0; i < this.currentBytes.length; i++) {
       while (1) {
+        // fix this
         let randomRow = Math.floor(Math.random() * this.gridSize);
         let randomCol = Math.floor(Math.random() * this.gridSize);
 
