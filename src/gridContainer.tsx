@@ -186,8 +186,14 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
         root.style.setProperty("--tick", "0.4s");
         tickCountMs = 400;
       } else if (score > 80 && tickCountMs === 400) {
+        root.style.setProperty("--tick", "0.35s");
+        tickCountMs = 350;
+      } else if (score > 100 && tickCountMs === 350) {
         root.style.setProperty("--tick", "0.3s");
         tickCountMs = 300;
+      } else if (score > 120 && tickCountMs === 300) {
+        root.style.setProperty("--tick", "0.25s");
+        tickCountMs = 250;
       }
     }
   };
