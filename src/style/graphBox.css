@@ -38,6 +38,7 @@
   background-color: var(--scoreColor);
   animation: showData 1s var(--animprops);
   opacity: 0;
+  font-size: 90%;
 }
 
 .country {

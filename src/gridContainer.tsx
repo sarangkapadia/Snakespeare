@@ -57,7 +57,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     if (movePending) return;
 
     if (!playing) {
-      handleOnPlayPauseGame();
+      handleOnPlayPauseGame(Direction.Right);
       return;
     }
 
@@ -67,13 +67,12 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     gridObj.setCurrentHeadDirection(Direction.Left);
     gridObj.setPivotOnCurrentHeadDirection(Direction.Left);
     movePending = true;
-    window.navigator.vibrate(50);
   };
 
   const onSwipedRight = () => {
     if (movePending) return;
     if (!playing) {
-      handleOnPlayPauseGame();
+      handleOnPlayPauseGame(Direction.Right);
       return;
     }
     const currentHeadDir = gridObj.getCurrentHeadDirection();
@@ -82,13 +81,13 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     gridObj.setCurrentHeadDirection(Direction.Right);
     gridObj.setPivotOnCurrentHeadDirection(Direction.Right);
     movePending = true;
-    window.navigator.vibrate(50);
   };
 
   const onSwipedUp = () => {
     if (movePending) return;
     if (!playing) {
-      handleOnPlayPauseGame();
+      handleOnPlayPauseGame(Direction.Up);
+      gridObj.setPivotOnCurrentHeadDirection(Direction.Up);
       return;
     }
     const currentHeadDir = gridObj.getCurrentHeadDirection();
@@ -97,13 +96,13 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     gridObj.setCurrentHeadDirection(Direction.Up);
     gridObj.setPivotOnCurrentHeadDirection(Direction.Up);
     movePending = true;
-    window.navigator.vibrate(50);
   };
 
   const onSwipedDown = () => {
     if (movePending) return;
     if (!playing) {
-      handleOnPlayPauseGame();
+      handleOnPlayPauseGame(Direction.Down);
+      gridObj.setPivotOnCurrentHeadDirection(Direction.Down);
       return;
     }
     const currentHeadDir = gridObj.getCurrentHeadDirection();
@@ -113,7 +112,6 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     gridObj.setCurrentHeadDirection(Direction.Down);
     gridObj.setPivotOnCurrentHeadDirection(Direction.Down);
     movePending = true;
-    window.navigator.vibrate(50);
   };
 
   const resetGameToStart = () => {
@@ -121,6 +119,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     setPlaying(false);
     playingRef.current = false;
     Score.getInstance().setCurrentScore(score, false);
+    window.navigator.vibrate(350);
 
     // wait 3s, then show the stats dialog, then wait 500ms and clear the game state.
     setTimeout(() => {
@@ -427,33 +426,36 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     gridObj.setHint();
   };
 
-  const handleOnPlayPauseGame = useCallback(() => {
-    if (modalTitle !== "") {
-      // pause and return
-      setPlaying(false);
-      playingRef.current = false;
-      return;
-    }
-
-    if (!playing) {
-      const currentTailDir = gridObj.getCurrentTailDirection();
-      const currentHeadDir = gridObj.getCurrentHeadDirection();
-      // on play first time
-      if (
-        currentHeadDir === Direction.None &&
-        currentTailDir === Direction.None
-      ) {
-        gridObj.setCurrentTailDirection(Direction.Right);
-        gridObj.setCurrentHeadDirection(Direction.Right);
+  const handleOnPlayPauseGame = useCallback(
+    (initialDir: Direction) => {
+      if (modalTitle !== "") {
+        // pause and return
+        setPlaying(false);
+        playingRef.current = false;
+        return;
       }
-      if (!startDate.current) startDate.current = new Date();
-      resetHintTimer();
-    }
 
-    // here is where we set playing to true
-    playingRef.current = !playing;
-    setPlaying((playing) => !playing);
-  }, [playing, modalTitle, resetHintTimer]);
+      if (!playing) {
+        const currentTailDir = gridObj.getCurrentTailDirection();
+        const currentHeadDir = gridObj.getCurrentHeadDirection();
+        // on play first time
+        if (
+          currentHeadDir === Direction.None &&
+          currentTailDir === Direction.None
+        ) {
+          gridObj.setCurrentTailDirection(Direction.Right);
+          gridObj.setCurrentHeadDirection(initialDir);
+        }
+        if (!startDate.current) startDate.current = new Date();
+        resetHintTimer();
+      }
+
+      // here is where we set playing to true
+      playingRef.current = !playing;
+      setPlaying((playing) => !playing);
+    },
+    [playing, modalTitle, resetHintTimer]
+  );
 
   const handlers = useSwipeable({
     onSwipedLeft: onSwipedLeft,
