@@ -67,6 +67,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     gridObj.setCurrentHeadDirection(Direction.Left);
     gridObj.setPivotOnCurrentHeadDirection(Direction.Left);
     movePending = true;
+    window.navigator.vibrate(50);
   };
 
   const onSwipedRight = () => {
@@ -81,6 +82,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     gridObj.setCurrentHeadDirection(Direction.Right);
     gridObj.setPivotOnCurrentHeadDirection(Direction.Right);
     movePending = true;
+    window.navigator.vibrate(50);
   };
 
   const onSwipedUp = () => {
@@ -95,6 +97,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     gridObj.setCurrentHeadDirection(Direction.Up);
     gridObj.setPivotOnCurrentHeadDirection(Direction.Up);
     movePending = true;
+    window.navigator.vibrate(50);
   };
 
   const onSwipedDown = () => {
@@ -110,6 +113,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     gridObj.setCurrentHeadDirection(Direction.Down);
     gridObj.setPivotOnCurrentHeadDirection(Direction.Down);
     movePending = true;
+    window.navigator.vibrate(50);
   };
 
   const resetGameToStart = () => {
