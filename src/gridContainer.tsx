@@ -57,7 +57,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     if (movePending) return;
 
     if (!playing) {
-      handleOnPlayPauseGame(Direction.Right);
+      handleOnPlayPauseGame(Direction.Left);
       return;
     }
 
@@ -87,7 +87,6 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     if (movePending) return;
     if (!playing) {
       handleOnPlayPauseGame(Direction.Up);
-      gridObj.setPivotOnCurrentHeadDirection(Direction.Up);
       return;
     }
     const currentHeadDir = gridObj.getCurrentHeadDirection();
@@ -102,7 +101,6 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     if (movePending) return;
     if (!playing) {
       handleOnPlayPauseGame(Direction.Down);
-      gridObj.setPivotOnCurrentHeadDirection(Direction.Down);
       return;
     }
     const currentHeadDir = gridObj.getCurrentHeadDirection();
@@ -410,7 +408,6 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
   }, [modalTitle, hintsOn, resetHintTimer]);
 
   useEffect(() => {
-    console.log("in use effect", playing, modalTitle, currentLetter);
     if (!playing && modalTitle === "") {
       clearTimeout(bannerTimeOutId.current);
       bannerTimeOutId.current = setTimeout(() => {
@@ -444,8 +441,13 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
           currentTailDir === Direction.None
         ) {
           gridObj.setCurrentTailDirection(Direction.Right);
-          gridObj.setCurrentHeadDirection(initialDir);
+          gridObj.setCurrentHeadDirection(
+            initialDir === Direction.Left ? Direction.Right : initialDir
+          );
+          if (initialDir === Direction.Up || initialDir === Direction.Down)
+            gridObj.setPivotOnCurrentHeadDirection(initialDir);
         }
+
         if (!startDate.current) startDate.current = new Date();
         resetHintTimer();
       }
