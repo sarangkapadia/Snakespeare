@@ -74,13 +74,13 @@ function registerValidSW(swUrl: string, config?: Config) {
               // At this point, the updated precached content has been fetched,
               // but the previous service worker will still serve the older
               // content until all client tabs are closed.
-              alert(
+              console.log(
                 "New content is available and will be used when all " +
                   "tabs for this page are closed. See https://cra.link/PWA."
               );
 
               if (registration && registration.waiting) {
-                alert("Skip waiting");
+                console.log("Skip waiting");
                 registration.waiting.postMessage({ type: "SKIP_WAITING" });
               }
 
@@ -94,7 +94,7 @@ function registerValidSW(swUrl: string, config?: Config) {
               // At this point, everything has been precached.
               // It's the perfect time to display a
               // "Content is cached for offline use." message.
-              alert("Content is cached for offline use.");
+              console.log("Content is cached for offline use.");
 
               // Execute callback
               if (config && config.onSuccess) {
