@@ -165,7 +165,11 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     setPlaying(false);
     playingRef.current = false;
     Score.getInstance().setCurrentScore(score, false);
-    window.navigator.vibrate(350);
+    try {
+      window.navigator.vibrate(350);
+    } catch (e) {
+      console.log("resetGameToStart - Exception on Vibrate ", e);
+    }
     /*
     balanceObj.balance -= 1;
     console.log(balanceObj);
