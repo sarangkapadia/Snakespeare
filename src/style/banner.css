@@ -43,7 +43,7 @@
 }
 
 .openBanner {
-  animation: showHideBanner linear forwards 3s;
+  animation: showHideBanner linear forwards 4s;
 }
 .closedBanner {
   opacity: 0;

@@ -9,8 +9,8 @@ import { Banner } from "./banner";
 import { Score } from "./scores";
 // import { IGameBalance } from "./launchSettings"; //gameBalanceCheck
 
-const showBannerAfterMs = 5000;
-const hideBannerAfterMs = 3200; // if you change this , also change the banner.css animation to Xs
+const showBannerAfterMs = 1000;
+const hideBannerAfterMs = 4000; // if you change this , also change the banner.css animation to Xs
 // move this to a useEffect
 const root = document.querySelector(":root")!;
 const rootStyle = getComputedStyle(root);
@@ -459,10 +459,11 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
       bannerTimeOutId.current = setTimeout(() => {
         if (
           !playingRef.current &&
-          modalTitle === "" /*&&
+          modalTitle === "" &&
+          currentLetter.length === 0 /*&&
           balanceObj.balance > 0 */ //gameBalanceCheck
         ) {
-          setBannerText("Swipe anywhere to start");
+          setBannerText("Swipe ANYWHERE to start");
           setTimeout(() => setBannerText("Text"), hideBannerAfterMs);
         }
       }, showBannerAfterMs);
