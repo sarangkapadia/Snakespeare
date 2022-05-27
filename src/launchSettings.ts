@@ -8,6 +8,7 @@ export interface IScore {
     bronze: IGraphData;
   };
 }
+
 const personalScores: IScore = {
   record: {
     gold: {
@@ -24,6 +25,11 @@ const personalScores: IScore = {
     },
   },
 };
+/*
+export interface IGameBalance {
+  date: Date;
+  balance: number;
+}*/
 
 export const Timeout = (timeInMS: number) => {
   let controller = new AbortController();
@@ -141,10 +147,67 @@ export const initLaunchSettings = () => {
   const isFirstVisit: boolean = isFirst ? JSON.parse(isFirst) : true;
   if (isFirstVisit) {
     console.log("first visit");
+
     localStorage.setItem("isFirst", JSON.stringify(!isFirstVisit));
     localStorage.setItem("personalScores", JSON.stringify(personalScores));
     localStorage.setItem("darkMode", JSON.stringify(false));
-  }
+    /*
+    const gameBalance: IGameBalance = { date: new Date(), balance: 3 };
+    localStorage.setItem("gameBalance", JSON.stringify(gameBalance));
+    */ //gameBalanceCheck
+  } /*
+  else {
+    // subsequent visit
+
+    // if current date is ahead of the balance.date then we refresh it.
+    const currentDate = new Date();
+    const gameBalance = localStorage.getItem("gameBalance");
+    let balance: IGameBalance;
+    let balanceDate = new Date();
+    if (gameBalance) {
+      balance = JSON.parse(gameBalance);
+      balanceDate = new Date(balance.date);
+    } else {
+      // this will happen for early adopters
+      balance = { date: currentDate, balance: 3 };
+      balanceDate = new Date(currentDate);
+      localStorage.setItem("gameBalance", JSON.stringify(balance));
+      console.log("No gameBalance found , adding one");
+    }
+
+    console.log("Dates to compare : ", currentDate, balanceDate);
+
+    const diff = Math.floor(
+      (currentDate.getTime() - balanceDate.getTime()) / 60000
+    );
+
+    console.log("diff = ", diff);
+
+    console.log(
+      "currentDate.getDate() > balanceDate.getDate()",
+      currentDate.getDate() > balanceDate.getDate()
+    );
+    console.log(
+      "currentDate.getMonth() > balanceDate.getMonth()",
+      currentDate.getMonth() > balanceDate.getMonth()
+    );
+    console.log(
+      "currentDate.getFullYear() > balanceDate.getFullYear()",
+      currentDate.getFullYear() > balanceDate.getFullYear()
+    );
+
+    if (
+      currentDate > balanceDate &&
+      (currentDate.getDate() > balanceDate.getDate() ||
+        currentDate.getMonth() > balanceDate.getMonth() ||
+        currentDate.getFullYear() > balanceDate.getFullYear() ||
+        diff > 15)
+    ) {
+      balance.date = currentDate;
+      balance.balance = 3;
+      localStorage.setItem("gameBalance", JSON.stringify(balance));
+    }
+  }*/
 
   return isFirstVisit;
 };

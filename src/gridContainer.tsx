@@ -7,6 +7,7 @@ import "./style/gridContainer.css";
 import { WordTiles } from "./wordtiles";
 import { Banner } from "./banner";
 import { Score } from "./scores";
+// import { IGameBalance } from "./launchSettings"; //gameBalanceCheck
 
 const showBannerAfterMs = 5000;
 const hideBannerAfterMs = 3200; // if you change this , also change the banner.css animation to Xs
@@ -32,9 +33,20 @@ interface IGridContainer {
   modalTitle: string;
   onGameEnd: () => void;
 }
+
 export const GridContainer: React.FunctionComponent<IGridContainer> = (
   props
 ) => {
+  /* gameBalanceCheck
+  const gameBalance = localStorage.getItem("gameBalance");
+  let balanceObj: IGameBalance;
+  if (gameBalance) {
+    balanceObj = JSON.parse(gameBalance);
+  } else {
+    // default balance, to prevent bugs
+    balanceObj = { date: new Date(), balance: 3 };
+  }
+*/
   const { modalTitle, onGameEnd } = props;
   const [snakeEnds, setSnakeEnds] = useState(gridObj.getSnake().getSnakeEnds());
   const [playing, setPlaying] = useState(false);
@@ -112,31 +124,55 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     movePending = true;
   };
 
+  const resetGame = () => {
+    setTimeout(() => {
+      gridObj.getSnake().resetSnakeEnds();
+      gridObj.resetGrid();
+      gridObj.initGridData();
+      setSnakeEnds(gridObj.getSnake().getSnakeEnds());
+
+      clearTimeout(hintsTimeOutId);
+      startDate.current = null;
+      score = 0;
+      currentLetter = "";
+      tickCountMs =
+        parseFloat(tickCount.substr(0, tickCount.length - 1)) * 1000;
+      const root = document.querySelector<HTMLElement>(":root")!;
+      root.style.setProperty("--tick", "0.5s");
+    }, 500);
+  };
+
+  const showStats = useCallback(
+    (resetBoard: boolean) => {
+      const delayMs = 3000;
+
+      if (!resetBoard) {
+        setBannerText("Daily limit of 3 games reached");
+        setTimeout(() => setBannerText("Text"), 5000);
+      }
+      // wait delay ms, then show the stats dialog, then wait 500ms and clear the game state.
+      setTimeout(() => {
+        onGameEnd(); //this shows the stats
+        // wait 500ms and clear the board
+        if (resetBoard) resetGame();
+      }, delayMs);
+    },
+    [onGameEnd]
+  );
+
   const resetGameToStart = () => {
     currentLetter = gridObj.getCurrentBytes().toUpperCase();
     setPlaying(false);
     playingRef.current = false;
     Score.getInstance().setCurrentScore(score, false);
     window.navigator.vibrate(350);
-
-    // wait 3s, then show the stats dialog, then wait 500ms and clear the game state.
-    setTimeout(() => {
-      onGameEnd(); //this shows the stats
-      setTimeout(() => {
-        gridObj.getSnake().resetSnakeEnds();
-        gridObj.resetGrid();
-        gridObj.initGridData();
-        setSnakeEnds(gridObj.getSnake().getSnakeEnds());
-
-        clearTimeout(hintsTimeOutId);
-        startDate.current = null;
-        score = 0;
-        currentLetter = "";
-        tickCountMs = 500;
-        const root = document.querySelector<HTMLElement>(":root")!;
-        root.style.setProperty("--tick", "0.5s");
-      }, 500);
-    }, 3000);
+    /*
+    balanceObj.balance -= 1;
+    console.log(balanceObj);
+    localStorage.setItem("gameBalance", JSON.stringify(balanceObj));
+    if (balanceObj.balance === 0) showStats(false);
+    else showStats(true);*/
+    showStats(true);
   };
 
   const calculateScore = () => {
@@ -409,15 +445,25 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
 
   useEffect(() => {
     if (!playing && modalTitle === "") {
+      /*
+      if (balanceObj.balance <= 0) {
+        setBannerText("Daily limit of 3 games reached");
+        setTimeout(() => setBannerText("Text"), hideBannerAfterMs);
+      }*/ //gameBalanceCheck
+
       clearTimeout(bannerTimeOutId.current);
       bannerTimeOutId.current = setTimeout(() => {
-        if (!playingRef.current && modalTitle === "") {
+        if (
+          !playingRef.current &&
+          modalTitle === "" /*&&
+          balanceObj.balance > 0 */ //gameBalanceCheck
+        ) {
           setBannerText("Swipe anywhere to start");
           setTimeout(() => setBannerText("Text"), hideBannerAfterMs);
         }
       }, showBannerAfterMs);
     }
-  }, [playing, modalTitle]);
+  }, [playing, modalTitle /*, showStats, balanceObj.balance*/]); //gameBalanceCheck
 
   const onHintTimer = () => {
     gridObj.setHint();
@@ -433,6 +479,13 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
       }
 
       if (!playing) {
+        /*
+        if (balanceObj.balance <= 0) {
+          window.navigator.vibrate(350);
+          showStats(false);
+          return;
+        }*/ //gameBalanceCheck
+
         const currentTailDir = gridObj.getCurrentTailDirection();
         const currentHeadDir = gridObj.getCurrentHeadDirection();
         // on play first time
@@ -456,7 +509,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
       playingRef.current = !playing;
       setPlaying((playing) => !playing);
     },
-    [playing, modalTitle, resetHintTimer]
+    [playing, modalTitle, resetHintTimer /*, showStats ,balanceObj.balance*/] //gameBalanceCheck
   );
 
   const handlers = useSwipeable({
