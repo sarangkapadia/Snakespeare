@@ -517,11 +517,25 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     [playing, modalTitle, resetHintTimer /*, showStats ,balanceObj.balance*/] //gameBalanceCheck
   );
 
+  const onSwipeStart = (swipeEventData: any) => {
+    switch (swipeEventData.dir) {
+      case "Up":
+        onSwipedUp();
+        break;
+      case "Down":
+        onSwipedDown();
+        break;
+      case "Right":
+        onSwipedRight();
+        break;
+      case "Left":
+        onSwipedLeft();
+        break;
+    }
+  };
+
   const handlers = useSwipeable({
-    onSwipedLeft: onSwipedLeft,
-    onSwipedRight: onSwipedRight,
-    onSwipedDown: onSwipedDown,
-    onSwipedUp: onSwipedUp,
+    onSwipeStart: (swipeEventData) => onSwipeStart(swipeEventData),
     preventDefaultTouchmoveEvent: true,
     trackMouse: true,
   });
