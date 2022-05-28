@@ -548,14 +548,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     <div {...handlers} className={"game"}>
       <div className={"gridContainer"}>
         <Banner text={bannerText} />
-
-        <GridRenderer
-          grid={grid}
-          currentHeadDirection={gridObj.getCurrentHeadDirection()}
-          currentTailDirection={gridObj.getCurrentTailDirection()}
-          currentTailPivot={gridObj.getPivotDirectionOnCurrentTail()}
-        />
-
+        <GridRenderer gridObj={gridObj} />
         <WordTiles bytes={currentLetter} score={score} />
       </div>
     </div>

@@ -1,20 +1,21 @@
 import React from "react";
 import { Box } from "./box";
-import { Direction, IGridItem, Role } from "./grid";
+import { Direction, Grid, Role } from "./grid";
 import "./style/grid.css";
 
 interface IGridRendererProps {
-  grid: IGridItem[][];
-  currentHeadDirection: Direction;
-  currentTailDirection: Direction;
-  currentTailPivot: Direction;
+  gridObj: Grid;
 }
 
 export const GridRenderer: React.FunctionComponent<IGridRendererProps> = (
   props
 ) => {
-  const { grid, currentHeadDirection, currentTailDirection, currentTailPivot } =
-    props;
+  const { gridObj } = props;
+
+  const currentHeadDirection: Direction = gridObj.getCurrentHeadDirection();
+  const currentTailDirection: Direction = gridObj.getCurrentTailDirection();
+  const currentTailPivot: Direction = gridObj.getPivotDirectionOnCurrentTail();
+  const grid = gridObj.getGrid();
 
   return (
     <div className={"grid"}>
