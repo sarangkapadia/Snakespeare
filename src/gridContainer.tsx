@@ -536,6 +536,10 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
 
   const handlers = useSwipeable({
     onSwipeStart: (swipeEventData) => onSwipeStart(swipeEventData),
+    onSwipedDown: () => {},
+    onSwipedUp: () => {},
+    onSwipedRight: () => {},
+    onSwipedLeft: () => {},
     preventDefaultTouchmoveEvent: true,
     trackMouse: true,
   });
