@@ -217,24 +217,24 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
 
     switch (bonus) {
       case 3:
-        setBannerText("Brisk !");
+        setBannerText("Brisk +3 !");
         setTimeout(() => setBannerText("Text"), hideBannerAfterMs);
         break;
       case 4:
-        setBannerText("Speedy !");
+        setBannerText("Speedy +4 !");
         setTimeout(() => setBannerText("Text"), hideBannerAfterMs);
         break;
       case 5:
-        setBannerText("Electric !!");
+        setBannerText("Electric +5 !!");
         setTimeout(() => setBannerText("Text"), hideBannerAfterMs);
         break;
       case 6:
-        setBannerText("Supersonic !!");
+        setBannerText("Supersonic +6 !!");
         setTimeout(() => setBannerText("Text"), hideBannerAfterMs);
         break;
       default: {
         if (bonus > 6) {
-          setBannerText("Hypersonic !!!");
+          setBannerText(`Hypersonic +${bonus.toString()} !!!`);
           setTimeout(() => setBannerText("Text"), hideBannerAfterMs);
           break;
         }
