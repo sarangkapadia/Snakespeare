@@ -30,6 +30,7 @@ export const Settings: React.FunctionComponent = () => {
   const darkMode = localStorage.getItem("darkMode");
   const hints = localStorage.getItem("hints");
   const progressiveSpeed = localStorage.getItem("progressiveSpeed");
+  const sounds = localStorage.getItem("sounds");
 
   const [hintsChecked, setHintsChecked] = useState(
     hints ? JSON.parse(hints) : true
@@ -40,6 +41,31 @@ export const Settings: React.FunctionComponent = () => {
   const [progressiveSpeedChecked, setProgressiveSpeedChecked] = useState(
     progressiveSpeed ? JSON.parse(progressiveSpeed) : true
   );
+  const [soundsChecked, setSoundsChecked] = useState(
+    sounds ? JSON.parse(sounds) : true
+  );
+
+  const [soundsUx, setSoundsUx] = useState(false);
+  useEffect(() => {
+    const dummyAudio = new Audio("silent.mp3");
+    dummyAudio.volume = 0.1;
+    dummyAudio
+      .play()
+      .then(() => {
+        console.log("Show Sound Settings");
+        setSoundsUx(true);
+      })
+      .catch((e) => {
+        console.log("Safari", e);
+        setSoundsUx(false);
+        try {
+          localStorage.setItem("sounds", JSON.stringify(false));
+        } catch (e) {
+          console.log("cannot write to localStorage ", e);
+        }
+        setSoundsChecked(false);
+      });
+  }, []);
 
   useEffect(() => {
     if (darkModeChecked) {
@@ -122,6 +148,15 @@ export const Settings: React.FunctionComponent = () => {
     setProgressiveSpeedChecked(event.target.checked);
   };
 
+  const handleSoundsChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
+    try {
+      localStorage.setItem("sounds", JSON.stringify(event.target.checked));
+    } catch (e) {
+      console.log("cannot write to localStorage ", e);
+    }
+    setSoundsChecked(event.target.checked);
+  };
+
   return (
     <div className="settingsContainer">
       <div className="rowContainer">
@@ -154,6 +189,18 @@ export const Settings: React.FunctionComponent = () => {
           onChange={handleProgressiveSpeedChanged}
         />
       </div>
+      {soundsUx ? (
+        <div className="rowContainer">
+          <div className="settingsTitleContainer">
+            <div className="rowTitle">{"Sounds"}</div>
+          </div>
+          <GreenSwitch
+            {...colorModeLabel}
+            checked={soundsChecked}
+            onChange={handleSoundsChanged}
+          />
+        </div>
+      ) : null}
     </div>
   );
 };

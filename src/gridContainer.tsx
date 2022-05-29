@@ -33,6 +33,15 @@ interface IGridContainer {
   modalTitle: string;
   onGameEnd: () => void;
 }
+const left = new Audio("left.mp3");
+const right = new Audio("right.mp3");
+const up = new Audio("up.mp3");
+const down = new Audio("down.mp3");
+const letter = new Audio("letter.mp3");
+const error = new Audio("error.mp3");
+
+left.volume = right.volume = up.volume = down.volume = letter.volume = 0.1;
+error.volume = 0.2;
 
 export const GridContainer: React.FunctionComponent<IGridContainer> = (
   props
@@ -56,10 +65,13 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
   let movePending = false;
   const hints = localStorage.getItem("hints");
   const progressiveSpeed = localStorage.getItem("progressiveSpeed");
+  const sounds = localStorage.getItem("sounds");
   const hintsOn = hints ? JSON.parse(hints) : "true";
   const progressiveSpeedOn = progressiveSpeed
     ? JSON.parse(progressiveSpeed)
     : "true";
+  const soundsOn = sounds ? JSON.parse(sounds) : true;
+
   let hintsTimeOutId: any = useRef(null);
   let bannerTimeOutId: any = useRef(null);
   let startDate: any = useRef(null);
@@ -72,6 +84,8 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
       handleOnPlayPauseGame(Direction.Left);
       return;
     }
+
+    if (soundsOn) left.play().catch((e) => {});
 
     const currentHeadDir = gridObj.getCurrentHeadDirection();
     if (currentHeadDir === Direction.Left || currentHeadDir === Direction.Right)
@@ -87,6 +101,9 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
       handleOnPlayPauseGame(Direction.Right);
       return;
     }
+
+    if (soundsOn) right.play().catch((e) => {});
+
     const currentHeadDir = gridObj.getCurrentHeadDirection();
     if (currentHeadDir === Direction.Left || currentHeadDir === Direction.Right)
       return;
@@ -101,6 +118,9 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
       handleOnPlayPauseGame(Direction.Up);
       return;
     }
+
+    if (soundsOn) up.play().catch((e) => {});
+
     const currentHeadDir = gridObj.getCurrentHeadDirection();
     if (currentHeadDir === Direction.Down || currentHeadDir === Direction.Up)
       return;
@@ -115,8 +135,10 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
       handleOnPlayPauseGame(Direction.Down);
       return;
     }
-    const currentHeadDir = gridObj.getCurrentHeadDirection();
 
+    if (soundsOn) down.play().catch((e) => {});
+
+    const currentHeadDir = gridObj.getCurrentHeadDirection();
     if (currentHeadDir === Direction.Down || currentHeadDir === Direction.Up)
       return;
     gridObj.setCurrentHeadDirection(Direction.Down);
@@ -165,6 +187,9 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     setPlaying(false);
     playingRef.current = false;
     Score.getInstance().setCurrentScore(score, false);
+
+    if (soundsOn) error.play().catch((e) => console.log(e));
+
     try {
       window.navigator.vibrate(350);
     } catch (e) {
@@ -302,6 +327,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
         }
 
         grid[newHeadRow][newHeadCol].role = Role.CorrectByte;
+        if (soundsOn) letter.play().catch((e) => {});
 
         currentLetter =
           gridObj.getLetterIndex() > 0 ? currentLetter + landed : landed;
