@@ -9,7 +9,7 @@
 .close {
   height: var(--fontSize);
   width: var(--fontSize);
-  border-radius: 15%;
+  border-radius: 10%;
   background-color: var(--byteColor);
   border: none;
   font-family: var(--fontFamily);

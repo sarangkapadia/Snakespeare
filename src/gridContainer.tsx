@@ -160,7 +160,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
       tickCountMs =
         parseFloat(tickCount.substr(0, tickCount.length - 1)) * 1000;
       const root = document.querySelector<HTMLElement>(":root")!;
-      root.style.setProperty("--tick", "0.5s");
+      root.style.setProperty("--tick", "0.6s");
     }, 500);
   };
 
@@ -248,7 +248,13 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
   const increaseSpeed = () => {
     if (progressiveSpeedOn) {
       const root = document.querySelector<HTMLElement>(":root")!;
-      if (score >= 50 && score <= 80 && tickCountMs === 500) {
+
+      if (score <= 40) return;
+
+      if (score > 40 && score <= 60 && tickCountMs === 600) {
+        root.style.setProperty("--tick", "0.5s");
+        tickCountMs = 500;
+      } else if (score > 60 && tickCountMs === 500) {
         root.style.setProperty("--tick", "0.4s");
         tickCountMs = 400;
       } else if (score > 80 && tickCountMs === 400) {
