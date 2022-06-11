@@ -7,8 +7,10 @@ import "./style/gridContainer.css";
 import { WordTiles } from "./wordtiles";
 import { Banner } from "./banner";
 import { Score } from "./scores";
+import { MessageBubble } from "./messageBubble";
 // import { IGameBalance } from "./launchSettings"; //gameBalanceCheck
 
+const nav: any = window.navigator;
 const showBannerAfterMs = 1000;
 const hideBannerAfterMs = 4000; // if you change this , also change the banner.css animation to Xs
 // move this to a useEffect
@@ -61,6 +63,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
   const [playing, setPlaying] = useState(false);
 
   const [bannerText, setBannerText] = useState("Text");
+  const [showBubble, setShowBubble] = useState(false);
 
   let movePending = false;
   const hints = localStorage.getItem("hints");
@@ -468,6 +471,18 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     }
   }, [hintsOn]);
 
+  // Detects if device is on iOS
+  const isIos = () => {
+    const userAgent = nav.userAgent.toLowerCase();
+    return /iphone/.test(userAgent);
+  };
+
+  // Detects if device is in standalone mode
+  const isInStandaloneMode = () => "standalone" in nav && nav.standalone;
+  const showBubbleOnIos = useCallback(() => {
+    return isIos() && !isInStandaloneMode();
+  }, []);
+
   useEffect(() => {
     if (modalTitle !== "") {
       clearTimeout(hintsTimeOutId.current);
@@ -497,10 +512,18 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
         ) {
           setBannerText("Swipe ANYWHERE to start");
           setTimeout(() => setBannerText("Text"), hideBannerAfterMs);
+          if (showBubbleOnIos()) {
+            setShowBubble(true);
+            setTimeout(() => setShowBubble(false), 2 * hideBannerAfterMs);
+          }
         }
       }, showBannerAfterMs);
     }
-  }, [playing, modalTitle /*, showStats, balanceObj.balance*/]); //gameBalanceCheck
+  }, [
+    playing,
+    modalTitle,
+    showBubbleOnIos /*, showStats, balanceObj.balance*/,
+  ]); //gameBalanceCheck
 
   const onHintTimer = () => {
     gridObj.setHint();
@@ -550,6 +573,8 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
   );
 
   const onSwipeStart = (swipeEventData: any) => {
+    if (showBubble) setShowBubble(false);
+
     switch (swipeEventData.dir) {
       case "Up":
         onSwipedUp();
@@ -583,6 +608,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
         <GridRenderer gridObj={gridObj} />
         <WordTiles bytes={currentLetter} score={score} />
       </div>
+      {showBubble ? <MessageBubble /> : null}
     </div>
   );
 };

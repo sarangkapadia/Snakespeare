@@ -1,0 +1,38 @@
+.bubbleContainer {
+  display: flex;
+  flex-flow: column nowrap;
+  margin-top: 10px;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0%;
+}
+
+.messageContainer {
+  display: flex;
+  width: max-content;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  background-image: linear-gradient(var(--snakeColor), var(--byteColor));
+  color: var(--darkFont);
+  size: var(--fontSize);
+  font-family: var(--fontFamily);
+  padding: 2px;
+}
+
+.messageArrowDown {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+
+  border-top: 10px solid var(--byteColor);
+}
+
+.bubbleIcon {
+  width: var(--fontSize);
+  height: var(--fontSize);
+  margin: 4px;
+}
