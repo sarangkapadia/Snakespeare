@@ -162,33 +162,27 @@ export class Grid {
     this.currentBytes = this.bytes.getNextWord();
     const { head } = this.snake.getSnakeEnds();
 
-    const delta = 3;
-
     for (let i = 0; i < this.currentBytes.length; i++) {
       while (1) {
-        // fix this
         let randomRow = Math.floor(Math.random() * this.gridSize);
         let randomCol = Math.floor(Math.random() * this.gridSize);
 
         if (this.grid[randomRow][randomCol].role === Role.Canvas) {
-          let horizontalDistance = Math.abs(randomCol - head.col);
-          let verticalDistance = Math.abs(randomRow - head.row);
-
           if (
             currentHeadDir === Direction.Right ||
             currentHeadDir === Direction.Left ||
             currentHeadDir === Direction.None
           ) {
-            if (horizontalDistance <= delta && randomRow === head.row) {
-              console.log("too close to head, horz");
+            if (randomRow === head.row) {
+              console.log("rejecting row ", randomRow);
               continue;
             }
           } else if (
             currentHeadDir === Direction.Up ||
             currentHeadDir === Direction.Down
           ) {
-            if (verticalDistance <= delta && randomCol === head.col) {
-              console.log("too close to head, vertical");
+            if (randomCol === head.col) {
+              console.log("rejecting col ", randomCol);
               continue;
             }
           } else {

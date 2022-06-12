@@ -19,6 +19,7 @@ const rootStyle = getComputedStyle(root);
 
 const tickCount = rootStyle.getPropertyValue("--tick");
 let tickCountMs = parseFloat(tickCount.substr(0, tickCount.length - 1)) * 1000;
+let newWordCycle = false;
 
 const gridObj = new Grid();
 gridObj.initGridData();
@@ -79,6 +80,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
   let bannerTimeOutId: any = useRef(null);
   let startDate: any = useRef(null);
   let playingRef = useRef(playing);
+
   // add logic in these to detect game end
   const onSwipedLeft = () => {
     if (movePending) return;
@@ -350,6 +352,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
           calculateScore();
           resetHintTimer();
           increaseSpeed();
+          newWordCycle = true;
         } else if (letterIndex <= gridObj.getHintsPerWord()) {
           resetHintTimer();
         }
@@ -447,13 +450,20 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
   };
 
   const onTick = () => {
+    movePending = false;
+
+    if (newWordCycle) {
+      newWordCycle = false;
+      console.log("skipping");
+      return;
+    }
+
     let ends = { ...snakeEnds };
     // set new roles on the new ends
     const newEnds = getNewEnds(ends);
     setSnakeEnds(newEnds);
     // set new ends
     gridObj.getSnake().setSnakeEnds(ends);
-    movePending = false;
   };
 
   useInterval(
