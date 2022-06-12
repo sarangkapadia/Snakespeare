@@ -1,5 +1,13 @@
 import "../../style/instructions.css";
 
+const nav: any = window.navigator;
+
+// Detects if device is on iOS
+const isIos = () => {
+  const userAgent = nav.userAgent.toLowerCase();
+  return /iphone/.test(userAgent);
+};
+
 export const Instructions: React.FunctionComponent = () => {
   const darkMode = localStorage.getItem("darkMode");
   const darkModeChecked = darkMode ? JSON.parse(darkMode) : false; // default turn off dark mode
@@ -33,6 +41,7 @@ export const Instructions: React.FunctionComponent = () => {
         autoPlay
         preload={"auto"}
         disableRemotePlayback={true}
+        controls={isIos() ? true : false}
       >
         <source
           src={darkModeChecked ? "snake_dark.mp4" : "snake_light.mp4"}
