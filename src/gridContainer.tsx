@@ -29,7 +29,7 @@ const grid = gridObj.getGrid();
 
 const pointsPerWord = 10;
 const pointsPerWord7 = 30;
-export const threshold7 = 20;
+export const threshold7 = 100;
 
 let score = 0;
 let currentLetter = "";
