@@ -1,5 +1,6 @@
 import "./style/wordTiles.css";
 import "./style/tile.css";
+import { threshold7 } from "./gridContainer";
 import React from "react";
 
 interface IWordTileProps {
@@ -9,10 +10,12 @@ interface IWordTileProps {
 
 interface INumberTileProps {
   score: number;
+  small?: boolean;
 }
 
 interface ILetterTileProps {
   bytes: string;
+  small?: boolean;
 }
 
 export const NumberTiles: React.FunctionComponent<INumberTileProps> =
@@ -20,7 +23,10 @@ export const NumberTiles: React.FunctionComponent<INumberTileProps> =
     return (
       <div className="tileContainer">
         {[...props.score.toString()].map((digit, index) => (
-          <div key={index} className={"tile number"}>
+          <div
+            key={index}
+            className={props.small ? "tile tile7 number" : "tile number"}
+          >
             {digit}
           </div>
         ))}
@@ -33,7 +39,10 @@ export const LetterTiles: React.FunctionComponent<ILetterTileProps> =
     return (
       <div className="tileContainer">
         {[...props.bytes].map((letter, index) => (
-          <div key={index} className={"tile letter"}>
+          <div
+            key={index}
+            className={props.small ? "tile tile7 letter" : "tile letter"}
+          >
             {letter}
           </div>
         ))}
@@ -45,8 +54,12 @@ export const WordTiles: React.FunctionComponent<IWordTileProps> = React.memo(
   (props: IWordTileProps) => {
     return (
       <div className={"wordTilesContainer"}>
-        {props.bytes ? <LetterTiles bytes={props.bytes} /> : null}
-        {props.score > 0 ? <NumberTiles score={props.score} /> : null}
+        {props.bytes ? (
+          <LetterTiles bytes={props.bytes} small={props.score > threshold7} />
+        ) : null}
+        {props.score > 0 ? (
+          <NumberTiles score={props.score} small={props.score > threshold7} />
+        ) : null}
       </div>
     );
   }

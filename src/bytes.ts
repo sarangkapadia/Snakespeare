@@ -1,8 +1,11 @@
-import { byteList } from "./byteList";
+import { byteList, byteList7 } from "./byteList";
 
 export class Bytes {
   private byteList: string[] = [];
+  private byteList7: string[] = [];
+
   private index: number = 0;
+  private index7: number = 0;
 
   public shuffle(array: string[]) {
     let currentIndex = array.length;
@@ -39,12 +42,36 @@ export class Bytes {
       this.index = 0;
       localStorage.setItem("byteIndex", JSON.stringify(this.index));
     }
+
+    // for 7
+    const storageByteList7 = localStorage.getItem("byteList7");
+    if (storageByteList7) {
+      this.byteList7 = JSON.parse(storageByteList7);
+    } else {
+      this.byteList7 = this.shuffle(byteList7);
+      localStorage.setItem("byteList7", JSON.stringify(this.byteList7));
+    }
+
+    const storageIndex7 = localStorage.getItem("byteIndex7");
+    if (storageIndex7) {
+      this.index7 = JSON.parse(storageIndex7);
+    } else {
+      this.index7 = 0;
+      localStorage.setItem("byteIndex7", JSON.stringify(this.index7));
+    }
   }
 
   public getNextWord(): string {
     const nextWord = this.byteList[this.index];
     this.index = (this.index + 1) % this.byteList.length;
     localStorage.setItem("byteIndex", JSON.stringify(this.index));
+    return nextWord;
+  }
+
+  public getNextWord7(): string {
+    const nextWord = this.byteList7[this.index7];
+    this.index7 = (this.index7 + 1) % this.byteList7.length;
+    localStorage.setItem("byteIndex7", JSON.stringify(this.index7));
     return nextWord;
   }
 }

@@ -28,9 +28,12 @@ const gridSize = gridObj.getGridSize();
 const grid = gridObj.getGrid();
 
 const pointsPerWord = 10;
+const pointsPerWord7 = 30;
+export const threshold7 = 20;
+
 let score = 0;
 let currentLetter = "";
-const hintTimeoutMs = 10 * 1000;
+const hintTimeoutMs = 14 * 1000;
 
 interface IGridContainer {
   modalTitle: string;
@@ -90,11 +93,11 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
       return;
     }
 
-    if (soundsOn) left.play().catch((e) => {});
-
     const currentHeadDir = gridObj.getCurrentHeadDirection();
     if (currentHeadDir === Direction.Left || currentHeadDir === Direction.Right)
       return;
+
+    if (soundsOn) left.play().catch((e) => {});
     gridObj.setCurrentHeadDirection(Direction.Left);
     gridObj.setPivotOnCurrentHeadDirection(Direction.Left);
     movePending = true;
@@ -107,11 +110,10 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
       return;
     }
 
-    if (soundsOn) right.play().catch((e) => {});
-
     const currentHeadDir = gridObj.getCurrentHeadDirection();
     if (currentHeadDir === Direction.Left || currentHeadDir === Direction.Right)
       return;
+    if (soundsOn) right.play().catch((e) => {});
     gridObj.setCurrentHeadDirection(Direction.Right);
     gridObj.setPivotOnCurrentHeadDirection(Direction.Right);
     movePending = true;
@@ -124,11 +126,10 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
       return;
     }
 
-    if (soundsOn) up.play().catch((e) => {});
-
     const currentHeadDir = gridObj.getCurrentHeadDirection();
     if (currentHeadDir === Direction.Down || currentHeadDir === Direction.Up)
       return;
+    if (soundsOn) up.play().catch((e) => {});
     gridObj.setCurrentHeadDirection(Direction.Up);
     gridObj.setPivotOnCurrentHeadDirection(Direction.Up);
     movePending = true;
@@ -141,11 +142,10 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
       return;
     }
 
-    if (soundsOn) down.play().catch((e) => {});
-
     const currentHeadDir = gridObj.getCurrentHeadDirection();
     if (currentHeadDir === Direction.Down || currentHeadDir === Direction.Up)
       return;
+    if (soundsOn) down.play().catch((e) => {});
     gridObj.setCurrentHeadDirection(Direction.Down);
     gridObj.setPivotOnCurrentHeadDirection(Direction.Down);
     movePending = true;
@@ -215,7 +215,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
       (endDate.getTime() - startDate.current.getTime()) / 1000
     );
     const bonus = Math.floor(100 / seconds);
-    score += pointsPerWord;
+    score += score > threshold7 ? pointsPerWord7 : pointsPerWord; // points based on score.
     score += bonus >= 2 ? bonus : 0; //min bonus of 2 is needed.
 
     Score.getInstance().setCurrentScore(score);
@@ -256,22 +256,24 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
 
       if (score <= 40) return;
 
-      if (score > 40 && score <= 60 && tickCountMs === 600) {
+      if (score > 40 && score <= 70 && tickCountMs === 600) {
         root.style.setProperty("--tick", "0.5s");
         tickCountMs = 500;
-      } else if (score > 60 && tickCountMs === 500) {
+      } else if (score > 70 && tickCountMs === 500) {
         root.style.setProperty("--tick", "0.4s");
         tickCountMs = 400;
-      } else if (score > 80 && tickCountMs === 400) {
+      } else if (score > threshold7 && tickCountMs === 400) {
         root.style.setProperty("--tick", "0.35s");
         tickCountMs = 350;
-      } else if (score > 100 && tickCountMs === 350) {
-        root.style.setProperty("--tick", "0.3s");
-        tickCountMs = 300;
-      } else if (score > 120 && tickCountMs === 300) {
-        root.style.setProperty("--tick", "0.25s");
-        tickCountMs = 250;
       }
+      // else if (score > 120 && tickCountMs === 350) {
+      //   root.style.setProperty("--tick", "0.3s");
+      //   tickCountMs = 300;
+      // }
+      // else if (score > 120 && tickCountMs === 300) {
+      //   root.style.setProperty("--tick", "0.25s");
+      //   tickCountMs = 250;
+      // }
     }
   };
 
@@ -347,9 +349,16 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
         // new word
         const letterIndex = gridObj.getLetterIndex();
         if (letterIndex === 0) {
-          gridObj.setRandomBytePositions(currentHeadDir);
-
           calculateScore();
+          const aboveThreshold = score > threshold7;
+          gridObj.setRandomBytePositions(currentHeadDir, aboveThreshold);
+          if (aboveThreshold) {
+            setBannerText(
+              `7 letter words, ${pointsPerWord7.toString()} points each!`
+            );
+            setTimeout(() => setBannerText("Text"), 2 * hideBannerAfterMs);
+          }
+
           resetHintTimer();
           increaseSpeed();
           newWordCycle = true;
@@ -383,7 +392,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
 
   const calculateNewTail = (ends: typeof snakeEnds) => {
     // no-op if the head is on a byte
-    if (isHeadOnByte(snakeEnds)) {
+    if (isHeadOnByte(snakeEnds) && score < threshold7) {
       return;
     }
 
@@ -454,7 +463,6 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
 
     if (newWordCycle) {
       newWordCycle = false;
-      console.log("skipping");
       return;
     }
 

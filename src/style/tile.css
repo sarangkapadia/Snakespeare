@@ -25,6 +25,11 @@
   animation: tileAnimation linear forwards 0.5s;
 }
 
+.tile7 {
+  width: calc(1.25 * var(--boxSize));
+  height: calc(1.25 * var(--boxSize));
+}
+
 .letter {
   background: var(--byteColor);
 }

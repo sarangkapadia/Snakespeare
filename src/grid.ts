@@ -158,8 +158,13 @@ export class Grid {
   }
 
   // sprinkles the next word on the grid
-  public setRandomBytePositions(currentHeadDir: Direction) {
-    this.currentBytes = this.bytes.getNextWord();
+  public setRandomBytePositions(
+    currentHeadDir: Direction,
+    showSevenLetterWord?: boolean
+  ) {
+    this.currentBytes = showSevenLetterWord
+      ? this.bytes.getNextWord7()
+      : this.bytes.getNextWord();
     const { head } = this.snake.getSnakeEnds();
 
     for (let i = 0; i < this.currentBytes.length; i++) {
@@ -174,7 +179,6 @@ export class Grid {
             currentHeadDir === Direction.None
           ) {
             if (randomRow === head.row) {
-              console.log("rejecting row ", randomRow);
               continue;
             }
           } else if (
@@ -182,7 +186,6 @@ export class Grid {
             currentHeadDir === Direction.Down
           ) {
             if (randomCol === head.col) {
-              console.log("rejecting col ", randomCol);
               continue;
             }
           } else {
@@ -199,8 +202,6 @@ export class Grid {
             this.hintList[i] = { row: randomRow, column: randomCol };
 
           break;
-        } else {
-          console.log("Invalid random position");
         }
       }
     }

@@ -21,12 +21,12 @@ export const Instructions: React.FunctionComponent = () => {
 
       <p>
         <b>Goal:</b> Capture the randomly placed letters in the correct order to
-        form a 5 letter word.
+        form a 5 letter word. Upgrade to 7 letters after scoring 100 points.
       </p>
 
       <p>
-        <b>Score:</b> 10 points for every word solved + bonus points for solving
-        speed.
+        <b>Score:</b> 10 points for words solved + bonus points for solving
+        speed. Upgrade to 30 points for 7 letter words.
       </p>
 
       <p>
