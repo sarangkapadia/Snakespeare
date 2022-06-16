@@ -52,7 +52,7 @@ export class Grid {
   private bytes: Bytes; // Grid contains Bytes
   private currentBytes: string = "snake";
   private letterIndex: number = 0;
-  private hintsPerWord: number = 2;
+  private hintsPerWord: number = 3;
   private hintList: IHintItem[];
 
   public constructor() {
