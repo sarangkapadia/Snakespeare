@@ -352,7 +352,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
           calculateScore();
           const aboveThreshold = score > threshold7;
           gridObj.setRandomBytePositions(currentHeadDir, aboveThreshold);
-          if (aboveThreshold) {
+          if (aboveThreshold && score < threshold7 + pointsPerWord7) {
             setBannerText(
               `7 letter words, ${pointsPerWord7.toString()} points each!`
             );

@@ -44,12 +44,16 @@ export class Bytes {
     }
 
     // for 7
-    const storageByteList7 = localStorage.getItem("byteList7");
+    const storageByteList7 = localStorage.getItem("byteList7noS");
     if (storageByteList7) {
       this.byteList7 = JSON.parse(storageByteList7);
     } else {
       this.byteList7 = this.shuffle(byteList7);
-      localStorage.setItem("byteList7", JSON.stringify(this.byteList7));
+      localStorage.setItem("byteList7noS", JSON.stringify(this.byteList7));
+    }
+
+    if (localStorage.getItem("byteList7")) {
+      localStorage.removeItem("byteList7");
     }
 
     const storageIndex7 = localStorage.getItem("byteIndex7");
