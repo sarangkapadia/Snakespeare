@@ -1,5 +1,4 @@
 export const byteList7 = [
-  "Ability",
   "Academy",
   "Account",
   "Achieve",
@@ -150,7 +149,6 @@ export const byteList7 = [
   "Freedom",
   "Further",
   "Gallery",
-  "Gateway",
   "General",
   "Genetic",
   "Genuine",
@@ -228,8 +226,6 @@ export const byteList7 = [
   "Organic",
   "Outcome",
   "Outdoor",
-  "Outlook",
-  "Overall",
   "Pacific",
   "Package",
   "Painted",
