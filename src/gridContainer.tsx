@@ -20,6 +20,7 @@ const rootStyle = getComputedStyle(root);
 const tickCount = rootStyle.getPropertyValue("--tick");
 let tickCountMs = parseFloat(tickCount.substr(0, tickCount.length - 1)) * 1000;
 let newWordCycle = false;
+let movePending = false;
 
 const gridObj = new Grid();
 gridObj.initGridData();
@@ -69,7 +70,6 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
   const [bannerText, setBannerText] = useState("Text");
   const [showBubble, setShowBubble] = useState(false);
 
-  let movePending = false;
   const hints = localStorage.getItem("hints");
   const progressiveSpeed = localStorage.getItem("progressiveSpeed");
   const sounds = localStorage.getItem("sounds");
@@ -86,8 +86,6 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
 
   // add logic in these to detect game end
   const onSwipedLeft = () => {
-    if (movePending) return;
-
     if (!playing) {
       handleOnPlayPauseGame(Direction.Left);
       return;
@@ -97,14 +95,13 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     if (currentHeadDir === Direction.Left || currentHeadDir === Direction.Right)
       return;
 
+    movePending = true;
     if (soundsOn) left.play().catch((e) => {});
     gridObj.setCurrentHeadDirection(Direction.Left);
     gridObj.setPivotOnCurrentHeadDirection(Direction.Left);
-    movePending = true;
   };
 
   const onSwipedRight = () => {
-    if (movePending) return;
     if (!playing) {
       handleOnPlayPauseGame(Direction.Right);
       return;
@@ -113,14 +110,14 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     const currentHeadDir = gridObj.getCurrentHeadDirection();
     if (currentHeadDir === Direction.Left || currentHeadDir === Direction.Right)
       return;
+
+    movePending = true;
     if (soundsOn) right.play().catch((e) => {});
     gridObj.setCurrentHeadDirection(Direction.Right);
     gridObj.setPivotOnCurrentHeadDirection(Direction.Right);
-    movePending = true;
   };
 
   const onSwipedUp = () => {
-    if (movePending) return;
     if (!playing) {
       handleOnPlayPauseGame(Direction.Up);
       return;
@@ -129,14 +126,14 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     const currentHeadDir = gridObj.getCurrentHeadDirection();
     if (currentHeadDir === Direction.Down || currentHeadDir === Direction.Up)
       return;
+
+    movePending = true;
     if (soundsOn) up.play().catch((e) => {});
     gridObj.setCurrentHeadDirection(Direction.Up);
     gridObj.setPivotOnCurrentHeadDirection(Direction.Up);
-    movePending = true;
   };
 
   const onSwipedDown = () => {
-    if (movePending) return;
     if (!playing) {
       handleOnPlayPauseGame(Direction.Down);
       return;
@@ -145,10 +142,11 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     const currentHeadDir = gridObj.getCurrentHeadDirection();
     if (currentHeadDir === Direction.Down || currentHeadDir === Direction.Up)
       return;
+
+    movePending = true;
     if (soundsOn) down.play().catch((e) => {});
     gridObj.setCurrentHeadDirection(Direction.Down);
     gridObj.setPivotOnCurrentHeadDirection(Direction.Down);
-    movePending = true;
   };
 
   const resetGame = () => {
@@ -459,8 +457,6 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
   };
 
   const onTick = () => {
-    movePending = false;
-
     if (newWordCycle) {
       newWordCycle = false;
       return;
@@ -472,6 +468,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
     setSnakeEnds(newEnds);
     // set new ends
     gridObj.getSnake().setSnakeEnds(ends);
+    movePending = false;
   };
 
   useInterval(
@@ -591,6 +588,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
   );
 
   const onSwipeStart = (swipeEventData: any) => {
+    if (movePending || newWordCycle) return;
     if (showBubble) setShowBubble(false);
 
     switch (swipeEventData.dir) {
