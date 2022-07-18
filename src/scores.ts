@@ -30,7 +30,7 @@ export const getCountryCode = async (): Promise<string> => {
     return flag;
   }
   console.log("unable to fetch country code!");
-  return "--";
+  return "🇺🇸";
 };
 
 export class Score {
