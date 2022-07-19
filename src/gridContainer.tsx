@@ -501,6 +501,7 @@ export const GridContainer: React.FunctionComponent<IGridContainer> = (
   useEffect(() => {
     if (modalTitle !== "") {
       clearTimeout(hintsTimeOutId.current);
+      movePending = false;
       setPlaying(false);
       playingRef.current = false;
     }
