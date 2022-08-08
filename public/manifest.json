@@ -1,25 +1,49 @@
 {
   "short_name": "Snakespeare",
   "name": "Snakespeare",
+  "description": "A fun twist on the popular game of snake. The goal is to solve as many word puzzles while navigating your snake safely.",
+  "categories": ["games", "social"],
+  "screenshots": [
+    {
+      "src": "gamelight.png",
+      "type": "image/png",
+      "sizes": "1080x2340"
+    },
+    {
+      "src": "gamedark.png",
+      "type": "image/png",
+      "sizes": "1080x2340"
+    },
+    {
+      "src": "highscoresdark.png",
+      "type": "image/png",
+      "sizes": "1080x2340"
+    },
+    {
+      "src": "howtoplay.png",
+      "type": "image/png",
+      "sizes": "1080x2340"
+    },
+    {
+      "src": "share.png",
+      "type": "image/png",
+      "sizes": "1080x2340"
+    },
+    {
+      "src": "about.png",
+      "type": "image/png",
+      "sizes": "1080x2340"
+    }
+  ],
   "icons": [
     {
       "src": "snakespeareLogo.png",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "sizes": "638x638",
       "type": "image/png"
-    },
-    {
-      "src": "snakespeareLogo.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "snakespeareLogo.png",
-      "type": "image/png",
-      "sizes": "512x512"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#7037bb",
   "background_color": "#ffffff"
 }
