@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.netlify.snakespeare.twa",
+      "sha256_cert_fingerprints": [
+        "1A:92:2A:FE:54:D9:CC:D3:81:F0:FE:07:16:65:0F:25:E2:3E:E8:88:D6:84:96:CA:B5:DB:53:F3:EE:56:D0:63"
+      ]
+    }
+  }
+]
