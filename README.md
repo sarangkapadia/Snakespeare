@@ -1,6 +1,7 @@
 # Snakespeare
 
 Snakespeare - A snake who is great with words!!
+Play it at https://snakespeare.netlify.app
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
