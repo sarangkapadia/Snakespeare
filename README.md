@@ -4,45 +4,50 @@ Snakespeare - A snake who is great with words!!
 Play it at https://snakespeare.netlify.app
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Swipe controls for navigating the snake.
+- Score tracking and bonuses based on gameplay performance.
+- Progressive speed increase as the game progresses.
+- Sound effects for movement and interactions.
+- Daily game limit and hints system.
 
-### `yarn start`
+## Setup
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Clone the repository: `git clone https://github.com/your_username/snake-game.git`
+2. Install dependencies: `npm install`
+3. Run the application: `npm start`
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Gameplay
 
-### `yarn test`
+- Swipe in different directions to control the snake's movement.
+- Collect letters to form words and earn points.
+- Avoid collisions with walls and the snake's own body.
+- The game speeds up as the player earns more points.
+- Use hints sparingly to reveal the next letter in the word.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Controls
 
-### `yarn build`
+- Swipe Up: Move the snake up.
+- Swipe Down: Move the snake down.
+- Swipe Left: Move the snake left.
+- Swipe Right: Move the snake right.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Settings
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Adjust game settings such as hints, progressive speed, and sound effects in the localStorage.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Dependencies
 
-### `yarn eject`
+- React: JavaScript library for building user interfaces.
+- react-swipeable: React library for handling swipe gestures.
+- CSS: Styling for game components.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Credits
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Original game logic and implementation by [Your Name](https://github.com/your_username)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## License
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
