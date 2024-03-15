@@ -14,7 +14,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Setup
 
-1. Clone the repository: `git clone https://github.com/your_username/snake-game.git`
+1. Clone the repository: `git clone https://github.com/sarangkapadia/snake-game.git`
 2. Install dependencies: `npm install`
 3. Run the application: `npm start`
 
