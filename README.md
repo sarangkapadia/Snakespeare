@@ -45,7 +45,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Credits
 
-- Original game logic and implementation by [Your Name](https://github.com/your_username)
+- Original game logic and implementation by [Sarang Kapadia](https://github.com/sarangkapadia)
 
 ## License
 
